@@ -49,7 +49,7 @@ which in turn forwards to message to Loki.
 
 ### Rsyslog
 
-```rsyslog
+```raw
 module(load="imptcp")
 module(load="imudp" TimeRequery="500")
 
