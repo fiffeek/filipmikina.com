@@ -1,6 +1,6 @@
 ---
 external: false
-draft: false
+draft: true
 title: Forwarding UDP syslog messages to Loki using Promtail
 description: This post is a draft and won't be built.
 date: 2024-02-22
