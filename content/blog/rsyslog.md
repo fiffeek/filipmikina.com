@@ -1,6 +1,5 @@
 ---
 external: false
-draft: false
 title: Forwarding custom syslog messages to Loki via UDP using Promtail
 description: How to forward custom formatted syslog messages via UDP to Loki using Promtail. Testing with Docker/containers.
 date: 2024-02-22
