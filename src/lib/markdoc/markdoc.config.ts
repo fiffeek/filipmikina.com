@@ -137,13 +137,13 @@ export const config: Config = {
           throw new Error(
             `unexpected non-string child of code block from ${
               node.location?.file ?? "(unknown file)"
-            }:${node.location?.start.line ?? "(unknown line)"}`
+            }:${node.location?.start.line ?? "(unknown line)"}`,
           );
         }
         return new Tag(
           this.render,
           { ...attributes, content: children.join("") },
-          []
+          [],
         );
       },
     },

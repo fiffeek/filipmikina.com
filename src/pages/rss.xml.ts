@@ -14,7 +14,7 @@ export const get = async () => {
     .sort(
       (a, b) =>
         new Date(b.frontmatter.date).valueOf() -
-        new Date(a.frontmatter.date).valueOf()
+        new Date(a.frontmatter.date).valueOf(),
     );
 
   let baseUrl = SITE_URL;
