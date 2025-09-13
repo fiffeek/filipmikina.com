@@ -1,6 +1,7 @@
 # filipmikina.com
 
-Filip Mikina's personal website built with [Astro](https://astro.build) and [Markdoc](https://markdoc.dev).
+Filip Mikina's personal website built with [Astro](https://astro.build) and
+[Markdoc](https://markdoc.dev).
 
 ## Development
 
