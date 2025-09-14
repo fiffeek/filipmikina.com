@@ -1,6 +1,6 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
 import DarkModeToggle from "./DarkModeToggle.astro";
+import Navbar from "./Navbar.astro";
 ---
 
 <header>
@@ -10,14 +10,7 @@ import DarkModeToggle from "./DarkModeToggle.astro";
   >
     Skip to content
   </a>
-  <nav>
-    <section class="text-text-bold">
-      <ul class="unset flex gap-4 [&>li]:p-0">
-        <li><HeaderLink href="/">Home</HeaderLink></li>
-        <li><HeaderLink href="/blog">Blog</HeaderLink></li>
-      </ul>
-    </section>
-  </nav>
+  <Navbar />
   <div
     class="max-[375px]:hidden justify-self-end py-2 flex items-center content-center text-text-bold"
   >
@@ -34,14 +27,24 @@ import DarkModeToggle from "./DarkModeToggle.astro";
   </div>
   <DarkModeToggle />
 </header>
+
 <style>
   header {
     grid-area: header;
     display: grid;
     align-items: center;
-    grid-template-columns: minmax(0, 1fr) minmax(0, max-content) minmax(
-        0,
-        max-content
-      );
+    position: relative;
+    grid-template-columns:
+      minmax(0, max-content) minmax(0, 1fr) minmax(0, max-content)
+      minmax(0, max-content);
+  }
+
+  @media (min-width: 768px) {
+    header {
+      grid-template-columns: minmax(0, 1fr) minmax(0, max-content) minmax(
+          0,
+          max-content
+        );
+    }
   }
 </style>

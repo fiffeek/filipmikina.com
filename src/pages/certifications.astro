@@ -1,0 +1,140 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+import { SITE_TITLE } from "../config";
+
+const certifications = [
+  {
+    name: "Google Cloud Certified Professional Cloud Architect",
+    issuer: "Google Cloud Platform",
+    date: "2024-07-14",
+    expiryDate: "2026-07-14",
+    verificationUrl:
+      "https://www.credly.com/badges/f492cb81-8894-491e-b5d3-5e733799e739/linked_in_profile",
+    description:
+      "Professional Cloud Architects enable organizations to leverage Google Cloud technologies. With a thorough understanding of cloud architecture and Google Cloud, they design, develop, and manage robust, secure, scalable, highly available, and dynamic solutions to drive business objectives.",
+  },
+  {
+    name: "Microsoft Certified: Azure Data Fundamentals",
+    issuer: "Microsoft",
+    date: "2021-06-29",
+    verificationUrl:
+      "https://www.credly.com/badges/20daf013-d684-4e0a-8d77-0055c40ba8d1?source=linked_in_profile",
+    description:
+      "Earners of the Azure Data Fundamentals certification have demonstrated foundational knowledge of core data concepts and how they are implemented using Microsoft Azure data services.",
+  },
+  {
+    name: "Microsoft Certified: Azure Fundamentals",
+    issuer: "Microsoft",
+    date: "2020-09-26",
+    verificationUrl:
+      "https://www.credly.com/badges/80133ba6-f39a-4d21-bcf6-216444fc4991?source=linked_in_profile",
+    description:
+      "Earners of the Azure Fundamentals certification have demonstrated foundational level knowledge of cloud services and how those services are provided with Microsoft Azure.",
+  },
+];
+
+const sortedCertifications = certifications.sort(
+  (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf(),
+);
+---
+
+<PageLayout>
+  <PageMeta title={`Certifications | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main">
+    {
+      certifications.length === 0 ? (
+        <div class="text-text-muted">
+          <p>Certifications will be listed here as they are earned.</p>
+        </div>
+      ) : (
+        <ul class="space-y-6">
+          {sortedCertifications.map((cert) => {
+            const issuedDate = new Date(cert.date).toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+
+            const expiryDate = cert.expiryDate
+              ? new Date(cert.expiryDate).toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : null;
+
+            const isExpired =
+              cert.expiryDate && new Date(cert.expiryDate) < new Date();
+            const isExpiringSoon =
+              cert.expiryDate &&
+              new Date(cert.expiryDate) <
+                new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days
+
+            return (
+              <li class="pb-4">
+                <div class="mb-2 flex items-start justify-between">
+                  <h2 class="text-lg font-semibold flex-1">
+                    {cert.verificationUrl ? (
+                      <a
+                        href={cert.verificationUrl}
+                        target="_blank"
+                        class="hover:text-text-link"
+                      >
+                        {cert.name}
+                        <i class="ml-1 text-[12px] fa-solid fa-up-right-from-square" />
+                      </a>
+                    ) : (
+                      cert.name
+                    )}
+                  </h2>
+                  <span class="text-sm text-text-muted ml-4 mt-1">
+                    {issuedDate}
+                  </span>
+                </div>
+
+                <div class="text-sm text-text-muted mb-2">
+                  <span class="font-medium">Issuer:</span> {cert.issuer}
+                </div>
+
+                {expiryDate && (
+                  <div class="text-sm text-text-muted mb-2">
+                    <span class="font-medium">Expires:</span>
+                    <span
+                      class={
+                        isExpired
+                          ? "text-red-500"
+                          : isExpiringSoon
+                            ? "text-yellow-600"
+                            : ""
+                      }
+                    >
+                      {" "}
+                      {expiryDate}
+                      {isExpired && " (Expired)"}
+                      {isExpiringSoon && !isExpired && " (Expires Soon)"}
+                    </span>
+                  </div>
+                )}
+
+                {cert.description && (
+                  <div class="text-sm mb-2">{cert.description}</div>
+                )}
+
+                {cert.skills && cert.skills.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {cert.skills.map((skill) => (
+                      <span class="px-2 py-1 bg-bg-subtle text-xs rounded">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )
+    }
+  </section>
+</PageLayout>

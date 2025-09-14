@@ -1,0 +1,116 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/publications", label: "Publications" },
+  { href: "/certifications", label: "Certifications" },
+];
+---
+
+<button
+  id="hamburger-btn"
+  class="md:hidden justify-self-start p-2 text-text-bold text-xl"
+  aria-label="Toggle navigation menu"
+  aria-expanded="false"
+>
+  <i class="fa-solid fa-bars transition-transform duration-200"></i>
+</button>
+
+<nav class="hidden md:block">
+  <section class="text-text-bold">
+    <ul class="unset flex gap-4 [&>li]:p-0">
+      {
+        navItems.map((item) => (
+          <li>
+            <HeaderLink href={item.href}>{item.label}</HeaderLink>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</nav>
+
+<nav
+  id="mobile-nav"
+  class="md:hidden absolute top-full left-0 right-0 bg-bg-body border-b border-border-color shadow-lg z-50 opacity-0 invisible transform -translate-y-2 transition-all duration-200"
+>
+  <section class="text-text-bold p-4">
+    <ul class="unset flex flex-col gap-4 [&>li]:p-0">
+      {
+        navItems.map((item) => (
+          <li>
+            <HeaderLink href={item.href}>{item.label}</HeaderLink>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const mobileNav = document.getElementById("mobile-nav");
+    const hamburgerIcon = hamburgerBtn?.querySelector("i");
+
+    if (hamburgerBtn && mobileNav && hamburgerIcon) {
+      let isOpen = false;
+
+      hamburgerBtn.addEventListener("click", function () {
+        isOpen = !isOpen;
+
+        if (isOpen) {
+          mobileNav.classList.remove(
+            "opacity-0",
+            "invisible",
+            "-translate-y-2",
+          );
+          mobileNav.classList.add("opacity-100", "visible", "translate-y-0");
+          hamburgerIcon.classList.remove("fa-bars");
+          hamburgerIcon.classList.add("fa-times");
+          hamburgerIcon.style.transform = "rotate(180deg)";
+          hamburgerBtn.setAttribute("aria-expanded", "true");
+        } else {
+          // Close menu
+          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
+          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
+          hamburgerIcon.classList.remove("fa-times");
+          hamburgerIcon.classList.add("fa-bars");
+          hamburgerIcon.style.transform = "rotate(0deg)";
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      const mobileNavLinks = mobileNav.querySelectorAll("a");
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          isOpen = false;
+          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
+          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
+          hamburgerIcon.classList.remove("fa-times");
+          hamburgerIcon.classList.add("fa-bars");
+          hamburgerIcon.style.transform = "rotate(0deg)";
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        if (
+          isOpen &&
+          !hamburgerBtn.contains(event.target) &&
+          !mobileNav.contains(event.target)
+        ) {
+          isOpen = false;
+          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
+          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
+          hamburgerIcon.classList.remove("fa-times");
+          hamburgerIcon.classList.add("fa-bars");
+          hamburgerIcon.style.transform = "rotate(0deg)";
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  });
+</script>

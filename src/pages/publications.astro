@@ -1,0 +1,88 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+import { SITE_TITLE } from "../config";
+
+const publications = [
+  {
+    title: "sAirflow: Adopting Serverless in a Legacy Workflow Scheduler",
+    authors: ["Filip Mikina", "Pawel Zuk", "Krzysztof Rzadca"],
+    venue: "Euro-Par",
+    venueUrl: "https://2024.euro-par.org/",
+    year: "2024",
+    url: "https://link.springer.com/chapter/10.1007/978-3-031-69577-3_18",
+    type: "conference",
+    abstract:
+      "Serverless clouds promise efficient scaling, reduced toil and monetary costs. Yet, serverless-ing a complex, legacy application might require major refactoring and thus is risky. As a case study, we use Airflow, an industry-standard workflow system. To reduce migration risk, we propose to limit code modifications by relying on change data capture (CDC) and message queues for internal communication. To achieve serverless efficiency, we rely on Function-as-a-Service (FaaS). Our system, sAirflow, is the first adaptation of the control plane and workers to the serverless cloud - and it maintains the same interface and most of the code. Experimentally, we show that sAirflow delivers the key serverless benefits: scaling and cost reduction. We compare sAirflow to MWAA, a managed (SaaS) Airflow. On Alibaba benchmarks on warm systems, sAirflow performs similarly while halving the monetary cost. On highly parallel workflows on cold systems, sAirflow scales out in seconds to 125 workers, reducing makespan by 2x-7x. ",
+  },
+];
+
+const sortedPublications = publications.sort(
+  (a, b) => parseInt(b.year) - parseInt(a.year),
+);
+---
+
+<PageLayout>
+  <PageMeta title={`Publications | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main">
+    {
+      publications.length === 0 ? (
+        <div class="text-text-muted">
+          <p>Publications will be listed here as they become available.</p>
+        </div>
+      ) : (
+        <ul class="space-y-6">
+          {sortedPublications.map((pub) => (
+            <li class="border-b border-border-color pb-4 last:border-b-0">
+              <div class="mb-2 flex items-start justify-between">
+                <h2 class="text-lg font-semibold flex-1">
+                  {pub.url ? (
+                    <a
+                      href={pub.url}
+                      target="_blank"
+                      class="hover:text-text-link"
+                    >
+                      {pub.title}
+                      <i class="ml-1 text-[12px] fa-solid fa-up-right-from-square" />
+                    </a>
+                  ) : (
+                    pub.title
+                  )}
+                </h2>
+                <span class="text-sm text-text-muted ml-4 mt-1">
+                  {pub.year}
+                </span>
+              </div>
+
+              <div class="text-sm text-text-muted mb-2">
+                <span class="font-medium">Authors:</span>{" "}
+                {pub.authors.join(", ")}
+              </div>
+
+              <div class="text-sm text-text-muted mb-2">
+                <span class="font-medium">Venue:</span>{" "}
+                {pub.venueUrl ? (
+                  <a
+                    href={pub.venueUrl}
+                    target="_blank"
+                    class="hover:text-text-link"
+                  >
+                    {pub.venue}
+                    <i class="ml-1 text-[10px] fa-solid fa-up-right-from-square" />
+                  </a>
+                ) : (
+                  pub.venue
+                )}
+                <span class="ml-2 px-2 py-1 bg-bg-subtle rounded text-xs">
+                  {pub.type}
+                </span>
+              </div>
+
+              {pub.abstract && <div class="text-sm">{pub.abstract}</div>}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</PageLayout>
