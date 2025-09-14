@@ -81,13 +81,13 @@ needed:
 
 ## Why I Built My Own
 
-Extending `pyprland` would have meant dealing with on power-awareness, rewriting
+Extending `pyprland` would have meant dealing with power-awareness, rewriting
 its config parser, and restructuring event handling — essentially a partial
 rewrite.
 
 Since I wanted full control over configuration, a minimal architecture, and
-something that survives restarts, suspend/resume cycles, and enabling/disabling
-a monitor gracefully, I decided to build a dedicated tool instead.
+something that gracefully survives restarts, suspend/resume cycles, and
+enabling/disabling a monitor, I decided to build a dedicated tool instead.
 
 ---
 
@@ -147,7 +147,7 @@ description = "Dell U2720Q"
 ### Fail-fast reliability
 
 If something goes wrong, the service exits immediately rather than continuing in
-a broken state. `Systemd`` then restarts it and re-applies the correct
+a broken state. `Systemd` then restarts it and re-applies the correct
 configuration; no silent failures.
 
 ## Design decisions
