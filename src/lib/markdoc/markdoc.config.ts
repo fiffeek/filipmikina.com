@@ -53,6 +53,14 @@ export const config: Config = {
       render: "sub",
       children: nodes.strong.children,
     },
+    div: {
+      render: "div",
+      children: nodes.strong.children,
+    },
+    span: {
+      render: "span",
+      children: nodes.strong.children,
+    },
     abbr: {
       render: "abbr",
       attributes: {
@@ -123,6 +131,22 @@ export const config: Config = {
     //     return new Tag(this.render, { ...attributes }, children);
     //   },
     // },
+    table: {
+      ...Markdoc.nodes.table,
+
+      transform(node, config) {
+        const attrs = node.transformAttributes(config);
+        const children = node.transformChildren(config);
+
+        return new Markdoc.Tag("div", { class: "w-full overflow-x-scroll" }, [
+          new Markdoc.Tag(
+            "table",
+            { class: "table-auto overflow-x-auto", ...attrs },
+            children,
+          ),
+        ]);
+      },
+    },
     fence: {
       render: "CodeBlock",
       attributes: {

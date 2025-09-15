@@ -26,7 +26,7 @@ if (level === 2) {
 }
 ---
 
-<Tag id={id} class="group flex -ml-[1rem]">
+<Tag id={id} class="group flex -ml-[1rem]" style="overflow-wrap: break-word;">
   <span class="not-prose w-[1rem] -mt-[0.125rem]">
     <a
       aria-label="link to this heading"
@@ -37,5 +37,5 @@ if (level === 2) {
       <i class="fa-solid fa-hashtag"></i>
     </a>
   </span>
-  <span>{children}</span>
+  <span style="overflow-wrap: break-word;" class="w-full">{children}</span>
 </Tag>
