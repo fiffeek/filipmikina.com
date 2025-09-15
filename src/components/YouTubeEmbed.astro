@@ -2,9 +2,10 @@
 type Props = {
   url: string;
   label: string;
+  height: string;
 };
 
-const { url, label } = Astro.props;
+const { url, label, height } = Astro.props;
 ---
 
 <div>
@@ -15,6 +16,7 @@ const { url, label } = Astro.props;
     frame-border="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
+    height={height}
   >
   </iframe>
 </div>

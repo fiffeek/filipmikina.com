@@ -73,6 +73,7 @@ export const config: Config = {
       attributes: {
         url: { type: String, required: true },
         label: { type: String, required: true },
+        height: { type: String },
       },
       selfClosing: true,
     },
