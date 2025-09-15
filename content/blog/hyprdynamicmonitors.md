@@ -130,7 +130,7 @@ animations {
 Each monitor setup gets its own profile with clear matching rules. When a
 profile matches the current environment, its config is applied automatically:
 
-```toml {% title="~/.config/hyprdynamicmonitors/config.toml" %}
+```text {% title="~/.config/hyprdynamicmonitors/config.toml" %}
 [profiles.laptop_only]
 config_file = "laptop.conf"
 [[profiles.laptop_only.conditions.required_monitors]]

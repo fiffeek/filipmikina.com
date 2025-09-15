@@ -38,7 +38,7 @@ or grab a prebuilt binary from the
 Here’s a `~/.config/hyprwhenthen/config.toml` that reacts whenever a window’s
 title matches `Sign in – Google Accounts`:
 
-```toml {% title="~/.config/hyprwhenthen/config.toml" %}
+```text {% title="~/.config/hyprwhenthen/config.toml" %}
 [[handler]]
 on = "windowtitlev2"
 # (.*) captures the window's address (first field), then we match the title
