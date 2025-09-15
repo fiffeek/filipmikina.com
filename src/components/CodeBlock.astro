@@ -1,10 +1,90 @@
 ---
 import { Prism } from "@astrojs/prism";
 
-const { language, content } = Astro.props;
+const { language, content, title } = Astro.props;
 ---
 
-<Prism lang={language} code={content} />
+<div class="code-container relative">
+  {
+    title && title.trim() !== "" && (
+      <div class="code-title bg-gray-800 text-gray-200 px-4 py-2 text-sm font-medium rounded-t border-b border-gray-700 flex justify-between items-center">
+        <span>{title}</span>
+        <div class="flex gap-2">
+          <button
+            class="copy-path-btn px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+            data-path={title}
+          >
+            Copy Path
+          </button>
+          <button
+            class="copy-code-btn px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+            data-content={content}
+          >
+            Copy Code
+          </button>
+        </div>
+      </div>
+    )
+  }
+  <div
+    class={`relative ${title && title.trim() !== "" ? "rounded-t-none" : ""}`}
+  >
+    <Prism lang={language} code={content} />
+    {
+      (!title || title.trim() === "") && (
+        <button
+          class="copy-code-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+          data-content={content}
+        >
+          Copy Code
+        </button>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const copyCodeButtons = document.querySelectorAll(".copy-code-btn");
+    const copyPathButtons = document.querySelectorAll(".copy-path-btn");
+
+    copyCodeButtons.forEach((button) => {
+      button.addEventListener("click", async function () {
+        const content = this.getAttribute("data-content");
+
+        try {
+          await navigator.clipboard.writeText(content);
+          const originalText = this.textContent;
+          this.textContent = "Copied!";
+
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1000);
+        } catch (err) {
+          console.error("Failed to copy code: ", err);
+        }
+      });
+    });
+
+    copyPathButtons.forEach((button) => {
+      button.addEventListener("click", async function () {
+        const path = this.getAttribute("data-path");
+
+        try {
+          await navigator.clipboard.writeText(path);
+          const originalText = this.textContent;
+          this.textContent = "Copied!";
+
+          setTimeout(() => {
+            this.textContent = originalText;
+          }, 1000);
+        } catch (err) {
+          console.error("Failed to copy path: ", err);
+        }
+      });
+    });
+  });
+</script>
 
 <style is:global>
   /**
@@ -55,6 +135,13 @@ const { language, content } = Astro.props;
     padding: 1em;
     margin: 0.5em 0;
     overflow: auto;
+  }
+
+  /* When there's a title, remove top border radius */
+  .rounded-t-none pre[class*="language-"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;
   }
 
   :not(pre) > code[class*="language-"],

@@ -130,6 +130,7 @@ export const config: Config = {
         language: { type: String, default: "typescript" },
         // process determines whether or not markdoc processes tags inside the content of the code block
         process: { type: Boolean, render: false, default: false },
+        title: { type: String, required: false },
       },
       transform(node, config) {
         const attributes = node.transformAttributes(config);

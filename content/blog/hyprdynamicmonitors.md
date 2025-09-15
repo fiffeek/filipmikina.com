@@ -113,7 +113,7 @@ Listens to Hyprland IPC and D-Bus events; near-zero CPU usage when idle.
 No new DSL to learn; just write normal Hyprland config with Go template logic
 for dynamic behavior:
 
-```gotmpl
+```gotmpl {% title="~/.config/hyprdynamicmonitors/hyprconfigs/basic.conf" %}
 # Adjust refresh rate based on power state
 monitor=eDP-1,2880x1920@{{if isOnAC}}120.00000{{else}}60.00000{{end}},0x0,2.0,vrr,1
 
@@ -130,7 +130,7 @@ animations {
 Each monitor setup gets its own profile with clear matching rules. When a
 profile matches the current environment, its config is applied automatically:
 
-```toml
+```toml {% title="~/.config/hyprdynamicmonitors/config.toml" %}
 [profiles.laptop_only]
 config_file = "laptop.conf"
 [[profiles.laptop_only.conditions.required_monitors]]
