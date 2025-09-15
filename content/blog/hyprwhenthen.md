@@ -69,10 +69,10 @@ more manual dragging and resizing.
 
 ## Why not existing tools?
 
-- **[shellevents](https://github.com/hyprwm/contrib/tree/main/shellevents) /
-  [hyprevents](https://github.com/vilari-mickopf/hyprevents)** → simple bash
+- [shellevents](https://github.com/hyprwm/contrib/tree/main/shellevents) /
+  [hyprevents](https://github.com/vilari-mickopf/hyprevents) → simple bash
   wrappers, but limited pattern matching
-- **[pyprland](https://github.com/hyprland-community/pyprland)** → powerful, but
+- [pyprland](https://github.com/hyprland-community/pyprland) → powerful, but
   overkill for quick one-off event reactions
 - raw `socat` → works, but gets messy with complex logic (e.g. background
   processing, event ordering)
