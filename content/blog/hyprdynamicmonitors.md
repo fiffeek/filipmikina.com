@@ -156,10 +156,9 @@ configuration; no silent failures.
   who's used `Hugo`, `Helm`, or `Kubernetes` manifests.
 - **File generation over `hyprctl` commands** gives you visibility and control.
   You can inspect, tweak, and version your configs.
-- **No GUI/TUI by design** tools like `hyprmon` and `nwg-displays` already very
-  good for visual configuration. You can use them alongside
-  `HyprDynamicMonitors` to define the setup visually, then have it applied
-  automatically.
+- **Built-in TUI** provides an interactive terminal interface for configuring
+  monitors visually. You can experiment with layouts, positions, resolutions,
+  and refresh rates in real-time before applying or saving them as profiles.
 
 ## What makes it different
 
@@ -171,6 +170,26 @@ configuration; no silent failures.
   restarting the service.
 - **Minimal resource usage**: No polling, no background loops — it's entirely
   event-driven.
+
+### Interactive TUI
+
+HyprDynamicMonitors includes a built-in terminal user interface for visual
+monitor configuration. The TUI lets you:
+
+- Adjust monitor positions, resolutions, and refresh rates interactively
+- Preview changes in real-time before applying them
+- Save configurations as profiles for automatic switching
+- Edit monitor properties like rotation, scaling, and VRR settings
+
+![TUI Demo](/images/demo.gif)
+
+The TUI is especially useful for initial setup or experimenting with new monitor
+arrangements. Once you've configured a layout you like, save it as a profile and
+the daemon will automatically apply it whenever that monitor combination is
+detected.
+
+For detailed TUI usage and keyboard shortcuts, see the
+[TUI documentation](https://github.com/fiffeek/hyprdynamicmonitors/blob/main/docs/tui-help.md).
 
 ---
 
