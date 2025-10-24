@@ -1,9 +1,21 @@
 ---
+export interface Props {
+  recentPosts?: Array<{
+    slug: string;
+    frontmatter: {
+      title: string;
+      description?: string;
+      date: Date;
+    };
+    minutes: number;
+  }>;
+}
 
+const { recentPosts = [] } = Astro.props;
 ---
 
 <section class="mb-8">
-  <div class="mb-4">
+  <div class="mb-12">
     <h1
       class="font-extrabold text-5xl md:text-6xl tracking-tight pt-4 pb-2 overflow-hidden"
     >
@@ -13,74 +25,137 @@
         FILIP MIKINA
       </span>
     </h1>
-    <p class="text-xl pb-4">
+    <p class="text-xl pb-4 text-text-muted">
       Solving problems with<sup class="text-xs">(out)</sup> code, duct tape, and
       <span class="line-through opacity-70 hover:opacity-100">coffee</span> empathy.
     </p>
   </div>
-  <div>
-    <h2 class="text-2xl pt-4">A little about me</h2>
-    <p class="mb-5 mt-2">
-      <span class="font-semibold">Let's start with the obvious:</span>
-      the best code I've ever written is no code at all. I work at the intersection
-      of <span class="font-medium text-gray-900 dark:text-white">SRE</span>
-      and <span class="font-medium text-gray-900 dark:text-white"
+
+  <div class="mb-12">
+    <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
+      <i class="fa-solid fa-user text-primary-main"></i>
+      A little about me
+    </h2>
+    <p class="mb-4 text-text-body leading-relaxed">
+      <span class="font-semibold">Let's start with the obvious:</span> the best code
+      I've ever written is no code at all. I work at the intersection of <span
+        class="font-medium text-gray-900 dark:text-white">SRE</span
+      > and <span class="font-medium text-gray-900 dark:text-white"
         >software engineering</span
       > — I love writing code, but I'm always weighing whether it's worth the long-term
       cost. Every line you write is one you have to maintain, debug, and eventually
       replace. That's why I think carefully about adoption, rollout plans, and whether
-      a solution justifies its complexity. <br />
-      <br />
-      At the same time, technology fascinates me. When I have the time, I love pushing
-      boundaries and going right up to the edge of overengineering in personal projects.
-      It's how I experiment, learn, and, honestly, what keeps me excited about building
-      things. <br />
+      a solution justifies its complexity.
     </p>
-    <h2 class="text-2xl pt-4">What I work on</h2>
-    <p class="mb-5 mt-2">
+    <p class="text-text-body leading-relaxed">
+      At the same time, technology fascinates me. When I have the time, I love
+      pushing boundaries and going right up to the edge of overengineering in
+      personal projects. It's how I experiment, learn, and, honestly, what keeps
+      me excited about building things.
+    </p>
+  </div>
+
+  <div class="mb-12">
+    <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
+      <i class="fa-solid fa-code text-primary-main"></i>
+      What I work on
+    </h2>
+    <p class="mb-4 text-text-body leading-relaxed">
       Most days, you'll find me wrestling with distributed systems, making
       monitoring tools that don't suck, and trying to convince CI/CD pipelines
       to play nice. I've built systems that churn through 500k+ monitoring
       samples per second, process thousands of messages per second, and somehow
       managed to help teams ship faster without everything catching fire
       (well... not always?).
-      <br />
-      <br />
-      Language-wise, I'm agnostic. I've shipped production code in Python, Scala,
-      Java, TypeScript, Go, Bash, Hack/PHP — you name it. Go happens to be my current
-      favorite, but tomorrow it might be something else. For me, the tool should
-      fit the problem, not the other way around.
     </p>
-    <h2 class="text-2xl pt-4">Where I've been</h2>
-    <p class="mb-5 mt-2">
+    <p class="text-text-body leading-relaxed">
+      Language-wise, I'm agnostic. I've shipped production code in Python,
+      Scala, Java, TypeScript, Go, Bash, Hack/PHP — you name it. Go happens to
+      be my current favorite, but tomorrow it might be something else. For me,
+      the tool should fit the problem, not the other way around.
+    </p>
+  </div>
+
+  <div class="mb-12">
+    <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
+      <i class="fa-solid fa-briefcase text-primary-main"></i>
+      Where I've been
+    </h2>
+    <p class="mb-4 text-text-body leading-relaxed">
       My career has been a bit of a tour through different corners of tech. I've
       worked at massive companies like Meta, Microsoft, Google, and Amazon,
       where you learn how systems scale (and break) at ridiculous volumes. I've
       also spent time at smaller, engineering-heavy places like Radix Trading,
       where every line of code matters and there's no room to hide behind
       process.
-      <br />
-      <br />
-      One of the most eye-opening experiences was my time at GetInData, a consulting
-      company where I primarily worked with startup clients. Consulting taught me
-      how to quickly dive into someone else's codebase, understand their business
-      problems, and deliver solutions under tight timelines.
     </p>
+    <p class="text-text-body leading-relaxed">
+      One of the most eye-opening experiences was my time at GetInData, a
+      consulting company where I primarily worked with startup clients.
+      Consulting taught me how to quickly dive into someone else's codebase,
+      understand their business problems, and deliver solutions under tight
+      timelines.
+    </p>
+  </div>
 
-    <h2 class="text-2xl pt-4">If you're here</h2>
-    <p class="mb-5 mt-2">
-      If you’re interested in hiring me, check out my <a
-        href={"https://drive.google.com/file/d/1j3yjmZPbzp_XJ6oBDBYijkWAPlOx_rp8/view?usp=sharing"}
-        target="_blank">resume</a
-      >
-      . And if you enjoy thinking about distributed systems, automation, or how to
-      make software teams happier and faster, subscribe to the blog (<a
-        href="/rss.xml"
-        target="_blank"
-        class="hover:text-text-link"
-        title="Subscribe to RSS feed"
-        ><i class="fa-solid fa-rss text-orange-500"></i> RSS</a
-      >). I write when there's something worth saying, though.
-    </p>
+  {
+    recentPosts && recentPosts.length > 0 && (
+      <div class="mb-12 pl-6 border-l-4 border-primary-main/30">
+        <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
+          <i class="fa-solid fa-pencil text-primary-main" />
+          Recent Writing
+        </h2>
+        <div class="space-y-6">
+          {recentPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="unset block group">
+              <div class="font-semibold text-text-bold group-hover:text-primary-main mb-1 transition-colors">
+                {post.frontmatter.title}
+              </div>
+              {post.frontmatter.description && (
+                <div class="text-sm text-text-muted mb-2 leading-relaxed">
+                  {post.frontmatter.description}
+                </div>
+              )}
+              <div class="text-xs text-text-muted">
+                {new Date(post.frontmatter.date).toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+                {" • "}
+                {post.minutes} min read
+              </div>
+            </a>
+          ))}
+        </div>
+        <a
+          href="/blog"
+          class="inline-block mt-6 text-primary-main hover:underline text-sm font-medium"
+        >
+          View all posts →
+        </a>
+      </div>
+    )
+  }
+
+  <div
+    class="flex flex-col sm:flex-row gap-4 mb-8 pt-4 border-t border-border-color"
+  >
+    <a
+      href="https://drive.google.com/file/d/1j3yjmZPbzp_XJ6oBDBYijkWAPlOx_rp8/view?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex-1 text-center px-6 py-3 bg-primary-main text-white rounded font-semibold hover:opacity-90 transition-opacity"
+    >
+      <i class="fa-solid fa-file-lines mr-2"></i>
+      View Resume
+    </a>
+    <a
+      href="/rss.xml"
+      class="flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
+    >
+      <i class="fa-solid fa-rss mr-2"></i>
+      Subscribe via RSS
+    </a>
   </div>
 </section>
