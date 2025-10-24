@@ -1,6 +1,8 @@
 ---
 import DarkModeToggle from "./DarkModeToggle.astro";
 import Navbar from "./Navbar.astro";
+import SearchModal from "./SearchModal.astro";
+import { GITHUB_URL, LINKEDIN_URL } from "../config";
 ---
 
 <header>
@@ -15,9 +17,22 @@ import Navbar from "./Navbar.astro";
     class="max-[375px]:hidden justify-self-end py-2 flex items-center content-center text-text-bold"
   >
     <a
-      class="unset text-xl ml-4 hover:text-text-link"
-      href="https://github.com/fiffeek"
+      class="unset text-lg ml-4 hover:text-text-link"
+      href="/rss.xml"
+      title="RSS Feed"
     >
+      <i class="fa-solid fa-rss" aria-hidden="true"></i>
+      <span class="fa-sr-only">RSS Feed</span>
+    </a>
+    <a
+      class="unset text-lg ml-4 hover:text-text-link"
+      href={LINKEDIN_URL}
+      title="Filip Mikina on LinkedIn"
+    >
+      <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+      <span class="fa-sr-only">LinkedIn</span>
+    </a>
+    <a class="unset text-lg ml-4 hover:text-text-link" href={GITHUB_URL}>
       <i
         class="fa-brands fa-github"
         aria-hidden="true"
@@ -26,6 +41,7 @@ import Navbar from "./Navbar.astro";
     </a>
   </div>
   <DarkModeToggle />
+  <SearchModal />
 </header>
 
 <style>
@@ -36,15 +52,14 @@ import Navbar from "./Navbar.astro";
     position: relative;
     grid-template-columns:
       minmax(0, max-content) minmax(0, 1fr) minmax(0, max-content)
-      minmax(0, max-content);
+      minmax(0, max-content) minmax(0, max-content);
   }
 
   @media (min-width: 768px) {
     header {
-      grid-template-columns: minmax(0, 1fr) minmax(0, max-content) minmax(
-          0,
-          max-content
-        );
+      grid-template-columns:
+        minmax(0, 1fr) minmax(0, max-content) minmax(0, max-content)
+        minmax(0, max-content) minmax(0, max-content);
     }
   }
 </style>

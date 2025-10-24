@@ -1,12 +1,50 @@
 ---
 import PageMeta from "../components/PageMeta.astro";
+import StructuredData from "../components/StructuredData.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import Intro from "../components/Intro.astro";
-import { SITE_TITLE } from "../config";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_URL,
+  MY_NAME,
+  TWITTER_HANDLE,
+  GITHUB_URL,
+  LINKEDIN_URL,
+} from "../config";
+
+// Structured data for website
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  url: SITE_URL,
+  author: {
+    "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
+  },
+};
+
+// Structured data for person/author
+const personStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/#person`,
+  name: MY_NAME,
+  url: SITE_URL,
+  sameAs: [
+    `https://twitter.com/${TWITTER_HANDLE.replace("@", "")}`,
+    GITHUB_URL,
+    LINKEDIN_URL,
+  ],
+};
 ---
 
 <PageLayout>
   <PageMeta title={`${SITE_TITLE}`} slot="meta" />
+  <StructuredData data={websiteStructuredData} slot="meta" />
+  <StructuredData data={personStructuredData} slot="meta" />
   <Fragment slot="main">
     <Intro />
   </Fragment>

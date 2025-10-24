@@ -3,8 +3,11 @@ import { readOne, readAll } from "../../lib/markdoc/read";
 import { blog } from "../../lib/markdoc/frontmatter.schema";
 import Renderer from "../../components/Renderer.astro";
 import BlogPostMeta from "../../components/BlogPostMeta.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import TagList from "../../components/TagList.astro";
 import ContentLayout from "../../layouts/ContentLayout.astro";
-import { SITE_URL } from "../../config";
+import { SITE_URL, MY_NAME, SITE_TITLE } from "../../config";
+import { getReadingTime } from "../../lib/reading-time";
 
 export async function getStaticPaths() {
   const posts = await readAll({
@@ -27,26 +30,96 @@ if (typeof slug !== "string") {
   throw Error(`slug should be string. Received: ${slug}`);
 }
 
-const { content, frontmatter } = await readOne({
+const { content, rawContent, frontmatter } = await readOne({
   directory: "blog",
   slug,
   frontmatterSchema: blog,
 });
 
+const { words, minutes } = getReadingTime(rawContent);
+
 const ogImageAbsoluteUrl =
   frontmatter.external !== true && frontmatter.ogImagePath
     ? new URL(frontmatter.ogImagePath, SITE_URL).toString()
     : undefined;
+
+// Structured data for blog post
+const articleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  author: {
+    "@type": "Person",
+    name: MY_NAME,
+    url: SITE_URL,
+  },
+  datePublished: frontmatter.date.toISOString(),
+  dateModified: frontmatter.date.toISOString(),
+  image: ogImageAbsoluteUrl,
+  url: `${SITE_URL}/blog/${slug}`,
+  keywords:
+    frontmatter.external === false && frontmatter.tags
+      ? frontmatter.tags.join(", ")
+      : undefined,
+  wordCount: words,
+  publisher: {
+    "@type": "Organization",
+    name: SITE_TITLE,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/favicon.ico`,
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/blog/${slug}`,
+  },
+};
+
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Blog",
+      item: `${SITE_URL}/blog`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: frontmatter.title,
+      item: `${SITE_URL}/blog/${slug}`,
+    },
+  ],
+};
 ---
 
-<ContentLayout title={frontmatter.title} date={frontmatter.date}>
+<ContentLayout
+  title={frontmatter.title}
+  date={frontmatter.date}
+  tags={frontmatter.external === false ? frontmatter.tags : undefined}
+  readingTime={minutes}
+  wordCount={words}
+>
   <BlogPostMeta
     title={frontmatter.title}
     description={frontmatter.external ? undefined : frontmatter.description}
     publishDate={frontmatter.date.toISOString()}
     pagePath={`/blog/${slug}`}
     ogImageAbsoluteUrl={ogImageAbsoluteUrl}
+    tags={frontmatter.external === false ? frontmatter.tags : undefined}
     slot="meta"
   />
+  <StructuredData data={articleStructuredData} slot="meta" />
+  <StructuredData data={breadcrumbStructuredData} slot="meta" />
   <Renderer content={content} slot="content" />
 </ContentLayout>

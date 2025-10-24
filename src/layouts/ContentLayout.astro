@@ -13,13 +13,17 @@ import ThemeScript from "./ThemeScript.astro";
 import Favicon from "./Favicon.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import TagList from "../components/TagList.astro";
 
 export interface Props {
   title: string;
   date: Date;
+  tags?: string[];
+  readingTime?: number;
+  wordCount?: number;
 }
 
-const { title, date } = Astro.props;
+const { title, date, tags, readingTime, wordCount } = Astro.props;
 const formattedDate = new Date(date).toLocaleDateString("en-us", {
   year: "numeric",
   month: "short",
@@ -33,7 +37,24 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
     <!-- Global Metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1a1a1a"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="generator" content="Blogster" />
+    <link rel="sitemap" href="/sitemap-0.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed"
+      href="/rss.xml"
+    />
     <Favicon />
     <slot name="meta" />
     <GoogleFont />
@@ -46,7 +67,28 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
     <main id="main">
       <section class="blog-post prose max-w-none prose-sleek">
         <h1 class="m-0 mb-[0.25em]">{title}</h1>
-        <time class="block mb-[2em] text-text-muted">{formattedDate}</time>
+        <div
+          class="flex flex-wrap items-center gap-3 mb-[0.5em] text-text-muted"
+        >
+          <time>{formattedDate}</time>
+          {
+            readingTime && (
+              <>
+                <span>•</span>
+                <span>{readingTime} min read</span>
+              </>
+            )
+          }
+          {
+            wordCount && (
+              <>
+                <span>•</span>
+                <span>{wordCount.toLocaleString()} words</span>
+              </>
+            )
+          }
+        </div>
+        {tags && tags.length > 0 && <TagList tags={tags} />}
         <slot name="content" />
       </section>
     </main>

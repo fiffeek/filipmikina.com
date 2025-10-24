@@ -17,6 +17,7 @@ export interface Props {
   ogImageAltText?: string;
   ogImageWidth?: number;
   ogImageHeight?: number;
+  tags?: string[];
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   ogImageAltText,
   ogImageWidth,
   ogImageHeight,
+  tags,
 } = Astro.props;
 
 const { meta, og, twitter } = getBlogPostMeta({
@@ -35,6 +37,7 @@ const { meta, og, twitter } = getBlogPostMeta({
   description: description || SITE_DESCRIPTION,
   pageUrl: pagePath ? new URL(pagePath, SITE_URL).toString() : undefined,
   authorName: MY_NAME,
+  siteName: SITE_TITLE,
   publishDate,
   ogImageAbsoluteUrl,
   ogImageAltText,
@@ -49,6 +52,7 @@ const { meta, og, twitter } = getBlogPostMeta({
 <title>{meta.title}</title>
 <meta name="title" content={meta.title} />
 {meta.description && <meta name="description" content={meta.description} />}
+{tags && tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
 {meta.canonicalUrl && <link rel="canonical" href={meta.canonicalUrl} />}
 
 <!-- Open Graph / Facebook -->
@@ -56,12 +60,14 @@ const { meta, og, twitter } = getBlogPostMeta({
 {og.description && <meta property="og:description" content={og.description} />}
 {og.type && <meta property="og:type" content={og.type} />}
 {og.url && <meta property="og:url" content={og.url} />}
+{og.siteName && <meta property="og:site_name" content={og.siteName} />}
 {og.author && <meta property="article:author" content={og.author} />}
 {
   og.publishDate && (
     <meta property="article:published_time" content={og.publishDate} />
   )
 }
+{tags && tags.map((tag) => <meta property="article:tag" content={tag} />)}
 {og.image && <meta property="og:image" content={og.image} />}
 {og.imageAlt && <meta property="og:image:alt" content={og.imageAlt} />}
 {og.imageWidth && <meta property="og:image:width" content={og.imageWidth} />}

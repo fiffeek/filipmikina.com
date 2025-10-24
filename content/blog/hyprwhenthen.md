@@ -2,8 +2,12 @@
 external: false
 draft: false
 title: "Dispatching actions on Hyprland's events"
-description: Floating windows that refuse to be floated.
+description:
+  Event-driven automation for Hyprland. HyprWhenThen listens to Hyprland events
+  and executes actions based on configurable rules, enabling dynamic window
+  management and workspace automation.
 date: 2025-09-15
+tags: ["Hyprland", "Wayland", "Linux", "Go", "Automation"]
 ---
 
 Ever had a window that should float but doesn't? Think of those `OAuth popups`

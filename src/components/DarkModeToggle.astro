@@ -2,22 +2,17 @@
 
 ---
 
-<mode-toggle class="flex">
+<mode-toggle>
   <button
-    class="justify-self-end bg-neutral-200 dark:bg-neutral-700 ml-4 inline-flex h-6 w-11 items-center rounded-full"
+    class="unset text-lg ml-4 hover:text-text-link text-text-bold transition-colors duration-200"
     id="mode-toggle"
     role="switch"
     type="button"
     tabindex="0"
-    aria-checked="false"
-    data-headlessui-state=""
-    ><span class="sr-only">Toggle dark mode</span><span
-      id="mode-circle"
-      class="light inline-block h-4 w-4 rounded-full bg-gradient-to-tr invisible"
-      ><span
-        class="absolute top-0 right-0 w-[10px] h-[10px] rounded-full bg-gray-700 scale-[0]"
-      ></span>
-    </span>
+    aria-label="Toggle dark mode"
+    title="Toggle dark mode"
+  >
+    <i id="theme-icon" class="fa-solid fa-sun invisible" aria-hidden="true"></i>
   </button>
 </mode-toggle>
 
@@ -57,40 +52,34 @@
         document.documentElement.classList.contains("dark") ? "dark" : "light";
 
       const toggle = this.querySelector("button");
-      const iconElem = toggle?.querySelector("#mode-circle");
+      const iconElem = toggle?.querySelector("#theme-icon") as HTMLElement;
 
       if (iconElem) {
-        // set the toggle mode based on the html classname set in ThemeScript.astro
         if (currentMode === "dark") {
-          iconElem.classList.remove("light");
-          iconElem.classList.add("dark");
+          iconElem.classList.remove("fa-sun");
+          iconElem.classList.add("fa-moon");
+        } else {
+          iconElem.classList.remove("fa-moon");
+          iconElem.classList.add("fa-sun");
         }
 
-        // we load the toggle invisible to prevent flash
-        // remove visibility class after setting initial dark/light class
         iconElem.classList.remove("invisible");
 
-        // Each time the button is clicked, update the count.
         toggle?.addEventListener("click", () => {
           if (currentMode === "dark") {
             const modeToSwitch = "light";
-            iconElem.classList.remove("dark");
-            iconElem.classList.add("light");
+            iconElem.classList.remove("fa-moon");
+            iconElem.classList.add("fa-sun");
             updateHTMLTheme(modeToSwitch);
             updateStorageTheme(modeToSwitch);
             currentMode = modeToSwitch;
           } else {
             const modeToSwitch = "dark";
-            iconElem.classList.remove("light");
-            iconElem.classList.add("dark");
+            iconElem.classList.remove("fa-sun");
+            iconElem.classList.add("fa-moon");
             updateHTMLTheme(modeToSwitch);
             updateStorageTheme(modeToSwitch);
             currentMode = modeToSwitch;
-          }
-
-          // prevent slide animation on page load for dark mode
-          if (!iconElem.classList.contains("duration-300")) {
-            iconElem.classList.add("duration-300");
           }
         });
       }
@@ -99,14 +88,3 @@
 
   customElements.define("mode-toggle", ModeToggle);
 </script>
-
-<style>
-  .light {
-    transform: translateX(0.25rem);
-    background-image: linear-gradient(to top right, #f97316, #f97316);
-  }
-  .dark {
-    transform: translateX(1.5rem);
-    background-image: linear-gradient(to top right, #facc15, #facc15);
-  }
-</style>

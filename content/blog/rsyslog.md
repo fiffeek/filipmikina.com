@@ -2,9 +2,13 @@
 external: false
 title: Forwarding custom syslog messages to Loki via UDP using Promtail
 description:
-  How to forward custom formatted syslog messages via UDP to Loki using
-  Promtail. Testing with Docker/containers.
+  A comprehensive guide to setting up rsyslog as a forwarder to collect
+  custom-formatted syslog messages from legacy appliances over UDP and relay
+  them to Grafana Loki via Promtail. Includes containerized deployment with
+  Docker Compose and Kubernetes configurations, solving the challenge of
+  non-standard syslog formats that Promtail can't handle directly.
 date: 2024-02-22
+tags: ["DevOps", "Docker", "Kubernetes", "Logging", "Observability", "Grafana"]
 ---
 
 # Background

@@ -2,8 +2,15 @@
 external: false
 draft: false
 title: Managing dynamic monitor configuration in Hyprland
-description: Writing a suitable tool.
+description:
+  Building HyprDynamicMonitors, a power-aware and event-driven monitor
+  configuration manager for Hyprland that automatically applies the right
+  monitor layout when displays are connected or disconnected. Unlike existing
+  solutions, it uses Hyprland's native monitor syntax, supports power state
+  awareness for battery optimization, and instantly reacts to monitor changes
+  without manual intervention.
 date: 2025-09-13
+tags: ["Hyprland", "Wayland", "Linux", "Go", "Arch Linux"]
 ---
 
 ---

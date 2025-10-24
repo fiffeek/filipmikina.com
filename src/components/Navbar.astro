@@ -45,6 +45,16 @@ const navItems = [
           </li>
         ))
       }
+      <li>
+        <button
+          id="mobile-search-button"
+          class="unset flex items-center gap-2 text-text-bold hover:text-text-link transition-colors duration-200"
+          aria-label="Search"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search</span>
+        </button>
+      </li>
     </ul>
   </section>
 </nav>
@@ -54,9 +64,20 @@ const navItems = [
     const hamburgerBtn = document.getElementById("hamburger-btn");
     const mobileNav = document.getElementById("mobile-nav");
     const hamburgerIcon = hamburgerBtn?.querySelector("i");
+    const mobileSearchBtn = document.getElementById("mobile-search-button");
 
     if (hamburgerBtn && mobileNav && hamburgerIcon) {
       let isOpen = false;
+
+      function closeMobileNav() {
+        isOpen = false;
+        mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
+        mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
+        hamburgerIcon.classList.remove("fa-times");
+        hamburgerIcon.classList.add("fa-bars");
+        hamburgerIcon.style.transform = "rotate(0deg)";
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+      }
 
       hamburgerBtn.addEventListener("click", function () {
         isOpen = !isOpen;
@@ -73,27 +94,21 @@ const navItems = [
           hamburgerIcon.style.transform = "rotate(180deg)";
           hamburgerBtn.setAttribute("aria-expanded", "true");
         } else {
-          // Close menu
-          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
-          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
-          hamburgerIcon.classList.remove("fa-times");
-          hamburgerIcon.classList.add("fa-bars");
-          hamburgerIcon.style.transform = "rotate(0deg)";
-          hamburgerBtn.setAttribute("aria-expanded", "false");
+          closeMobileNav();
         }
       });
 
       const mobileNavLinks = mobileNav.querySelectorAll("a");
       mobileNavLinks.forEach((link) => {
         link.addEventListener("click", function () {
-          isOpen = false;
-          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
-          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
-          hamburgerIcon.classList.remove("fa-times");
-          hamburgerIcon.classList.add("fa-bars");
-          hamburgerIcon.style.transform = "rotate(0deg)";
-          hamburgerBtn.setAttribute("aria-expanded", "false");
+          closeMobileNav();
         });
+      });
+
+      mobileSearchBtn?.addEventListener("click", function () {
+        closeMobileNav();
+        const searchButton = document.getElementById("search-button");
+        searchButton?.click();
       });
 
       document.addEventListener("click", function (event) {
@@ -102,13 +117,7 @@ const navItems = [
           !hamburgerBtn.contains(event.target) &&
           !mobileNav.contains(event.target)
         ) {
-          isOpen = false;
-          mobileNav.classList.add("opacity-0", "invisible", "-translate-y-2");
-          mobileNav.classList.remove("opacity-100", "visible", "translate-y-0");
-          hamburgerIcon.classList.remove("fa-times");
-          hamburgerIcon.classList.add("fa-bars");
-          hamburgerIcon.style.transform = "rotate(0deg)";
-          hamburgerBtn.setAttribute("aria-expanded", "false");
+          closeMobileNav();
         }
       });
     }

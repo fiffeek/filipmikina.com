@@ -4,6 +4,7 @@ import { blog } from "../lib/markdoc/frontmatter.schema";
 import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
 import { SITE_TITLE } from "../config";
+import { getReadingTime } from "../lib/reading-time";
 
 const posts = await readAll({
   directory: "blog",
@@ -17,14 +18,19 @@ const sortedPosts = posts
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf(),
   );
+
+const postsWithMeta = sortedPosts.map((post) => {
+  const { words, minutes } = getReadingTime(post.rawContent);
+  return { ...post, words, minutes };
+});
 ---
 
 <PageLayout>
   <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
   <section slot="main">
-    <ul>
+    <ul class="space-y-6">
       {
-        sortedPosts.map((post) => {
+        postsWithMeta.map((post) => {
           const formattedDate = new Date(
             post.frontmatter.date,
           ).toLocaleDateString("en-us", {
@@ -33,13 +39,13 @@ const sortedPosts = posts
             day: "numeric",
           });
           return (
-            <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
-              <div class="title">
+            <li>
+              <div class="title mb-2">
                 {post.frontmatter.external ? (
                   <a
                     href={post.frontmatter.url}
                     target="_blank"
-                    class="unset hover:text-text-link"
+                    class="unset hover:text-text-link text-lg font-semibold"
                   >
                     <span>{post.frontmatter.title}</span>
                     <span>
@@ -49,17 +55,30 @@ const sortedPosts = posts
                 ) : (
                   <a
                     href={`/blog/${post.slug}`}
-                    class="unset hover:text-text-link"
+                    class="unset hover:text-text-link text-lg font-semibold"
                   >
                     {post.frontmatter.title}
                   </a>
                 )}
               </div>
-              <div class="text-text-muted text-sm italic">
+              <div class="flex flex-wrap items-center gap-2 text-text-muted text-sm mb-2">
                 <time datetime={post.frontmatter.date.toISOString()}>
                   {formattedDate}
                 </time>
+                {!post.frontmatter.external && (
+                  <>
+                    <span>•</span>
+                    <span>{post.minutes} min read</span>
+                    <span>•</span>
+                    <span>{post.words.toLocaleString()} words</span>
+                  </>
+                )}
               </div>
+              {!post.frontmatter.external && post.frontmatter.description && (
+                <p class="text-text-body text-sm leading-relaxed m-0">
+                  {post.frontmatter.description}
+                </p>
+              )}
             </li>
           );
         })

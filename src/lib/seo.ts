@@ -9,6 +9,7 @@ type PageOgMeta = {
   description?: string; // page description
   type: "website";
   url?: string; // site URL
+  siteName?: string; // site name
   image?: string; // preview image
   imageAlt?: string; // alt text for preview image
   imageWidth?: string; // preview image width - 1200px standard
@@ -31,7 +32,7 @@ type BlogPostOgMeta = {
   type: "article";
   url?: string; // blog post url
   author?: string; // post author name
-  // siteName?: string; // page title
+  siteName?: string; // site name
   publishDate: string; // ISO string
   image?: string; // preview image
   imageAlt?: string; // alt text for preview image
@@ -53,6 +54,7 @@ export function getPageMeta({
   title: pageTitle,
   description,
   baseUrl,
+  siteName,
   ogImageAbsoluteUrl,
   ogImageAltText,
   ogImageWidth,
@@ -63,6 +65,7 @@ export function getPageMeta({
   title: string;
   description: string;
   baseUrl?: string;
+  siteName?: string;
   ogImageAbsoluteUrl?: string; // should always be absolute
   ogImageAltText?: string;
   ogImageWidth?: number;
@@ -88,6 +91,7 @@ export function getPageMeta({
     description: description,
     type: "website",
     url: baseUrl,
+    siteName: siteName,
     image: ogImageAbsoluteUrl,
     imageAlt: ogImageAltText,
     imageWidth: ogImageWidth ? String(ogImageWidth) : undefined,
@@ -117,6 +121,7 @@ export function getBlogPostMeta({
   canonicalUrl,
   pageUrl,
   authorName,
+  siteName,
   publishDate,
   ogImageAbsoluteUrl,
   ogImageAltText,
@@ -130,6 +135,7 @@ export function getBlogPostMeta({
   canonicalUrl?: string;
   pageUrl?: string;
   authorName?: string;
+  siteName?: string;
   publishDate: string;
   ogImageAbsoluteUrl?: string; // should always be absolute
   ogImageAltText?: string;
@@ -157,6 +163,7 @@ export function getBlogPostMeta({
     type: "article",
     url: pageUrl,
     author: authorName,
+    siteName: siteName,
     publishDate: publishDate,
     image: ogImageAbsoluteUrl,
     imageAlt: ogImageAltText,

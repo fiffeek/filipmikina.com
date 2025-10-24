@@ -7,19 +7,13 @@ const { language, content, title } = Astro.props;
 <div class="code-container relative">
   {
     title && title.trim() !== "" && (
-      <div class="code-title bg-gray-800 text-gray-200 px-4 py-2 text-sm font-medium rounded-t border-b border-gray-700 flex justify-between items-center">
+      <div class="code-title">
         <span class="truncate pr-2">{title}</span>
         <div class="hidden sm:flex gap-2 flex-shrink-0">
-          <button
-            class="copy-path-btn px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
-            data-path={title}
-          >
+          <button class="copy-path-btn" data-path={title}>
             Copy Path
           </button>
-          <button
-            class="copy-code-btn px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
-            data-content={content}
-          >
+          <button class="copy-code-btn" data-content={content}>
             Copy Code
           </button>
         </div>
@@ -33,7 +27,7 @@ const { language, content, title } = Astro.props;
     {
       (!title || title.trim() === "") && (
         <button
-          class="copy-code-btn absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+          class="copy-code-btn copy-code-btn-absolute"
           data-content={content}
         >
           Copy Code
@@ -86,19 +80,50 @@ const { language, content, title } = Astro.props;
   });
 </script>
 
+<style>
+  .code-title {
+    background-color: rgb(var(--color-text-body) / 0.05);
+    color: rgb(var(--color-text-body));
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    border-bottom: 1px solid rgb(var(--color-text-muted) / 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copy-path-btn,
+  .copy-code-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: rgb(var(--color-primary-main) / 0.1);
+    color: rgb(var(--color-primary-main));
+    border: 1px solid rgb(var(--color-primary-main) / 0.2);
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .copy-path-btn:hover,
+  .copy-code-btn:hover {
+    background-color: rgb(var(--color-primary-main) / 0.2);
+    border-color: rgb(var(--color-primary-main) / 0.3);
+  }
+
+  .copy-code-btn-absolute {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+</style>
+
 <style is:global>
-  /**
-  https://github.com/PrismJS/prism-themes/blob/master/themes/prism-coldark-dark.css
- * Coldark Theme for Prism.js
- * Theme variation: Dark
- * Tested with HTML, CSS, JS, JSON, PHP, YAML, Bash script
- * @author Armand Philippot <contact@armandphilippot.com>
- * @homepage https://github.com/ArmandPhilippot/coldark-prism
- * @license MIT
- */
   code[class*="language-"],
   pre[class*="language-"] {
-    color: #e3eaf2;
+    color: rgb(var(--color-text-body));
     background: none;
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     text-align: left;
@@ -120,24 +145,23 @@ const { language, content, title } = Astro.props;
   pre[class*="language-"] ::-moz-selection,
   code[class*="language-"]::-moz-selection,
   code[class*="language-"] ::-moz-selection {
-    background: #3c526d;
+    background: rgb(var(--color-text-muted) / 0.2);
   }
 
   pre[class*="language-"]::selection,
   pre[class*="language-"] ::selection,
   code[class*="language-"]::selection,
   code[class*="language-"] ::selection {
-    background: #3c526d;
+    background: rgb(var(--color-text-muted) / 0.2);
   }
 
-  /* Code blocks */
   pre[class*="language-"] {
     padding: 1em;
     margin: 0.5em 0;
     overflow: auto;
+    border-radius: 0.375rem;
   }
 
-  /* When there's a title, remove top border radius */
   .rounded-t-none pre[class*="language-"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -146,10 +170,16 @@ const { language, content, title } = Astro.props;
 
   :not(pre) > code[class*="language-"],
   pre[class*="language-"] {
-    background: #111b27;
+    background: rgb(var(--color-text-body) / 0.03);
+    border: 1px solid rgb(var(--color-text-muted) / 0.15);
   }
 
-  /* Inline code */
+  html.dark pre[class*="language-"],
+  html.dark :not(pre) > code[class*="language-"] {
+    background: rgb(var(--color-text-body) / 0.05);
+    border-color: rgb(var(--color-text-muted) / 0.2);
+  }
+
   :not(pre) > code[class*="language-"] {
     padding: 0.1em 0.3em;
     border-radius: 0.3em;
@@ -160,18 +190,19 @@ const { language, content, title } = Astro.props;
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: #8da1b9;
+    color: rgb(var(--color-text-muted));
+    font-style: italic;
   }
 
   .token.punctuation {
-    color: #e3eaf2;
+    color: rgb(var(--color-text-body) / 0.7);
   }
 
   .token.delimiter.important,
   .token.selector .parent,
   .token.tag,
   .token.tag .token.punctuation {
-    color: #66cccc;
+    color: rgb(var(--color-primary-main));
   }
 
   .token.attr-name,
@@ -180,7 +211,7 @@ const { language, content, title } = Astro.props;
   .token.number,
   .token.constant,
   .token.selector .token.attribute {
-    color: #e6d37a;
+    color: rgb(var(--color-primary-main) / 0.8);
   }
 
   .token.class-name,
@@ -189,7 +220,7 @@ const { language, content, title } = Astro.props;
   .token.property,
   .token.property-access,
   .token.variable {
-    color: #6cb8e6;
+    color: rgb(var(--color-text-bold));
   }
 
   .token.attr-value,
@@ -198,20 +229,21 @@ const { language, content, title } = Astro.props;
   .token.selector .token.value,
   .token.string,
   .token.string .token.url-link {
-    color: #91d076;
+    color: rgb(var(--color-primary-main) / 0.9);
   }
 
   .token.builtin,
   .token.keyword-array,
   .token.package,
   .token.regex {
-    color: #f4adf4;
+    color: rgb(var(--color-text-link));
   }
 
   .token.function,
   .token.selector .token.class,
   .token.selector .token.id {
-    color: #c699e3;
+    color: rgb(var(--color-text-bold));
+    font-weight: 500;
   }
 
   .token.atrule .token.rule,
@@ -222,17 +254,18 @@ const { language, content, title } = Astro.props;
   .token.pseudo-element,
   .token.selector,
   .token.unit {
-    color: #e9ae7e;
+    color: rgb(var(--color-primary-main));
+    font-weight: 500;
   }
 
   .token.deleted,
   .token.important {
-    color: #cd6660;
+    color: rgb(var(--color-primary-main) / 0.7);
   }
 
   .token.keyword-this,
   .token.this {
-    color: #6cb8e6;
+    color: rgb(var(--color-text-bold));
   }
 
   .token.important,
@@ -256,162 +289,76 @@ const { language, content, title } = Astro.props;
 
   .language-markdown .token.title,
   .language-markdown .token.title .token.punctuation {
-    color: #6cb8e6;
+    color: rgb(var(--color-text-bold));
     font-weight: bold;
   }
 
-  .language-markdown .token.blockquote.punctuation {
-    color: #f4adf4;
+  .language-markdown .token.blockquote.punctuation,
+  .language-markdown .token.list.punctuation {
+    color: rgb(var(--color-primary-main));
   }
 
   .language-markdown .token.code {
-    color: #66cccc;
+    color: rgb(var(--color-primary-main));
   }
 
   .language-markdown .token.hr.punctuation {
-    color: #6cb8e6;
+    color: rgb(var(--color-text-muted));
   }
 
   .language-markdown .token.url .token.content {
-    color: #91d076;
+    color: rgb(var(--color-text-link));
   }
 
   .language-markdown .token.url-link {
-    color: #e6d37a;
-  }
-
-  .language-markdown .token.list.punctuation {
-    color: #f4adf4;
+    color: rgb(var(--color-primary-main) / 0.8);
   }
 
   .language-markdown .token.table-header {
-    color: #e3eaf2;
+    color: rgb(var(--color-text-bold));
   }
 
   .language-json .token.operator {
-    color: #e3eaf2;
+    color: rgb(var(--color-text-body));
   }
 
   .language-scss .token.variable {
-    color: #66cccc;
+    color: rgb(var(--color-primary-main));
   }
 
-  /* overrides color-values for the Show Invisibles plugin
- * https://prismjs.com/plugins/show-invisibles/
- */
-  .token.token.tab:not(:empty):before,
-  .token.token.cr:before,
-  .token.token.lf:before,
-  .token.token.space:before {
-    color: #8da1b9;
-  }
-
-  /* overrides color-values for the Toolbar plugin
- * https://prismjs.com/plugins/toolbar/
- */
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > a,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > button {
-    color: #111b27;
-    background: #6cb8e6;
-  }
-
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:hover,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:focus,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:hover,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:focus {
-    color: #111b27;
-    background: #6cb8e6da;
-    text-decoration: none;
-  }
-
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > span,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:hover,
-  div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:focus {
-    color: #111b27;
-    background: #8da1b9;
-  }
-
-  /* overrides color-values for the Line Highlight plugin
- * http://prismjs.com/plugins/line-highlight/
- */
   .line-highlight.line-highlight {
-    background: #3c526d5f;
-    background: linear-gradient(to right, #3c526d5f 70%, #3c526d55);
+    background: rgb(var(--color-primary-main) / 0.1);
   }
 
   .line-highlight.line-highlight:before,
   .line-highlight.line-highlight[data-end]:after {
-    background-color: #8da1b9;
-    color: #111b27;
-    box-shadow: 0 1px #3c526d;
+    background-color: rgb(var(--color-primary-main));
+    color: rgb(var(--color-bg-body));
+  }
+
+  .line-numbers.line-numbers .line-numbers-rows {
+    border-right: 1px solid rgb(var(--color-text-muted) / 0.2);
+    background: rgb(var(--color-text-body) / 0.03);
+  }
+
+  .line-numbers .line-numbers-rows > span:before {
+    color: rgb(var(--color-text-muted));
   }
 
   pre[id].linkable-line-numbers.linkable-line-numbers
     span.line-numbers-rows
     > span:hover:before {
-    background-color: #8da1b918;
+    background-color: rgb(var(--color-primary-main) / 0.1);
   }
 
-  /* overrides color-values for the Line Numbers plugin
- * http://prismjs.com/plugins/line-numbers/
- */
-  .line-numbers.line-numbers .line-numbers-rows {
-    border-right: 1px solid #0b121b;
-    background: #0b121b7a;
-  }
-
-  .line-numbers .line-numbers-rows > span:before {
-    color: #8da1b9da;
-  }
-
-  /* overrides color-values for the Match Braces plugin
- * https://prismjs.com/plugins/match-braces/
- */
-  .rainbow-braces .token.token.punctuation.brace-level-1,
-  .rainbow-braces .token.token.punctuation.brace-level-5,
-  .rainbow-braces .token.token.punctuation.brace-level-9 {
-    color: #e6d37a;
-  }
-
-  .rainbow-braces .token.token.punctuation.brace-level-2,
-  .rainbow-braces .token.token.punctuation.brace-level-6,
-  .rainbow-braces .token.token.punctuation.brace-level-10 {
-    color: #f4adf4;
-  }
-
-  .rainbow-braces .token.token.punctuation.brace-level-3,
-  .rainbow-braces .token.token.punctuation.brace-level-7,
-  .rainbow-braces .token.token.punctuation.brace-level-11 {
-    color: #6cb8e6;
-  }
-
-  .rainbow-braces .token.token.punctuation.brace-level-4,
-  .rainbow-braces .token.token.punctuation.brace-level-8,
-  .rainbow-braces .token.token.punctuation.brace-level-12 {
-    color: #c699e3;
-  }
-
-  /* overrides color-values for the Diff Highlight plugin
- * https://prismjs.com/plugins/diff-highlight/
- */
   pre.diff-highlight > code .token.token.deleted:not(.prefix),
   pre > code.diff-highlight .token.token.deleted:not(.prefix) {
-    background-color: #cd66601f;
+    background-color: rgb(var(--color-primary-main) / 0.1);
+    text-decoration: line-through;
   }
 
   pre.diff-highlight > code .token.token.inserted:not(.prefix),
   pre > code.diff-highlight .token.token.inserted:not(.prefix) {
-    background-color: #91d0761f;
-  }
-
-  /* overrides color-values for the Command Line plugin
- * https://prismjs.com/plugins/command-line/
- */
-  .command-line .command-line-prompt {
-    border-right: 1px solid #0b121b;
-  }
-
-  .command-line .command-line-prompt > span:before {
-    color: #8da1b9da;
+    background-color: rgb(var(--color-primary-main) / 0.15);
   }
 </style>

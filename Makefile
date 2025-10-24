@@ -25,3 +25,8 @@ dev/run:
 fmt:
 	@$(NPX_BIN) prettier --write .
 
+build:
+	@$(NPM_BIN) run build
+
+serve: build
+	@$(NPM_BIN) run preview
