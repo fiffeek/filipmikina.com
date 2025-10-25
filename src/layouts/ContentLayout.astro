@@ -14,6 +14,7 @@ import Favicon from "./Favicon.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import TagList from "../components/TagList.astro";
+import { SITE_URL } from "../config";
 
 export interface Props {
   title: string;
@@ -30,6 +31,56 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
   month: "short",
   day: "numeric",
 });
+
+// Social sharing configuration
+const pageUrl = slug ? `${SITE_URL}/blog/${slug}` : "";
+const encodedUrl = encodeURIComponent(pageUrl);
+const encodedTitle = encodeURIComponent(title);
+
+const socialPlatforms = [
+  {
+    name: "X",
+    icon: "fa-brands fa-x-twitter",
+    url: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    color: "bg-black hover:bg-gray-800",
+  },
+  {
+    name: "Bluesky",
+    icon: "fa-brands fa-bluesky",
+    url: `https://bsky.app/intent/compose?text=${encodedTitle}%20${encodedUrl}`,
+    color: "bg-[#0285FF] hover:bg-[#0070e0]",
+  },
+  {
+    name: "LinkedIn",
+    icon: "fa-brands fa-linkedin",
+    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    color: "bg-[#0A66C2] hover:bg-[#004182]",
+  },
+  {
+    name: "Facebook",
+    icon: "fa-brands fa-facebook",
+    url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    color: "bg-[#1877F2] hover:bg-[#0d5dba]",
+  },
+  {
+    name: "Mastodon",
+    icon: "fa-brands fa-mastodon",
+    url: `https://mastodonshare.com/?url=${encodedUrl}&text=${encodedTitle}`,
+    color: "bg-[#6364FF] hover:bg-[#4d4ed9]",
+  },
+  {
+    name: "Reddit",
+    icon: "fa-brands fa-reddit-alien",
+    url: `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
+    color: "bg-[#FF4500] hover:bg-[#cc3700]",
+  },
+  {
+    name: "Hacker News",
+    icon: "fa-brands fa-hacker-news",
+    url: `https://news.ycombinator.com/submitlink?u=${encodedUrl}&t=${encodedTitle}`,
+    color: "bg-[#FF6600] hover:bg-[#e65c00]",
+  },
+];
 ---
 
 <!doctype html>
@@ -93,16 +144,37 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
         <slot name="content" />
         {
           slug && (
-            <div class="mt-8 pt-6 border-t border-text-muted/20 text-text-muted">
-              <a
-                href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
-              >
-                <i class="fa-solid fa-pen-to-square" />
-                <span>Edit this page</span>
-              </a>
+            <div class="mt-8 pt-6 border-t border-text-muted/20">
+              <div class="mb-6">
+                <h3 class="text-sm font-semibold text-text-muted mb-3">
+                  Share this article
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                  {socialPlatforms.map((platform) => (
+                    <a
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={`inline-flex items-center gap-2 px-4 py-2 text-sm text-white rounded-lg transition-colors ${platform.color}`}
+                      aria-label={`Share on ${platform.name}`}
+                    >
+                      <i class={platform.icon} />
+                      <span>{platform.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div class="text-text-muted">
+                <a
+                  href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
+                >
+                  <i class="fa-solid fa-pen-to-square" />
+                  <span>Edit this page</span>
+                </a>
+              </div>
             </div>
           )
         }
