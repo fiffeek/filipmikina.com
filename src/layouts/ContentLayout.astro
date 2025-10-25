@@ -21,9 +21,10 @@ export interface Props {
   tags?: string[];
   readingTime?: number;
   wordCount?: number;
+  slug?: string;
 }
 
-const { title, date, tags, readingTime, wordCount } = Astro.props;
+const { title, date, tags, readingTime, wordCount, slug } = Astro.props;
 const formattedDate = new Date(date).toLocaleDateString("en-us", {
   year: "numeric",
   month: "short",
@@ -90,6 +91,21 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
         </div>
         {tags && tags.length > 0 && <TagList tags={tags} />}
         <slot name="content" />
+        {
+          slug && (
+            <div class="mt-8 pt-6 border-t border-text-muted/20 text-text-muted">
+              <a
+                href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
+              >
+                <i class="fa-solid fa-pen-to-square" />
+                <span>Edit this page</span>
+              </a>
+            </div>
+          )
+        }
       </section>
     </main>
     <Footer />
