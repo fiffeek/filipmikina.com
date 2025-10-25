@@ -26,7 +26,36 @@ const postsWithMeta = sortedPosts.map((post) => {
 ---
 
 <PageLayout>
-  <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
+  <PageMeta
+    title={`Tech Blog | ${SITE_TITLE}`}
+    description="Technical blog covering Hyprland development, DevOps practices, observability, distributed systems, and automation. Articles on rsyslog, Grafana Loki, Promtail, Hyprland monitor management, and event-driven workflows."
+    keywords={[
+      "Tech Blog",
+      "DevOps Blog",
+      "Hyprland Blog",
+      "SRE Blog",
+      "Software Engineering Blog",
+      "Distributed Systems",
+      "Observability",
+      "Monitoring",
+      "Grafana Loki",
+      "Promtail",
+      "Rsyslog",
+      "Hyprland",
+      "HyprDynamicMonitors",
+      "HyprWhenThen",
+      "Wayland",
+      "Linux",
+      "System Administration",
+      "Cloud Architecture",
+      "Automation",
+      "Open Source",
+      "Go Programming",
+      "Python",
+      "TypeScript",
+    ]}
+    slot="meta"
+  />
   <section slot="main">
     <ul class="space-y-6">
       {

@@ -2,7 +2,8 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = "Filip Mikina";
-export const SITE_DESCRIPTION = "Automation enthusiast";
+export const SITE_DESCRIPTION =
+  "SRE and Software Engineer specializing in distributed systems, observability, and automation. Ex-Meta, Google, Amazon, Microsoft. Building tools for Hyprland, writing about DevOps, cloud architecture, and system design.";
 export const TWITTER_HANDLE = "@fiffeek";
 export const MY_NAME = "Filip Mikina";
 

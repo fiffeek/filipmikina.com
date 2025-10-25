@@ -59,8 +59,10 @@ const articleStructuredData = {
   image: ogImageAbsoluteUrl,
   url: `${SITE_URL}/blog/${slug}`,
   keywords:
-    frontmatter.external === false && frontmatter.tags
-      ? frontmatter.tags.join(", ")
+    frontmatter.external === false && (frontmatter.tags || frontmatter.keywords)
+      ? [...(frontmatter.tags || []), ...(frontmatter.keywords || [])].join(
+          ", ",
+        )
       : undefined,
   wordCount: words,
   publisher: {
@@ -118,6 +120,7 @@ const breadcrumbStructuredData = {
     pagePath={`/blog/${slug}`}
     ogImageAbsoluteUrl={ogImageAbsoluteUrl}
     tags={frontmatter.external === false ? frontmatter.tags : undefined}
+    keywords={frontmatter.external === false ? frontmatter.keywords : undefined}
     slot="meta"
   />
   <StructuredData data={articleStructuredData} slot="meta" />

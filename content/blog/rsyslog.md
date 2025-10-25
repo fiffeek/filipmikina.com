@@ -1,14 +1,52 @@
 ---
 external: false
-title: Forwarding custom syslog messages to Loki via UDP using Promtail
+title:
+  "Rsyslog to Grafana Loki: Forwarding Syslog Messages via Promtail Syslog
+  Receiver"
 description:
-  A comprehensive guide to setting up rsyslog as a forwarder to collect
-  custom-formatted syslog messages from legacy appliances over UDP and relay
-  them to Grafana Loki via Promtail. Includes containerized deployment with
-  Docker Compose and Kubernetes configurations, solving the challenge of
-  non-standard syslog formats that Promtail can't handle directly.
+  Complete guide to forwarding syslog messages from rsyslog to Grafana Loki
+  using Promtail syslog receiver. Learn how to configure rsyslog as a UDP syslog
+  server and forwarder to relay custom syslog formats to Loki. Includes Docker
+  Compose and Kubernetes deployment examples for promtail syslog receiver
+  configuration.
 date: 2024-02-22
-tags: ["DevOps", "Docker", "Kubernetes", "Logging", "Observability", "Grafana"]
+tags:
+  [
+    "Rsyslog",
+    "Grafana Loki",
+    "Loki",
+    "Promtail",
+    "Syslog",
+    "Syslog Forwarding",
+    "DevOps",
+    "Docker",
+    "Kubernetes",
+    "Logging",
+    "Observability",
+  ]
+keywords:
+  [
+    "rsyslog to loki",
+    "syslog to loki",
+    "rsyslog loki",
+    "loki syslog",
+    "promtail syslog",
+    "rsyslog grafana",
+    "syslog loki",
+    "loki rsyslog",
+    "send syslog to loki",
+    "loki syslog receiver",
+    "promtail vs vector",
+    "loki.source.syslog",
+    "grafana loki syslog",
+    "grafana rsyslog",
+    "loki syslog server",
+    "promtail syslog receiver configuration example",
+    "promtail syslog receiver configuration",
+    "promtail syslog receiver documentation",
+    "syslog forwarder",
+    "udp syslog",
+  ]
 ---
 
 # Background

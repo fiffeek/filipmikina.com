@@ -11,9 +11,10 @@ export interface Props {
   title?: string;
   description?: string;
   canonicalUrl?: string;
+  keywords?: string[];
 }
 
-const { title, description, canonicalUrl } = Astro.props;
+const { title, description, canonicalUrl, keywords } = Astro.props;
 
 const { meta, og, twitter } = getPageMeta({
   title: title || SITE_TITLE,
@@ -35,6 +36,11 @@ const finalCanonicalUrl = canonicalUrl || Astro.url.href;
 <title>{meta.title}</title>
 <meta name="title" content={meta.title} />
 {meta.description && <meta name="description" content={meta.description} />}
+{
+  keywords && keywords.length > 0 && (
+    <meta name="keywords" content={keywords.join(", ")} />
+  )
+}
 <link rel="canonical" href={finalCanonicalUrl} />
 
 <!-- Open Graph / Facebook -->

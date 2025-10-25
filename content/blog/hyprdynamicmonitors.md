@@ -1,17 +1,134 @@
 ---
 external: false
 draft: false
-title: Managing dynamic monitor configuration in Hyprland
+title:
+  "Hyprland Monitor Config GUI/TUI and Manager: HyprDynamicMonitors vs Kanshi,
+  Hyprmon, nwg-displays"
 description:
-  Building HyprDynamicMonitors, a power-aware and event-driven monitor
-  configuration manager for Hyprland that automatically applies the right
-  monitor layout when displays are connected or disconnected. Unlike existing
-  solutions, it uses Hyprland's native monitor syntax, supports power state
-  awareness for battery optimization, and instantly reacts to monitor changes
-  without manual intervention.
+  Comprehensive comparison of Hyprland monitor configuration tools - kanshi,
+  shikane, hyprmon, nwg-displays, and pyprland. Learn why I built
+  HyprDynamicMonitors, the first power-aware monitor manager for Hyprland that
+  uses native monitor syntax, automatically switches profiles on display
+  changes, and optimizes battery life. Includes setup examples, configuration
+  syntax, and a feature comparison table.
 date: 2025-09-13
-tags: ["Hyprland", "Wayland", "Linux", "Go", "Arch Linux"]
+tags:
+  [
+    "Hyprland",
+    "Monitor Configuration",
+    "Wayland",
+    "Linux",
+    "Multi-Monitor",
+    "Go",
+    "Arch Linux",
+  ]
+keywords:
+  [
+    "hyprmon",
+    "kanshi hyprland",
+    "hyprland kanshi",
+    "hyprland monitor config gui",
+    "hyprdynamicmonitors",
+    "hyprland monitor gui",
+    "hyprland monitor manager",
+    "hyprland display settings gui",
+    "hyprland gui configuration tool",
+    "hyprland monitor manager gui",
+    "hyprland monitor configuration gui",
+    "hyprland nwg-displays",
+    "hyprland monitors gui",
+    "hyprland monitor config example",
+    "hyprland monitor configuration syntax",
+    "nwg displays hyprland",
+    "monitor settings hyprland",
+    "hyprland multi monitor setup",
+    "hyprland monitor setup",
+    "hyprland monitor",
+    "nwg-displays hyprland",
+    "hyprland monitor refresh rate",
+    "hyprctl monitors output example",
+    "kanshi no profile matched",
+    "hyprdisplay",
+    "hyprland reload monitors",
+    "nwg monitor",
+    "hyprland configuring monitors",
+    "hyprland monitor failed to set any requested modes",
+    "nwg-displays",
+    "hyprland monitors",
+    "hyprland monitors config",
+    "hyprland configure monitor",
+    "wdisplays hyprland",
+    "hyprland list monitors",
+    "hyprland monitor layout",
+    "hyprland 4k monitor",
+    "hyprland change refresh rate",
+    "hyprland monitor position",
+    "shikane",
+    "autorandr",
+    "hyprland dual monitor config",
+    "hyprland gui monitor configuration tool",
+    "hyprland monitor settings",
+    "hypr monitor",
+    "hyprdisplays",
+    "hyprland monitor orientation",
+    "hyprland config monitors",
+    "hyprland display configuration",
+    "hyprland multi monitor configuration",
+    "monitor config hyprland",
+    "autorandr wayland",
+    "how to configure monitors in hyprland",
+    "nwg monitors",
+    "sway vs hyprland",
+    "hyprland set monitor refresh rate",
+    "nwg displays not working",
+    "hyprland monitor transform syntax",
+    "monitor configuration hyprland",
+    "hyprland monitor brightness",
+  ]
 ---
+
+**TL;DR:** Looking for a Hyprland monitor configuration tool? I built
+[**HyprDynamicMonitors**](https://github.com/fiffeek/hyprdynamicmonitors) — a
+power-aware, automatic monitor manager with a built-in TUI for Hyprland. Unlike
+kanshi or shikane, it uses native Hyprland monitor syntax. Unlike nwg-displays
+or hyprmon, it automatically switches profiles when you plug/unplug displays.
+Most importantly, it's the only tool with power state awareness — automatically
+adjusting refresh rates and settings based on whether you're on battery or AC
+power. This article compares all available Hyprland monitor configuration tools
+and explains why I built my own.
+
+---
+
+## Quick Start: Hyprland Monitor Configuration
+
+**Manual configuration** - If you just need to configure monitors once, add this
+to your `~/.config/hypr/hyprland.conf`:
+
+```bash {% title="~/.config/hypr/hyprland.conf" %}
+# Basic syntax
+monitor=MONITOR-NAME,RESOLUTION@REFRESH_RATE,POSITION,SCALE
+
+# Examples
+monitor=eDP-1,2880x1920@120,0x0,2.0          # Laptop display
+monitor=DP-1,3840x2160@60,2880x0,1.5         # External 4K monitor
+monitor=,preferred,auto,1                     # Auto-configure remaining monitors
+```
+
+Find your monitor names with: `hyprctl monitors`
+
+**Automatic configuration** - If you switch between multiple monitor setups
+(laptop, docking station, office), you'll want a tool that automatically applies
+the right configuration:
+
+- **[kanshi](#existing-software)** / **[shikane](#existing-software)** -
+  Wayland-generic, custom config format
+- **[nwg-displays](#existing-software)** / **[hyprmon](#existing-software)** -
+  GUI/TUI tools for manual setup
+- **[HyprDynamicMonitors](#the-solution-hyprdynamicmonitors)** - Automatic +
+  power-aware (my solution)
+
+→ Jump to [tool comparison table](#existing-software) or
+[read why I built my own tool](#why-i-built-my-own)
 
 ---
 
@@ -254,5 +371,104 @@ give it a try!
 
 And if you run into issues or have ideas for improvement,
 [open an issue](https://github.com/fiffeek/hyprdynamicmonitors/issues) or
-[email me](mailto:filipmikina@gmail.com) — I’d love to hear how it works on your
+[email me](mailto:filipmikina@gmail.com) — I'd love to hear how it works on your
 setup.
+
+---
+
+## FAQ: Common Hyprland Monitor Configuration Issues
+
+### How do I configure monitors in Hyprland?
+
+Add monitor configuration to `~/.config/hypr/hyprland.conf` using the syntax:
+
+```bash
+monitor=MONITOR-NAME,RESOLUTION@REFRESH_RATE,POSITION,SCALE
+```
+
+List your available monitors with `hyprctl monitors` to get the exact names. For
+automatic multi-monitor management, use tools like kanshi, hyprmon,
+nwg-displays, or HyprDynamicMonitors.
+
+### What Hyprland monitor managers are available?
+
+- **kanshi / shikane** - Automatic profile switching, but use custom config
+  formats instead of native Hyprland syntax
+- **nwg-displays** - GUI tool for visual monitor configuration (manual
+  application)
+- **hyprmon** - TUI tool for terminal-based monitor setup (manual application)
+- **HyprDynamicMonitors** - Automatic, power-aware manager using native Hyprland
+  syntax
+
+See the [comparison table](#existing-software) above for detailed feature
+breakdown.
+
+### How do I fix "kanshi: no profile matched" error?
+
+This happens when kanshi can't find a profile matching your current monitor
+setup. Check:
+
+1. Monitor names in your kanshi config match `hyprctl monitors` output exactly
+2. You've defined a fallback profile with just your laptop display
+3. Profile conditions aren't too restrictive (try using just monitor names, not
+   serial numbers)
+
+Alternatively, use HyprDynamicMonitors which generates profiles from your
+Hyprland config instead of requiring a separate format.
+
+### Why isn't nwg-displays working with Hyprland?
+
+Common issues:
+
+1. **Changes not persisting** - nwg-displays saves to a separate config file.
+   You need to source it from your main Hyprland config.
+2. **Conflicts with existing config** - Check for conflicting monitor statements
+   in `hyprland.conf`
+3. **Wayland permissions** - Ensure nwg-displays has proper Wayland display
+   access
+
+For automatic application without manual GUI interaction, consider kanshi or
+HyprDynamicMonitors instead.
+
+### How do I set monitor refresh rate in Hyprland?
+
+In your Hyprland config:
+
+```bash
+monitor=eDP-1,2880x1920@120,0x0,2.0  # 120Hz
+monitor=DP-1,3840x2160@60,2880x0,1.5  # 60Hz
+```
+
+To change dynamically: `hyprctl keyword monitor "eDP-1,2880x1920@60,0x0,2.0"`
+
+For power-aware refresh rate switching (e.g., 120Hz on AC, 60Hz on battery), use
+HyprDynamicMonitors.
+
+### How do I fix "Hyprland: monitor failed to set any requested modes"?
+
+This error means the monitor doesn't support the requested resolution/refresh
+rate.
+
+**Manual fix:** List supported modes with `hyprctl monitors`, then use a valid
+resolution like `monitor=DP-1,3840x2160@60,0x0,1` or
+`monitor=DP-1,preferred,auto,1`. Check cable quality - DisplayPort 1.4 is
+required for 4K@120Hz.
+
+**OR** use [HyprDynamicMonitors TUI](#interactive-tui) which automatically
+restricts you to valid resolutions and refresh rates for each connected monitor,
+preventing this error entirely.
+
+### What's the difference between hyprmon and HyprDynamicMonitors?
+
+**hyprmon** is a TUI for manually configuring and saving monitor layouts. You
+run it, configure your setup, and save it - but you need to manually re-run it
+when monitors change.
+
+**HyprDynamicMonitors** is a superset: it includes a similar TUI for one-time or
+persistent configuration, but also runs as a background service that
+automatically detects monitor changes and applies the right profile. It
+additionally supports power state awareness (AC vs battery) and uses Go
+templates for dynamic configuration.
+
+Think of HyprDynamicMonitors as "hyprmon + automatic switching + power
+awareness".

@@ -18,6 +18,7 @@ export interface Props {
   ogImageWidth?: number;
   ogImageHeight?: number;
   tags?: string[];
+  keywords?: string[];
 }
 
 const {
@@ -30,7 +31,11 @@ const {
   ogImageWidth,
   ogImageHeight,
   tags,
+  keywords,
 } = Astro.props;
+
+// Combine tags and keywords for meta keywords tag
+const allKeywords = [...(tags || []), ...(keywords || [])];
 
 const { meta, og, twitter } = getBlogPostMeta({
   title: title || SITE_TITLE,
@@ -52,7 +57,11 @@ const { meta, og, twitter } = getBlogPostMeta({
 <title>{meta.title}</title>
 <meta name="title" content={meta.title} />
 {meta.description && <meta name="description" content={meta.description} />}
-{tags && tags.length > 0 && <meta name="keywords" content={tags.join(", ")} />}
+{
+  allKeywords.length > 0 && (
+    <meta name="keywords" content={allKeywords.join(", ")} />
+  )
+}
 {meta.canonicalUrl && <link rel="canonical" href={meta.canonicalUrl} />}
 
 <!-- Open Graph / Facebook -->

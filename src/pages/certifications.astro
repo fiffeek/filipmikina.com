@@ -40,7 +40,24 @@ const sortedCertifications = certifications.sort(
 ---
 
 <PageLayout>
-  <PageMeta title={`Certifications | ${SITE_TITLE}`} slot="meta" />
+  <PageMeta
+    title={`Cloud Certifications | ${SITE_TITLE}`}
+    description="Professional cloud certifications including Google Cloud Professional Cloud Architect, Microsoft Azure Data Fundamentals, and Azure Fundamentals. Verified cloud architecture and data engineering expertise."
+    keywords={[
+      "Google Cloud Certified",
+      "Professional Cloud Architect",
+      "GCP Certification",
+      "Azure Certification",
+      "Microsoft Azure",
+      "Cloud Architect",
+      "Cloud Certifications",
+      "Azure Data Fundamentals",
+      "Azure Fundamentals",
+      "Cloud Architecture",
+      "Filip Mikina Certifications",
+    ]}
+    slot="meta"
+  />
   <section slot="main">
     {
       certifications.length === 0 ? (

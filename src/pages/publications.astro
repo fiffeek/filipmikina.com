@@ -23,7 +23,29 @@ const sortedPublications = publications.sort(
 ---
 
 <PageLayout>
-  <PageMeta title={`Publications | ${SITE_TITLE}`} slot="meta" />
+  <PageMeta
+    title={`Research Publications | ${SITE_TITLE}`}
+    description="Research publications on serverless computing, workflow scheduling, and distributed systems. Published work includes sAirflow (Euro-Par 2024) - adapting Apache Airflow to serverless architectures using FaaS and message queues."
+    keywords={[
+      "sAirflow",
+      "Serverless Airflow",
+      "Apache Airflow",
+      "Serverless Computing",
+      "Workflow Scheduler",
+      "FaaS",
+      "Function as a Service",
+      "Euro-Par",
+      "Distributed Systems Research",
+      "Workflow Scheduling",
+      "Cloud Computing",
+      "Serverless Architecture",
+      "Change Data Capture",
+      "Message Queues",
+      "Filip Mikina Research",
+      "Krzysztof Rzadca",
+    ]}
+    slot="meta"
+  />
   <section slot="main">
     {
       publications.length === 0 ? (
