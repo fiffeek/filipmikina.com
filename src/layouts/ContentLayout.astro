@@ -14,7 +14,9 @@ import Favicon from "./Favicon.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import TagList from "../components/TagList.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 import { SITE_URL } from "../config";
+import type { Content } from "astro-markdoc-renderer";
 
 export interface Props {
   title: string;
@@ -23,9 +25,12 @@ export interface Props {
   readingTime?: number;
   wordCount?: number;
   slug?: string;
+  content?: Content;
+  showToc?: boolean;
 }
 
-const { title, date, tags, readingTime, wordCount, slug } = Astro.props;
+const { title, date, tags, readingTime, wordCount, slug, content, showToc } =
+  Astro.props;
 const formattedDate = new Date(date).toLocaleDateString("en-us", {
   year: "numeric",
   month: "short",
@@ -141,6 +146,7 @@ const socialPlatforms = [
           }
         </div>
         {tags && tags.length > 0 && <TagList tags={tags} />}
+        {showToc && content && <TableOfContents content={content} />}
         <slot name="content" />
         {
           slug && (
@@ -193,6 +199,30 @@ const socialPlatforms = [
       }
       main {
         grid-area: main;
+      }
+
+      /* Enhanced spacing for blog content */
+      .blog-post.prose {
+        line-height: 1.75;
+      }
+
+      .blog-post.prose p {
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-post.prose ul,
+      .blog-post.prose ol {
+        margin-bottom: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .blog-post.prose li {
+        margin-bottom: 0.5rem;
+      }
+
+      .blog-post.prose pre {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
       }
     </style>
   </body>

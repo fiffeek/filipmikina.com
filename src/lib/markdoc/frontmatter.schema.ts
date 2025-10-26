@@ -32,6 +32,7 @@ export const blog = z.discriminatedUnion("external", [
     canonicalUrl: z.optional(z.string()),
     tags: z.optional(z.array(z.string())),
     keywords: z.optional(z.array(z.string())),
+    showToc: z.boolean().default(false),
   }),
   // external link
   baseSchema.extend({

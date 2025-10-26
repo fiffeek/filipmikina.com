@@ -1,6 +1,7 @@
 ---
 external: false
 draft: false
+showToc: true
 title:
   "Hyprland Monitor Config GUI/TUI and Manager: HyprDynamicMonitors vs Kanshi,
   Hyprmon, nwg-displays"

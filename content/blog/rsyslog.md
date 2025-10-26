@@ -1,5 +1,6 @@
 ---
 external: false
+showToc: true
 title:
   "Rsyslog to Grafana Loki: Forwarding Syslog Messages via Promtail Syslog
   Receiver"

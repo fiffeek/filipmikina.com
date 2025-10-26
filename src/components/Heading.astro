@@ -26,7 +26,18 @@ if (level === 2) {
 }
 ---
 
-<Tag id={id} class="group flex -ml-[1rem]" style="overflow-wrap: break-word;">
+<Tag
+  id={id}
+  class:list={[
+    "group flex -ml-[1rem]",
+    {
+      "mt-12 mb-4": level === 2,
+      "mt-8 mb-3": level === 3,
+      "mt-6 mb-2": level >= 4,
+    },
+  ]}
+  style="overflow-wrap: break-word;"
+>
   <span class="not-prose w-[1rem] -mt-[0.125rem]">
     <a
       aria-label="link to this heading"

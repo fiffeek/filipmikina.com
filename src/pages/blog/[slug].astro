@@ -112,6 +112,8 @@ const breadcrumbStructuredData = {
   readingTime={minutes}
   wordCount={words}
   slug={slug}
+  content={content}
+  showToc={frontmatter.external === false ? frontmatter.showToc : false}
 >
   <BlogPostMeta
     title={frontmatter.title}

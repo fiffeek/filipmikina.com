@@ -1,0 +1,142 @@
+---
+import slugify from "slugify";
+import type { Content } from "astro-markdoc-renderer";
+
+interface Props {
+  content: Content;
+}
+
+interface TocItem {
+  text: string;
+  id: string;
+  level: number;
+}
+
+const { content } = Astro.props;
+
+function extractHeadings(node: any, headings: TocItem[] = []): TocItem[] {
+  if (!node) return headings;
+
+  if (node.name === "Heading" && node.attributes?.level) {
+    const level = node.attributes.level;
+    if (level >= 2 && level <= 3) {
+      const text = extractText(node.children);
+      const id = slugify(text.toLowerCase());
+      headings.push({ text, id, level });
+    }
+  }
+
+  if (Array.isArray(node.children)) {
+    node.children.forEach((child: any) => extractHeadings(child, headings));
+  }
+
+  return headings;
+}
+
+function extractText(children: any[]): string {
+  if (!children) return "";
+
+  return children
+    .map((child) => {
+      if (typeof child === "string") return child;
+      if (child.children) return extractText(child.children);
+      return "";
+    })
+    .join("");
+}
+
+const headings = extractHeadings(content);
+---
+
+{
+  headings.length > 0 && (
+    <nav class="toc not-prose mb-8 p-6 bg-bg-secondary rounded-lg border border-border-color">
+      <button
+        id="toc-toggle"
+        class="w-full text-left text-lg font-semibold text-text-bold mb-0 flex items-center justify-between gap-2 cursor-pointer hover:text-primary-main transition-colors"
+        aria-expanded="false"
+        aria-controls="toc-content"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-list text-primary-main" />
+          Table of Contents
+        </span>
+        <i
+          id="toc-icon"
+          class="fa-solid fa-chevron-down text-sm transition-transform duration-200"
+        />
+      </button>
+      <div
+        id="toc-content"
+        class="overflow-hidden transition-all duration-300"
+        style="max-height: 0;"
+      >
+        <ul class="mt-4">
+          {headings.map((heading) => (
+            <li
+              class:list={[
+                "text-sm leading-relaxed",
+                {
+                  "pl-0": heading.level === 2,
+                  "pl-6": heading.level === 3,
+                },
+              ]}
+            >
+              <a
+                href={`#${heading.id}`}
+                class="unset text-text-muted hover:text-text-link transition-colors duration-200 block no-underline border-0"
+                title={heading.text}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  )
+}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("toc-toggle");
+    const content = document.getElementById("toc-content");
+    const icon = document.getElementById("toc-icon");
+
+    if (toggle && content && icon) {
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+        if (isExpanded) {
+          content.style.maxHeight = "0";
+          toggle.setAttribute("aria-expanded", "false");
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          toggle.setAttribute("aria-expanded", "true");
+          icon.style.transform = "rotate(180deg)";
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc li {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none !important;
+  }
+
+  .toc a {
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+</style>
