@@ -9,6 +9,7 @@ export const MY_NAME = "Filip Mikina";
 
 export const GITHUB_URL = "https://github.com/fiffeek";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/filipmikina/";
+export const KOFI_URL = "https://ko-fi.com/filipmikina";
 
 // setup in astro.config.mjs
 const BASE_URL = new URL(import.meta.env.SITE);

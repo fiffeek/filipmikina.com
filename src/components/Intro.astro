@@ -1,4 +1,6 @@
 ---
+import { KOFI_URL } from "../config";
+
 export interface Props {
   recentPosts?: Array<{
     slug: string;
@@ -144,13 +146,43 @@ const { recentPosts = [] } = Astro.props;
   }
 
   <div
+    class="mb-12 bg-gradient-to-r from-primary-main/5 to-primary-main/10 dark:from-primary-main/10 dark:to-primary-main/5 p-6 rounded-lg border border-primary-main/20"
+  >
+    <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
+      <i class="fa-solid fa-mug-hot text-primary-main"></i>
+      Support This Work
+    </h2>
+    <p class="text-text-body leading-relaxed mb-4">
+      This blog is <span class="font-semibold">free</span>, <span
+        class="font-semibold">ad-free</span
+      >, and has <span class="font-semibold">no tracking</span>. I believe in
+      sharing knowledge without compromising your privacy or cluttering your
+      reading experience.
+    </p>
+    <p class="text-text-body leading-relaxed mb-4">
+      If you find the content valuable, consider supporting my work. Your
+      contribution helps me continue writing and building in public.
+    </p>
+    <a
+      href={KOFI_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="unset inline-flex items-center gap-2 px-6 py-3 bg-primary-main text-white rounded font-semibold hover:opacity-90 hover:text-white transition-opacity"
+      title="Support me on Ko-fi"
+    >
+      <i class="fa-solid fa-mug-hot"></i>
+      Buy me a coffee
+    </a>
+  </div>
+
+  <div
     class="flex flex-col sm:flex-row gap-4 mb-8 pt-4 border-t border-border-color"
   >
     <a
       href="https://drive.google.com/file/d/1j3yjmZPbzp_XJ6oBDBYijkWAPlOx_rp8/view?usp=sharing"
       target="_blank"
       rel="noopener noreferrer"
-      class="flex-1 text-center px-6 py-3 bg-primary-main text-white rounded font-semibold hover:opacity-90 transition-opacity"
+      class="unset flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
       title="View Filip Mikina's resume"
     >
       <i class="fa-solid fa-file-lines mr-2"></i>
@@ -158,7 +190,7 @@ const { recentPosts = [] } = Astro.props;
     </a>
     <a
       href="/rss.xml"
-      class="flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
+      class="unset flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
       title="Subscribe to RSS feed"
     >
       <i class="fa-solid fa-rss mr-2"></i>

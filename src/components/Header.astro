@@ -2,7 +2,7 @@
 import DarkModeToggle from "./DarkModeToggle.astro";
 import Navbar from "./Navbar.astro";
 import SearchModal from "./SearchModal.astro";
-import { GITHUB_URL, LINKEDIN_URL } from "../config";
+import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
 ---
 
 <header>
@@ -40,6 +40,16 @@ import { GITHUB_URL, LINKEDIN_URL } from "../config";
     >
       <i class="fa-brands fa-github" aria-hidden="true"></i>
       <span class="fa-sr-only">Github</span>
+    </a>
+    <a
+      class="unset text-lg ml-4 hover:text-text-link"
+      href={KOFI_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Support me on Ko-fi"
+    >
+      <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+      <span class="fa-sr-only">Ko-fi</span>
     </a>
   </div>
   <DarkModeToggle />
