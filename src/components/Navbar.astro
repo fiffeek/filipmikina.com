@@ -2,10 +2,14 @@
 import HeaderLink from "./HeaderLink.astro";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/publications", label: "Publications" },
-  { href: "/certifications", label: "Certifications" },
+  { href: "/", label: "Home", title: "Go to homepage" },
+  { href: "/blog", label: "Blog", title: "Read blog posts" },
+  { href: "/publications", label: "Publications", title: "View publications" },
+  {
+    href: "/certifications",
+    label: "Certifications",
+    title: "View certifications",
+  },
 ];
 ---
 
@@ -24,7 +28,9 @@ const navItems = [
       {
         navItems.map((item) => (
           <li>
-            <HeaderLink href={item.href}>{item.label}</HeaderLink>
+            <HeaderLink href={item.href} title={item.title}>
+              {item.label}
+            </HeaderLink>
           </li>
         ))
       }
@@ -41,7 +47,9 @@ const navItems = [
       {
         navItems.map((item) => (
           <li>
-            <HeaderLink href={item.href}>{item.label}</HeaderLink>
+            <HeaderLink href={item.href} title={item.title}>
+              {item.label}
+            </HeaderLink>
           </li>
         ))
       }

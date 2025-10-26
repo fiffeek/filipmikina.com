@@ -109,6 +109,50 @@ export const config: Config = {
     },
   },
   nodes: {
+    link: {
+      render: "a",
+      attributes: {
+        href: { type: String, required: true },
+        title: { type: String },
+      },
+      transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        const children = node.transformChildren(config);
+        const href = attributes.href || "";
+
+        // Extract text content from children to use as title if not provided
+        const getLinkText = (children: any[]): string => {
+          return children
+            .map((child) => {
+              if (typeof child === "string") return child;
+              if (child?.children) return getLinkText(child.children);
+              return "";
+            })
+            .join("");
+        };
+
+        // Use provided title or fallback to link text
+        const title = attributes.title || getLinkText(children);
+
+        // Add security attributes for external links
+        const isExternal =
+          href.startsWith("http://") || href.startsWith("https://");
+        if (isExternal) {
+          return new Tag(
+            this.render,
+            {
+              ...attributes,
+              title,
+              target: "_blank",
+              rel: "noopener noreferrer nofollow",
+            },
+            children,
+          );
+        }
+
+        return new Tag(this.render, { ...attributes, title }, children);
+      },
+    },
     heading: {
       render: "Heading",
       attributes: {

@@ -107,7 +107,11 @@ const { recentPosts = [] } = Astro.props;
         </h2>
         <div class="space-y-6">
           {recentPosts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="unset block group">
+            <a
+              href={`/blog/${post.slug}`}
+              class="unset block group"
+              title={`Read: ${post.frontmatter.title}`}
+            >
               <div class="font-semibold text-text-bold group-hover:text-primary-main mb-1 transition-colors">
                 {post.frontmatter.title}
               </div>
@@ -131,6 +135,7 @@ const { recentPosts = [] } = Astro.props;
         <a
           href="/blog"
           class="inline-block mt-6 text-primary-main hover:underline text-sm font-medium"
+          title="View all blog posts"
         >
           View all posts →
         </a>
@@ -146,6 +151,7 @@ const { recentPosts = [] } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
       class="flex-1 text-center px-6 py-3 bg-primary-main text-white rounded font-semibold hover:opacity-90 transition-opacity"
+      title="View Filip Mikina's resume"
     >
       <i class="fa-solid fa-file-lines mr-2"></i>
       View Resume
@@ -153,6 +159,7 @@ const { recentPosts = [] } = Astro.props;
     <a
       href="/rss.xml"
       class="flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
+      title="Subscribe to RSS feed"
     >
       <i class="fa-solid fa-rss mr-2"></i>
       Subscribe via RSS

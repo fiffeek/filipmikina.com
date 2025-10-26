@@ -9,6 +9,7 @@ import { GITHUB_URL, LINKEDIN_URL } from "../config";
   <a
     class="unset absolute z-10 left-[50%] -top-[100rem] translate-x-[-50%] bg-white text-black px-8 py-2 focus:top-[initial]"
     href="#main"
+    title="Skip to main content"
   >
     Skip to content
   </a>
@@ -32,11 +33,12 @@ import { GITHUB_URL, LINKEDIN_URL } from "../config";
       <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
       <span class="fa-sr-only">LinkedIn</span>
     </a>
-    <a class="unset text-lg ml-4 hover:text-text-link" href={GITHUB_URL}>
-      <i
-        class="fa-brands fa-github"
-        aria-hidden="true"
-        title="Filip Mikina on GitHub"></i>
+    <a
+      class="unset text-lg ml-4 hover:text-text-link"
+      href={GITHUB_URL}
+      title="Filip Mikina on GitHub"
+    >
+      <i class="fa-brands fa-github" aria-hidden="true"></i>
       <span class="fa-sr-only">Github</span>
     </a>
   </div>
