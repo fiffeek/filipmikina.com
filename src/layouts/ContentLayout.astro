@@ -48,49 +48,42 @@ const socialPlatforms = [
     name: "X",
     icon: "fa-brands fa-x-twitter",
     url: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-    color: "bg-black hover:bg-gray-800",
     title: "Share on X (Twitter)",
   },
   {
     name: "Bluesky",
     icon: "fa-brands fa-bluesky",
     url: `https://bsky.app/intent/compose?text=${encodedTitle}%20${encodedUrl}`,
-    color: "bg-[#0285FF] hover:bg-[#0070e0]",
     title: "Share on Bluesky",
   },
   {
     name: "LinkedIn",
     icon: "fa-brands fa-linkedin",
     url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    color: "bg-[#0A66C2] hover:bg-[#004182]",
     title: "Share on LinkedIn",
   },
   {
     name: "Facebook",
     icon: "fa-brands fa-facebook",
     url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    color: "bg-[#1877F2] hover:bg-[#0d5dba]",
     title: "Share on Facebook",
   },
   {
     name: "Mastodon",
     icon: "fa-brands fa-mastodon",
     url: `https://mastodonshare.com/?url=${encodedUrl}&text=${encodedTitle}`,
-    color: "bg-[#6364FF] hover:bg-[#4d4ed9]",
     title: "Share on Mastodon",
   },
   {
     name: "Reddit",
     icon: "fa-brands fa-reddit-alien",
     url: `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
-    color: "bg-[#FF4500] hover:bg-[#cc3700]",
     title: "Share on Reddit",
   },
   {
     name: "Hacker News",
     icon: "fa-brands fa-hacker-news",
     url: `https://news.ycombinator.com/submitlink?u=${encodedUrl}&t=${encodedTitle}`,
-    color: "bg-[#FF6600] hover:bg-[#e65c00]",
     title: "Share on Hacker News",
   },
 ];
@@ -153,6 +146,23 @@ const socialPlatforms = [
                 </>
               )
             }
+            {
+              slug && (
+                <>
+                  <span>•</span>
+                  <a
+                    href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-text-muted hover:text-text-link transition-colors edit-page-link"
+                    title="Edit this page on GitHub"
+                  >
+                    <i class="fa-solid fa-pen-to-square text-xs" />
+                    <span>Edit this page</span>
+                  </a>
+                </>
+              )
+            }
           </div>
           {tags && tags.length > 0 && <TagList tags={tags} />}
           <slot name="content" />
@@ -163,33 +173,20 @@ const socialPlatforms = [
                   <h3 class="text-sm font-semibold text-text-muted mb-3">
                     Share this article
                   </h3>
-                  <div class="flex flex-wrap gap-3">
+                  <div class="flex flex-wrap gap-2">
                     {socialPlatforms.map((platform) => (
                       <a
                         href={platform.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class={`inline-flex items-center gap-2 px-4 py-2 text-sm text-white rounded-lg transition-colors ${platform.color}`}
-                        aria-label={`Share on ${platform.name}`}
+                        class="inline-flex items-center justify-center w-10 h-10 text-lg rounded-lg transition-all bg-bg-secondary text-text-bold border border-border-color hover:bg-primary-main hover:border-primary-main hover:scale-110 share-button"
+                        aria-label={platform.title}
                         title={platform.title}
                       >
                         <i class={platform.icon} />
-                        <span>{platform.name}</span>
                       </a>
                     ))}
                   </div>
-                </div>
-                <div class="text-text-muted">
-                  <a
-                    href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
-                    title="Edit this page on GitHub"
-                  >
-                    <i class="fa-solid fa-pen-to-square" />
-                    <span>Edit this page</span>
-                  </a>
                 </div>
               </div>
             )
@@ -265,6 +262,42 @@ const socialPlatforms = [
       .blog-post.prose pre {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+      }
+
+      /* Share button styles */
+      .share-button:hover {
+        color: #ffffff !important;
+      }
+
+      .share-button:hover i {
+        color: #ffffff !important;
+      }
+
+      /* Edit page link - remove underline */
+      .edit-page-link,
+      .edit-page-link:hover,
+      .edit-page-link:active,
+      .edit-page-link:focus,
+      .edit-page-link:visited {
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+        text-decoration-line: none !important;
+        text-decoration-color: transparent !important;
+      }
+
+      .edit-page-link span,
+      .edit-page-link:hover span {
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+      }
+
+      .blog-post.prose .edit-page-link {
+        text-decoration: none !important;
+        border-bottom: none !important;
       }
     </style>
   </body>
