@@ -99,9 +99,9 @@ const { language, content, title } = Astro.props;
   .copy-code-btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
-    background-color: rgb(var(--color-primary-main) / 0.1);
-    color: rgb(var(--color-primary-main));
-    border: 1px solid rgb(var(--color-primary-main) / 0.2);
+    background-color: rgb(var(--color-text-muted) / 0.1);
+    color: rgb(var(--color-text-muted));
+    border: 1px solid rgb(var(--color-text-muted) / 0.2);
     border-radius: 0.25rem;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -109,8 +109,9 @@ const { language, content, title } = Astro.props;
 
   .copy-path-btn:hover,
   .copy-code-btn:hover {
-    background-color: rgb(var(--color-primary-main) / 0.2);
-    border-color: rgb(var(--color-primary-main) / 0.3);
+    background-color: rgb(var(--color-primary-main) / 0.15);
+    color: rgb(var(--color-primary-main));
+    border-color: rgb(var(--color-primary-main) / 0.4);
   }
 
   .copy-code-btn-absolute {

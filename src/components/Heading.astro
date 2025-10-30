@@ -49,5 +49,14 @@ if (level === 2) {
       <i class="fa-solid fa-hashtag"></i>
     </a>
   </span>
-  <span style="overflow-wrap: break-word;" class="w-full">{children}</span>
+  <span
+    style="overflow-wrap: break-word;"
+    class:list={[
+      "w-full",
+      {
+        "pl-3 pr-3 py-2 bg-gradient-to-r from-primary-main/15 to-transparent rounded border-l-[3px] border-primary-main/40":
+          level === 2,
+      },
+    ]}>{children}</span
+  >
 </Tag>
