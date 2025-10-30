@@ -11,64 +11,64 @@
 @layer base {
   /* light theme */
   .theme-sleek {
-    /* Tailwind orange-500 #f97316 */
-    --color-primary-main: 249 115 22;
+    /* Tailwind blue-600 #2563eb */
+    --color-primary-main: 37 99 235;
 
-    /* Tailwind gray-700 #374151 */
-    --color-text-body: 55 65 81;
-    /* Tailwind gray-700 #374151 */
-    --color-text-heading: 55 65 81;
-    /* Tailwind gray-700 #374151 */
-    --color-text-bold: 55 65 81;
-    /* Tailwind gray-500 #6b7280 */
-    --color-text-muted: 107 114 128;
-    /* Tailwind orange-500 #f97316 */
-    --color-text-link: 249 115 22;
-    /* black */
-    --color-text-code: 0 0 0;
-    /* black */
-    --color-text-selection: 0 0 0;
+    /* Tailwind slate-900 #0f172a - darker, more contrast */
+    --color-text-body: 15 23 42;
+    /* Tailwind slate-900 #0f172a */
+    --color-text-heading: 15 23 42;
+    /* Tailwind slate-900 #0f172a */
+    --color-text-bold: 15 23 42;
+    /* Tailwind slate-500 #64748b */
+    --color-text-muted: 100 116 139;
+    /* Tailwind blue-600 #2563eb */
+    --color-text-link: 37 99 235;
+    /* Tailwind slate-900 #0f172a */
+    --color-text-code: 15 23 42;
+    /* Tailwind slate-900 #0f172a */
+    --color-text-selection: 15 23 42;
 
-    /* white */
-    --color-bg-body: 255 255 255;
-    /* Tailwind orange-50 #fff7ed */
-    --color-bg-code: 255 247 237;
-    /* Tailwind amber-200 #fde68a */
-    --color-bg-selection: 253 230 138;
+    /* Tailwind slate-50 #f8fafc - softer white */
+    --color-bg-body: 248 250 252;
+    /* Tailwind blue-50 #eff6ff */
+    --color-bg-code: 239 246 255;
+    /* Tailwind blue-200 #bfdbfe */
+    --color-bg-selection: 191 219 254;
 
-    /* Tailwind orange-100 #ffedd5 */
-    --color-border-code: 255 237 213;
+    /* Tailwind blue-100 #dbeafe */
+    --color-border-code: 219 234 254;
   }
 
   /* dark theme */
   .theme-sleek.dark {
-    /* Tailwind yellow-400 #facc15 */
-    --color-primary-main: 250 204 21;
+    /* Tailwind emerald-400 #34d399 */
+    --color-primary-main: 52 211 153;
 
-    /* Tailwind stone-300 #d6d3d1 */
-    --color-text-body: 214 211 209;
-    /* white */
-    --color-text-heading: 255 255 255;
-    /* white */
-    --color-text-bold: 255 255 255;
-    /* Tailwind stone-400 #a8a29e */
-    --color-text-muted: 168 162 158;
-    /* Tailwind yellow-400 #facc15 */
-    --color-text-link: 250 204 21;
-    /* black */
-    --color-text-code: 255 255 255;
-    /* black */
-    --color-text-selection: 0 0 0;
+    /* Tailwind slate-200 #e2e8f0 - softer white */
+    --color-text-body: 226 232 240;
+    /* Tailwind slate-50 #f8fafc */
+    --color-text-heading: 248 250 252;
+    /* Tailwind slate-50 #f8fafc */
+    --color-text-bold: 248 250 252;
+    /* Tailwind slate-400 #94a3b8 */
+    --color-text-muted: 148 163 184;
+    /* Tailwind emerald-400 #34d399 */
+    --color-text-link: 52 211 153;
+    /* Tailwind slate-50 #f8fafc */
+    --color-text-code: 248 250 252;
+    /* Tailwind slate-950 #020617 */
+    --color-text-selection: 2 6 23;
 
-    /* #0e141b */
-    --color-bg-body: 14 20 27;
-    /* Tailwind yellow-500 #eab308 */
-    --color-bg-code: 234 179 8;
-    /* Tailwind yellow-300 #fde047 */
-    --color-bg-selection: 253 224 71;
+    /* Tailwind slate-950 #020617 - true dark */
+    --color-bg-body: 2 6 23;
+    /* Tailwind slate-900 #0f172a */
+    --color-bg-code: 15 23 42;
+    /* Tailwind emerald-500 #10b981 */
+    --color-bg-selection: 16 185 129;
 
-    /* Tailwind yellow-100 #fef9c3 */
-    --color-border-code: 254 243 199;
+    /* Tailwind slate-800 #1e293b */
+    --color-border-code: 30 41 59;
   }
 
   :root {

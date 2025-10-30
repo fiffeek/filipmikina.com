@@ -14,13 +14,13 @@
       const storageTheme = sessionStorage.getItem("theme");
       if (!storageTheme && isSystemColorSchemeDark) {
         document.documentElement.classList.add("dark");
-        document.head.children.namedItem("theme-color").content = "#0e141b";
+        document.head.children.namedItem("theme-color").content = "#020617";
       } else if (storageTheme === "dark") {
         document.documentElement.classList.add("dark");
-        document.head.children.namedItem("theme-color").content = "#0e141b";
+        document.head.children.namedItem("theme-color").content = "#020617";
       } else {
         // we already server render light theme
-        document.head.children.namedItem("theme-color").content = "#ffffff";
+        document.head.children.namedItem("theme-color").content = "#f8fafc";
       }
     }
   })();
