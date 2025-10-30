@@ -79,6 +79,12 @@ import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
       minmax(0, max-content) minmax(0, max-content);
   }
 
+  @supports (-webkit-touch-callout: none) {
+    header {
+      position: -webkit-sticky;
+    }
+  }
+
   @media (min-width: 640px) {
     header {
       padding-left: 1.5rem;
