@@ -50,7 +50,7 @@ keywords:
   ]
 ---
 
-# Background
+## Why I Needed a Syslog Forwarder for Loki
 
 As part of unifying the developer experience and enabling a more uniform
 observability stack for one company, I worked on centralizing multiple log
@@ -75,7 +75,7 @@ Here are a couple of similar articles that got me started on the issue:
 - [How I fell in love with logs thanks to Grafana Loki](https://grafana.com/blog/2021/03/23/how-i-fell-in-love-with-logs-thanks-to-grafana-loki/)
 - [Create Rsyslog Service in Kubernetes](https://zhimin-wen.medium.com/create-rsyslog-service-in-kubernetes-12102c517895)
 
-# Syslog Forwarding Challenges
+## Why Promtail's Syslog Receiver Isn't Enough
 
 Sending syslog messages to Loki seems _almost_ straightforward, thanks to relays
 like [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) or
@@ -120,7 +120,7 @@ I'll guide you through a basic setup for deploying
 [rsyslog](https://www.rsyslog.com/) in a containerized environment, testing it
 locally with `docker-compose`, and as a bonus, present a basic Kubernetes setup.
 
-# Streamlining with Syslog Forwarding
+## Setting Up Rsyslog as a UDP Syslog Forwarder
 
 As per the guidelines laid out in Grafana's aforementioned documentation, the
 most straightforward approach involves setting up a syslog forwarder. This
@@ -157,7 +157,7 @@ Please ensure you have the following tools at your disposal:
 The next sections will walk you through a basic setup using `docker compose` so
 that you can follow along and test it in a reproducible environment.
 
-### Rsyslog
+### Configuring Rsyslog to Forward UDP Messages
 
 The configuration underneath is telling `rsyslog` how to forward its inputs to
 Promtail:
@@ -224,7 +224,7 @@ You should see a similar output to the one underneath for the command:
 Connection to localhost (127.0.0.1) 10514 port [udp/*] succeeded!
 ```
 
-### Promtail
+### Configuring Promtail to Receive from Rsyslog
 
 The following configuration allows for listening for TCP syslog messages and
 forwarding them to Loki:
@@ -291,7 +291,7 @@ message) the log can't be sent to `Loki` since we have not yet started it
 rsyslog-promtail-1  | level=warn ts=2024-02-22T17:29:09.020479781Z caller=client.go:419 component=client host=loki:3100 msg="error sending batch, will retry" status=-1 tenant= error="Post \"http://loki:3100/loki/api/v1/push\": dial tcp: lookup loki on 127.0.0.11:53: server misbehaving"
 ```
 
-### Loki
+### Adding Loki to the Stack
 
 Spinning up Loki so that Promtail can push logs to it is as simple as:
 
@@ -329,7 +329,7 @@ curl http://localhost:31000/loki/api/v1/series
 
 The second message should arrive later when more data is pushed.
 
-### Docker compose
+### Complete Docker Compose Configuration
 
 To provide a holistic view, here's the final Docker Compose file:
 
@@ -360,7 +360,7 @@ volumes:
   data:
 ```
 
-# Summary: Expanding Possibilities
+## Adapting the Solution for Custom Syslog Formats
 
 Within this article, I've introduced a fundamental technique to channel UDP
 syslogs, even with varying formats, to Loki through Promtail. The beauty of this
@@ -370,12 +370,12 @@ forwarding and labeling mechanisms. This flexibility empowers you to tailor the
 solution to diverse data formats, making it a versatile foundation for your
 syslog forwarding endeavors.
 
-# Bonus: Simple setup in Kubernetes
+## Deploying Rsyslog and Promtail on Kubernetes
 
 This configuration can be easily mapped to Kubernetes abstractions to allow for
 a simple deployment and usage.
 
-## Rsyslog
+## Rsyslog Kubernetes Deployment
 
 The user needs some kind of
 [an ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
@@ -383,7 +383,7 @@ or [a load balancer](https://kubernetes.io/docs/concepts/services-networking/)
 to expose the rsyslog forwarder service, and as these are heavily dependent on
 the context, the following configuration does not take this fully into account.
 
-### Configuration
+### Creating the ConfigMap
 
 The configuration itself can be kept in a config map for simplicity:
 
@@ -406,7 +406,7 @@ data:
 
 An alternative approach would be to bake this in the container image itself.
 
-### Deployment
+### Deploying the Rsyslog Forwarder
 
 ```yaml {% title="deployment.yaml" %}
 apiVersion: apps/v1
@@ -462,7 +462,7 @@ backstage area is available is usually a breeze. They've got something called
 [dynamic PVC provisioning](https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes),
 making your life easier in cloud setups.
 
-### Service
+### Exposing Rsyslog with a Service
 
 No matter how we would like to expose the pods to the external world we would
 need a service object:
@@ -492,7 +492,7 @@ an ingress object and an ingress controller, such as
 Tailor your approach based on the specific needs and nuances of your
 environment.
 
-## Promtail
+## Promtail Helm Chart Configuration
 
 To achieve a comprehensive configuration, leverage
 [the Helm Chart for Promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail).

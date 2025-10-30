@@ -133,7 +133,7 @@ the right configuration:
 
 ---
 
-# The problem
+## Why Existing Monitor Tools Fell Short for Hyprland
 
 After switching to Arch Linux, I decided to give Wayland another try (my last
 setup was on [Ubuntu with X11](https://github.com/fiffeek/.dotfiles)). For the
@@ -216,7 +216,7 @@ enabling/disabling a monitor, I decided to build a dedicated tool instead.
 
 ---
 
-# The Solution: HyprDynamicMonitors
+## Building HyprDynamicMonitors: A Power-Aware Monitor Manager
 
 The result is
 [**HyprDynamicMonitors**](https://github.com/fiffeek/hyprdynamicmonitors): a
@@ -318,7 +318,7 @@ For detailed TUI usage and keyboard shortcuts, see the
 
 ---
 
-# Results and reflection
+## Real-World Impact After Weeks of Daily Use
 
 After using HyprDynamicMonitors for several weeks in my daily workflow, it's
 solved the core problems I had with existing solutions:
