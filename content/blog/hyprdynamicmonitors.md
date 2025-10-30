@@ -314,7 +314,7 @@ the daemon will automatically apply it whenever that monitor combination is
 detected.
 
 For detailed TUI usage and keyboard shortcuts, see the
-[TUI documentation](https://github.com/fiffeek/hyprdynamicmonitors/blob/main/docs/tui-help.md).
+[TUI documentation](https://hyprdynamicmonitors.filipmikina.com/docs/quickstart/tui).
 
 ---
 
