@@ -3,6 +3,8 @@ import { readAll } from "../lib/markdoc/read";
 import { blog } from "../lib/markdoc/frontmatter.schema";
 import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
+import TagList from "../components/TagList.astro";
+import BlogPostItem from "../components/BlogPostItem.astro";
 import { SITE_TITLE } from "../config";
 import { getReadingTime } from "../lib/reading-time";
 
@@ -23,6 +25,15 @@ const postsWithMeta = sortedPosts.map((post) => {
   const { words, minutes } = getReadingTime(post.rawContent);
   return { ...post, words, minutes };
 });
+
+// Get all unique tags
+const allTags = new Set<string>();
+sortedPosts.forEach((post) => {
+  if (post.frontmatter.external === false && post.frontmatter.tags) {
+    post.frontmatter.tags.forEach((tag: string) => allTags.add(tag));
+  }
+});
+const uniqueTags = Array.from(allTags).sort();
 ---
 
 <PageLayout>
@@ -57,62 +68,19 @@ const postsWithMeta = sortedPosts.map((post) => {
     slot="meta"
   />
   <section slot="main">
-    <h1 class="text-4xl font-bold mb-8">Technical Blog</h1>
+    <h1 class="text-4xl font-bold mb-4">Technical Blog</h1>
+    <h2 class="text-2xl font-semibold mb-6">All Posts</h2>
     <ul class="space-y-6">
-      {
-        postsWithMeta.map((post) => {
-          const formattedDate = new Date(
-            post.frontmatter.date,
-          ).toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          });
-          return (
-            <li>
-              <div class="title mb-2">
-                {post.frontmatter.external ? (
-                  <a
-                    href={post.frontmatter.url}
-                    target="_blank"
-                    class="unset hover:text-text-link text-lg font-semibold"
-                  >
-                    <span>{post.frontmatter.title}</span>
-                    <span>
-                      <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square pt-1" />
-                    </span>
-                  </a>
-                ) : (
-                  <a
-                    href={`/blog/${post.slug}`}
-                    class="unset hover:text-text-link text-lg font-semibold"
-                  >
-                    {post.frontmatter.title}
-                  </a>
-                )}
-              </div>
-              <div class="flex flex-wrap items-center gap-2 text-text-muted text-sm mb-2">
-                <time datetime={post.frontmatter.date.toISOString()}>
-                  {formattedDate}
-                </time>
-                {!post.frontmatter.external && (
-                  <>
-                    <span>•</span>
-                    <span>{post.minutes} min read</span>
-                    <span>•</span>
-                    <span>{post.words.toLocaleString()} words</span>
-                  </>
-                )}
-              </div>
-              {!post.frontmatter.external && post.frontmatter.description && (
-                <p class="text-text-body text-sm leading-relaxed m-0">
-                  {post.frontmatter.description}
-                </p>
-              )}
-            </li>
-          );
-        })
-      }
+      {postsWithMeta.map((post) => <BlogPostItem post={post} />)}
     </ul>
+
+    {
+      uniqueTags.length > 0 && (
+        <div class="mb-8 mt-8">
+          <h2 class="font-semibold text-text-muted mb-3">Browse by tag</h2>
+          <TagList tags={uniqueTags} />
+        </div>
+      )
+    }
   </section>
 </PageLayout>

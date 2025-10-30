@@ -1,0 +1,75 @@
+---
+export interface Props {
+  post: {
+    slug: string;
+    frontmatter: {
+      title: string;
+      date: Date;
+      description?: string;
+      external?: boolean;
+      url?: string;
+    };
+    minutes?: number;
+    words?: number;
+  };
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.frontmatter.date).toLocaleDateString(
+  "en-us",
+  {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  },
+);
+---
+
+<li>
+  <div class="title mb-2">
+    {
+      post.frontmatter.external ? (
+        <a
+          href={post.frontmatter.url}
+          target="_blank"
+          class="unset hover:text-text-link text-lg font-semibold"
+        >
+          <span>{post.frontmatter.title}</span>
+          <span>
+            <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square pt-1" />
+          </span>
+        </a>
+      ) : (
+        <a
+          href={`/blog/${post.slug}`}
+          class="unset hover:text-text-link text-lg font-semibold"
+        >
+          {post.frontmatter.title}
+        </a>
+      )
+    }
+  </div>
+  <div class="flex flex-wrap items-center gap-2 text-text-muted text-sm mb-2">
+    <time datetime={post.frontmatter.date.toISOString()}>
+      {formattedDate}
+    </time>
+    {
+      !post.frontmatter.external && post.minutes !== undefined && (
+        <>
+          <span>•</span>
+          <span>{post.minutes} min read</span>
+          <span>•</span>
+          <span>{post.words?.toLocaleString()} words</span>
+        </>
+      )
+    }
+  </div>
+  {
+    !post.frontmatter.external && post.frontmatter.description && (
+      <p class="text-text-body text-sm leading-relaxed m-0">
+        {post.frontmatter.description}
+      </p>
+    )
+  }
+</li>

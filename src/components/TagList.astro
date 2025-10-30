@@ -10,7 +10,7 @@ const { tags } = Astro.props;
   tags && tags.length > 0 && (
     <div class="tag-list">
       {tags.map((tag) => (
-        <span class="badge">
+        <a href={`/blog/tag/${encodeURIComponent(tag)}`} class="badge">
           <svg
             class="badge-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@ const { tags } = Astro.props;
             />
           </svg>
           {tag}
-        </span>
+        </a>
       ))}
     </div>
   )
@@ -51,13 +51,15 @@ const { tags } = Astro.props;
     border: 1px solid rgb(var(--color-primary-main) / 0.2);
     border-radius: 9999px;
     transition: all 0.2s ease;
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none;
   }
 
   .badge:hover {
     background-color: rgb(var(--color-primary-main) / 0.15);
     border-color: rgb(var(--color-primary-main) / 0.3);
     transform: translateY(-1px);
+    text-decoration: none;
   }
 
   .badge-icon {
