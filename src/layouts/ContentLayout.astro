@@ -11,10 +11,11 @@ import GoogleFont from "./GoogleFont.astro";
 import FontAwesome from "./FontAwesome.astro";
 import ThemeScript from "./ThemeScript.astro";
 import Favicon from "./Favicon.astro";
+import slugify from "slugify";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import TagList from "../components/TagList.astro";
-import TableOfContents from "../components/TableOfContents.astro";
+import TableOfContentsSidebar from "../components/TableOfContentsSidebar.astro";
 import { SITE_URL } from "../config";
 import type { Content } from "astro-markdoc-renderer";
 
@@ -37,7 +38,7 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
   day: "numeric",
 });
 
-// Social sharing configuration
+const titleId = slugify(title.toLowerCase());
 const pageUrl = slug ? `${SITE_URL}/blog/${slug}` : "";
 const encodedUrl = encodeURIComponent(pageUrl);
 const encodedTitle = encodeURIComponent(title);
@@ -128,75 +129,85 @@ const socialPlatforms = [
 
   <body class="min-h-screen">
     <Header />
-    <main id="main" class="max-w-3xl mx-auto px-6 sm:px-8 pt-8">
-      <section class="blog-post prose max-w-none prose-sleek">
-        <h1 class="m-0 mb-[0.25em]">{title}</h1>
-        <div
-          class="flex flex-wrap items-center gap-3 mb-[0.5em] text-text-muted"
-        >
-          <time>{formattedDate}</time>
+    <main id="main" class="content-with-sidebar mx-auto px-6 sm:px-8 pt-8">
+      <div class="content-wrapper">
+        <section class="blog-post prose max-w-none prose-sleek">
+          <h1 id={titleId} class="m-0 mb-[0.25em]">{title}</h1>
+          <div
+            class="flex flex-wrap items-center gap-3 mb-[0.5em] text-text-muted"
+          >
+            <time>{formattedDate}</time>
+            {
+              readingTime && (
+                <>
+                  <span>•</span>
+                  <span>{readingTime} min read</span>
+                </>
+              )
+            }
+            {
+              wordCount && (
+                <>
+                  <span>•</span>
+                  <span>{wordCount.toLocaleString()} words</span>
+                </>
+              )
+            }
+          </div>
+          {tags && tags.length > 0 && <TagList tags={tags} />}
+          <slot name="content" />
           {
-            readingTime && (
-              <>
-                <span>•</span>
-                <span>{readingTime} min read</span>
-              </>
-            )
-          }
-          {
-            wordCount && (
-              <>
-                <span>•</span>
-                <span>{wordCount.toLocaleString()} words</span>
-              </>
-            )
-          }
-        </div>
-        {tags && tags.length > 0 && <TagList tags={tags} />}
-        {showToc && content && <TableOfContents content={content} />}
-        <slot name="content" />
-        {
-          slug && (
-            <div class="mt-8 pt-6 border-t border-text-muted/20">
-              <div class="mb-6">
-                <h3 class="text-sm font-semibold text-text-muted mb-3">
-                  Share this article
-                </h3>
-                <div class="flex flex-wrap gap-3">
-                  {socialPlatforms.map((platform) => (
-                    <a
-                      href={platform.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class={`inline-flex items-center gap-2 px-4 py-2 text-sm text-white rounded-lg transition-colors ${platform.color}`}
-                      aria-label={`Share on ${platform.name}`}
-                      title={platform.title}
-                    >
-                      <i class={platform.icon} />
-                      <span>{platform.name}</span>
-                    </a>
-                  ))}
+            slug && (
+              <div class="mt-8 pt-6 border-t border-text-muted/20">
+                <div class="mb-6">
+                  <h3 class="text-sm font-semibold text-text-muted mb-3">
+                    Share this article
+                  </h3>
+                  <div class="flex flex-wrap gap-3">
+                    {socialPlatforms.map((platform) => (
+                      <a
+                        href={platform.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`inline-flex items-center gap-2 px-4 py-2 text-sm text-white rounded-lg transition-colors ${platform.color}`}
+                        aria-label={`Share on ${platform.name}`}
+                        title={platform.title}
+                      >
+                        <i class={platform.icon} />
+                        <span>{platform.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <div class="text-text-muted">
+                  <a
+                    href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
+                    title="Edit this page on GitHub"
+                  >
+                    <i class="fa-solid fa-pen-to-square" />
+                    <span>Edit this page</span>
+                  </a>
                 </div>
               </div>
-              <div class="text-text-muted">
-                <a
-                  href={`https://github.com/fiffeek/filipmikina.com/blob/main/content/blog/${slug}.md`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 text-sm hover:text-text-link transition-colors"
-                  title="Edit this page on GitHub"
-                >
-                  <i class="fa-solid fa-pen-to-square" />
-                  <span>Edit this page</span>
-                </a>
-              </div>
-            </div>
-          )
-        }
-      </section>
+            )
+          }
+        </section>
+      </div>
+      {
+        showToc && content && (
+          <TableOfContentsSidebar content={content} title={title} />
+        )
+      }
     </main>
     <Footer />
     <style>
+      html {
+        scroll-padding-top: 6rem;
+      }
+
       body {
         display: grid;
         grid-template-areas:
@@ -210,7 +221,29 @@ const socialPlatforms = [
         grid-area: main;
       }
 
-      /* Enhanced spacing for blog content */
+      .content-with-sidebar {
+        max-width: 100%;
+        display: flex;
+        gap: 3rem;
+        align-items: flex-start;
+      }
+
+      .content-wrapper {
+        flex: 1;
+        min-width: 0;
+        max-width: 48rem;
+      }
+
+      @media (max-width: 1023px) {
+        .content-with-sidebar {
+          max-width: 48rem;
+        }
+
+        .content-wrapper {
+          max-width: 100%;
+        }
+      }
+
       .blog-post.prose {
         line-height: 1.75;
       }

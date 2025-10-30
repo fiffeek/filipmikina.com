@@ -1,0 +1,346 @@
+---
+import slugify from "slugify";
+import type { Content } from "astro-markdoc-renderer";
+
+interface Props {
+  content: Content;
+  title: string;
+}
+
+interface TocItem {
+  text: string;
+  id: string;
+  level: number;
+}
+
+const { content, title } = Astro.props;
+
+function extractHeadings(node: any, headings: TocItem[] = []): TocItem[] {
+  if (!node) return headings;
+
+  if (node.name === "Heading" && node.attributes?.level) {
+    const level = node.attributes.level;
+    if (level >= 1 && level <= 3) {
+      const text = extractText(node.children);
+      const id = slugify(text.toLowerCase());
+      headings.push({ text, id, level });
+    }
+  }
+
+  if (Array.isArray(node.children)) {
+    node.children.forEach((child: any) => extractHeadings(child, headings));
+  }
+
+  return headings;
+}
+
+function extractText(children: any[]): string {
+  if (!children) return "";
+
+  return children
+    .map((child) => {
+      if (typeof child === "string") return child;
+      if (child.children) return extractText(child.children);
+      return "";
+    })
+    .join("");
+}
+
+const contentHeadings = extractHeadings(content);
+
+// Add the title as the first H1 item
+const titleId = slugify(title.toLowerCase());
+const headings: TocItem[] = [
+  { text: title, id: titleId, level: 1 },
+  ...contentHeadings,
+];
+---
+
+{
+  headings.length > 0 && (
+    <nav class="toc-sidebar">
+      <div class="toc-sidebar-sticky">
+        <h3 class="toc-header text-sm font-semibold text-text-muted mb-4 uppercase tracking-wide">
+          On this page
+        </h3>
+        <div class="toc-scroll-container">
+          <ul class="toc-list">
+            {headings.map((heading) => (
+              <li
+                class:list={[
+                  "toc-item",
+                  {
+                    "toc-level-1": heading.level === 1,
+                    "toc-level-2": heading.level === 2,
+                    "toc-level-3": heading.level === 3,
+                  },
+                ]}
+              >
+                <a
+                  href={`#${heading.id}`}
+                  class="toc-link"
+                  data-toc-id={heading.id}
+                  title={heading.text}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+<script>
+  // Highlight active section in TOC
+  function updateActiveTocLink() {
+    const headings = document.querySelectorAll(
+      ".blog-post h1, .blog-post h2, .blog-post h3",
+    );
+    const tocLinks = document.querySelectorAll(".toc-link");
+    const tocScrollContainer = document.querySelector(".toc-scroll-container");
+
+    if (headings.length === 0 || tocLinks.length === 0) {
+      return;
+    }
+
+    let activeId = "";
+    const scrollPos = window.scrollY + 150;
+
+    // Find the active heading
+    headings.forEach((heading) => {
+      const id = heading.id;
+      if (!id) return;
+
+      const offsetTop = (heading as HTMLElement).offsetTop;
+
+      if (scrollPos >= offsetTop) {
+        activeId = id;
+      }
+    });
+
+    tocLinks.forEach((link) => {
+      const tocId = link.getAttribute("data-toc-id");
+      if (tocId === activeId) {
+        link.classList.add("active");
+
+        if (tocScrollContainer) {
+          const linkElement = link as HTMLElement;
+          const containerElement = tocScrollContainer as HTMLElement;
+
+          const containerRect = containerElement.getBoundingClientRect();
+          const linkRect = linkElement.getBoundingClientRect();
+
+          const linkTopRelative = linkRect.top - containerRect.top;
+          const linkBottomRelative = linkRect.bottom - containerRect.top;
+
+          const isAboveView = linkTopRelative < 0;
+          const isBelowView = linkBottomRelative > containerRect.height;
+
+          if (isAboveView || isBelowView) {
+            const targetScroll =
+              containerElement.scrollTop +
+              linkTopRelative -
+              containerRect.height / 2 +
+              linkRect.height / 2;
+
+            containerElement.scrollTo({
+              top: targetScroll,
+              behavior: "smooth",
+            });
+          }
+        }
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  function throttle(func: Function, limit: number) {
+    let inThrottle: boolean;
+    return function (this: any) {
+      const args = arguments;
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => (inThrottle = false), limit);
+      }
+    };
+  }
+
+  const throttledUpdate = throttle(updateActiveTocLink, 100);
+
+  window.addEventListener("scroll", throttledUpdate);
+
+  window.addEventListener("load", () => {
+    setTimeout(updateActiveTocLink, 100);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(updateActiveTocLink, 100);
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    setTimeout(updateActiveTocLink, 100);
+  });
+</script>
+
+<style>
+  .toc-sidebar {
+    display: block;
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 6rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 8rem);
+  }
+
+  .toc-sidebar-sticky {
+    padding: 0rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: calc(100vh - 8rem);
+  }
+
+  .toc-header {
+    flex-shrink: 0;
+  }
+
+  .toc-scroll-container {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+  .toc-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for Firefox */
+  .toc-scroll-container {
+    scrollbar-width: none;
+  }
+
+  /* Hide scrollbar for IE and Edge Legacy */
+  .toc-scroll-container {
+    -ms-overflow-style: none;
+  }
+
+  @media (max-width: 1023px) {
+    .toc-sidebar {
+      display: none;
+    }
+  }
+
+  .toc-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .toc-item {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    list-style-type: none !important;
+  }
+
+  /* Remove any pseudo-elements or markers */
+  .toc-item::before,
+  .toc-item::after,
+  .toc-item::marker {
+    display: none !important;
+    content: none !important;
+  }
+
+  .toc-level-1 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .toc-level-2 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .toc-level-3 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 0.375rem 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgb(var(--color-text-muted));
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    outline: none !important;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .toc-link::before,
+  .toc-link::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Apply indentation to the link text via padding */
+  .toc-level-1 .toc-link {
+    padding-left: 0 !important;
+  }
+
+  .toc-level-2 .toc-link {
+    padding-left: 1rem !important;
+  }
+
+  .toc-level-3 .toc-link {
+    padding-left: 2rem !important;
+  }
+
+  .toc-link:hover {
+    color: rgb(var(--color-text-link));
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: none !important;
+  }
+
+  .toc-link.active {
+    color: rgb(var(--color-primary-main));
+    font-weight: 600;
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: none !important;
+  }
+
+  /* Override any prose styles */
+  .toc-list a,
+  .toc-list a:hover,
+  .toc-list a:active,
+  .toc-list a:focus,
+  .toc-list a:visited {
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: none !important;
+  }
+</style>
