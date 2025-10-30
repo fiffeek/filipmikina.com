@@ -1,0 +1,60 @@
+---
+// Reading progress bar component
+---
+
+<div class="reading-progress-track">
+  <div id="reading-progress" class="reading-progress-bar"></div>
+</div>
+
+<script>
+  function updateReadingProgress() {
+    const progressBar = document.getElementById("reading-progress");
+    if (!progressBar) return;
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    const scrollPercentage =
+      (scrollTop / (documentHeight - windowHeight)) * 100;
+
+    progressBar.style.width = `${Math.min(scrollPercentage, 100)}%`;
+  }
+
+  window.addEventListener("scroll", updateReadingProgress);
+
+  updateReadingProgress();
+
+  window.addEventListener("resize", updateReadingProgress);
+
+  document.addEventListener("astro:page-load", () => {
+    updateReadingProgress();
+  });
+</script>
+
+<style>
+  .reading-progress-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: rgb(var(--color-text-muted) / 0.2);
+    z-index: 1;
+  }
+
+  .reading-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-primary-main)),
+      rgb(var(--color-primary-main) / 0.7)
+    );
+    width: 0%;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(var(--color-primary-main), 0.5);
+  }
+</style>

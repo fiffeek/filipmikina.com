@@ -2,6 +2,7 @@
 import DarkModeToggle from "./DarkModeToggle.astro";
 import Navbar from "./Navbar.astro";
 import SearchModal from "./SearchModal.astro";
+import ReadingProgress from "./ReadingProgress.astro";
 import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
 ---
 
@@ -54,6 +55,7 @@ import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
   </div>
   <DarkModeToggle />
   <SearchModal />
+  <ReadingProgress />
 </header>
 
 <style>
@@ -61,10 +63,30 @@ import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
     grid-area: header;
     display: grid;
     align-items: center;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--theme-bg);
+    backdrop-filter: blur(20px);
+    padding-left: 2rem;
+    padding-right: 2rem;
     grid-template-columns:
       minmax(0, max-content) minmax(0, 1fr) minmax(0, max-content)
       minmax(0, max-content) minmax(0, max-content);
+  }
+
+  @media (min-width: 640px) {
+    header {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    header {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
   }
 
   @media (min-width: 768px) {
