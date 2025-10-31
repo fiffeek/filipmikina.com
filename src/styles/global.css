@@ -88,6 +88,29 @@
   h5,
   h6 {
     font-family: theme("fontFamily.heading");
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Page-level h1 styling (not in blog posts) */
+  section > h1 {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgb(var(--color-primary-main) / 0.3);
+    border-radius: 0 0 0.25rem 0.25rem;
+  }
+
+  section > h1::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 4rem;
+    height: 0.25rem;
+    background-color: rgb(var(--color-primary-main));
+    border-radius: 9999px;
   }
 }
 
@@ -132,6 +155,9 @@
     font-weight: 600;
     border: 1px solid theme("colors.border.code");
     margin-bottom: 1.25em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   html.dark code:not(pre code) {

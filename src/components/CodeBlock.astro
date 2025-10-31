@@ -99,12 +99,13 @@ const { language, content, title } = Astro.props;
   .copy-code-btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
-    background-color: rgb(var(--color-text-muted) / 0.1);
+    background-color: rgb(var(--color-bg-body));
     color: rgb(var(--color-text-muted));
-    border: 1px solid rgb(var(--color-text-muted) / 0.2);
+    border: 1px solid rgb(var(--color-text-muted) / 0.3);
     border-radius: 0.25rem;
     transition: all 0.2s ease;
     cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .copy-path-btn:hover,
