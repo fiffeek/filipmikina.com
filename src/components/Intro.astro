@@ -25,9 +25,7 @@ const { recentPosts = [] } = Astro.props;
     <h1
       class="font-extrabold text-5xl md:text-6xl tracking-tight pb-2 overflow-hidden"
     >
-      <span
-        class="bg-gradient-to-br from-[#3b82f6] via-[#2563eb] to-[#1d4ed8] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent"
-      >
+      <span class="animated-gradient bg-clip-text text-transparent">
         FILIP MIKINA
       </span>
     </h1>
@@ -208,3 +206,50 @@ const { recentPosts = [] } = Astro.props;
     </a>
   </div>
 </section>
+
+<style>
+  .animated-gradient {
+    background: linear-gradient(
+      90deg,
+      #3b82f6,
+      #2563eb,
+      #1d4ed8,
+      #7c3aed,
+      #6366f1,
+      #3b82f6
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  :global(.dark) .animated-gradient {
+    background: linear-gradient(
+      90deg,
+      #34d399,
+      #10b981,
+      #059669,
+      #14b8a6,
+      #2dd4bf,
+      #34d399
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>

@@ -126,17 +126,19 @@ import { GITHUB_URL, LINKEDIN_URL, KOFI_URL } from "../config";
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-text-bold);
+    color: rgb(var(--color-primary-main));
     white-space: nowrap;
   }
 
-  /* Light theme - keep logo black */
+  /* Light theme - blue accent color */
   :global(.theme-sleek:not(.dark)) .logo {
-    filter: brightness(0);
+    filter: brightness(0) saturate(100%) invert(37%) sepia(97%) saturate(2618%)
+      hue-rotate(213deg) brightness(99%) contrast(91%);
   }
 
-  /* Dark theme - invert to white */
+  /* Dark theme - green accent color */
   :global(.theme-sleek.dark) .logo {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) saturate(100%) invert(77%) sepia(18%) saturate(1696%)
+      hue-rotate(101deg) brightness(93%) contrast(85%);
   }
 </style>
