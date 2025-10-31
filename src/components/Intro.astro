@@ -17,9 +17,13 @@ const { recentPosts = [] } = Astro.props;
 ---
 
 <section class="mb-8">
-  <div class="mb-12">
+  <div
+    class="mb-12 relative pt-8 pb-6 border-b-4 border-primary-main/30 rounded-b"
+  >
+    <span class="absolute left-0 top-2 w-20 h-1 bg-primary-main rounded-full"
+    ></span>
     <h1
-      class="font-extrabold text-5xl md:text-6xl tracking-tight pt-4 pb-2 overflow-hidden"
+      class="font-extrabold text-5xl md:text-6xl tracking-tight pb-2 overflow-hidden"
     >
       <span
         class="bg-gradient-to-br from-[#3b82f6] via-[#2563eb] to-[#1d4ed8] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent"
@@ -27,7 +31,7 @@ const { recentPosts = [] } = Astro.props;
         FILIP MIKINA
       </span>
     </h1>
-    <p class="text-xl pb-4 text-text-muted">
+    <p class="text-xl text-text-muted">
       Solving problems with<sup class="text-xs">(out)</sup> code, duct tape, and
       <span class="line-through opacity-70 hover:opacity-100">coffee</span> empathy.
     </p>
