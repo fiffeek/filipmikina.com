@@ -2,6 +2,7 @@
 external: false
 draft: false
 showToc: true
+heroImage: "/images/hyprdynamicmonitors.png"
 title:
   "Hyprland Monitor Config GUI/TUI and Manager: HyprDynamicMonitors vs Kanshi,
   Hyprmon, nwg-displays"

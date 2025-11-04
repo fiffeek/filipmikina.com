@@ -2,6 +2,7 @@
 showToc: true
 external: false
 draft: false
+heroImage: "/images/hyprwhenthen.png"
 title:
   "Hyprland Events Automation: Auto-Float Windows with togglefloating and
   centerwindow"

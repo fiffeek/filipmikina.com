@@ -1,6 +1,7 @@
 ---
 external: false
 showToc: true
+heroImage: "/images/rsyslog.svg"
 title:
   "Rsyslog to Grafana Loki: Forwarding Syslog Messages via Promtail Syslog
   Receiver"
