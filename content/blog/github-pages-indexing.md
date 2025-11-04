@@ -2,6 +2,7 @@
 external: false
 draft: false
 showToc: true
+heroImage: "/images/google_search_console_custom_domain_sitemaps.png"
 title:
   How to Get Your GitHub Pages Indexed by Google and Bing in Days (Not Months)
 description:

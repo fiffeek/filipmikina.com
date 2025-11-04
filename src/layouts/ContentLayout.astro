@@ -29,10 +29,20 @@ export interface Props {
   slug?: string;
   content?: Content;
   showToc?: boolean;
+  heroImage?: string;
 }
 
-const { title, date, tags, readingTime, wordCount, slug, content, showToc } =
-  Astro.props;
+const {
+  title,
+  date,
+  tags,
+  readingTime,
+  wordCount,
+  slug,
+  content,
+  showToc,
+  heroImage,
+} = Astro.props;
 const formattedDate = new Date(date).toLocaleDateString("en-us", {
   year: "numeric",
   month: "short",
@@ -126,15 +136,40 @@ const socialPlatforms = [
     <main id="main" class="content-with-sidebar mx-auto px-6 sm:px-8 pt-8">
       <div class="content-wrapper">
         <section class="blog-post prose max-w-none prose-sleek">
-          <h1
-            id={titleId}
-            class="m-0 mb-[0.25em] pt-8 pb-4 border-b-4 border-primary-main/30 relative text-primary-main"
-          >
-            <span
-              class="absolute left-0 top-2 w-16 h-1 bg-primary-main rounded-full"
-            ></span>
-            {title}
-          </h1>
+          {
+            heroImage && (
+              <div class="hero-image-container mb-8">
+                <div
+                  class="overflow-hidden rounded-lg mb-8"
+                  style="height: 250px;"
+                >
+                  <img
+                    src={heroImage}
+                    alt=""
+                    class="w-full h-full object-cover scale-110"
+                  />
+                </div>
+                <h1
+                  id={titleId}
+                  class="m-0 mb-[0.25em] pt-6 pb-4 border-b-4 border-primary-main/30 relative text-primary-main"
+                >
+                  <span class="absolute left-0 top-2 w-16 h-1 bg-primary-main rounded-full" />
+                  {title}
+                </h1>
+              </div>
+            )
+          }
+          {
+            !heroImage && (
+              <h1
+                id={titleId}
+                class="m-0 mb-[0.25em] pt-8 pb-4 border-b-4 border-primary-main/30 relative text-primary-main"
+              >
+                <span class="absolute left-0 top-2 w-16 h-1 bg-primary-main rounded-full" />
+                {title}
+              </h1>
+            )
+          }
           <div
             class="flex flex-wrap items-center gap-3 mb-[0.5em] text-text-muted"
           >

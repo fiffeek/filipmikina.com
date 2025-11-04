@@ -1,5 +1,6 @@
 ---
 import { KOFI_URL } from "../config";
+import BlogPostItem from "./BlogPostItem.astro";
 
 export interface Props {
   recentPosts?: Array<{
@@ -8,8 +9,11 @@ export interface Props {
       title: string;
       description?: string;
       date: Date;
+      heroImage?: string;
+      external: boolean;
     };
     minutes: number;
+    words: number;
   }>;
 }
 
@@ -115,31 +119,9 @@ const { recentPosts = [] } = Astro.props;
           <i class="fa-solid fa-pencil text-primary-main" />
           Recent Writing
         </h2>
-        <div class="space-y-6 pl-6 border-l-4 border-primary-main/30">
+        <div class="space-y-6">
           {recentPosts.map((post) => (
-            <a
-              href={`/blog/${post.slug}`}
-              class="unset block group"
-              title={`Read: ${post.frontmatter.title}`}
-            >
-              <div class="font-semibold text-text-bold group-hover:text-primary-main mb-1 transition-colors">
-                {post.frontmatter.title}
-              </div>
-              {post.frontmatter.description && (
-                <div class="text-sm text-text-muted mb-2 leading-relaxed">
-                  {post.frontmatter.description}
-                </div>
-              )}
-              <div class="text-xs text-text-muted">
-                {new Date(post.frontmatter.date).toLocaleDateString("en-us", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-                {" • "}
-                {post.minutes} min read
-              </div>
-            </a>
+            <BlogPostItem post={post} />
           ))}
         </div>
         <a

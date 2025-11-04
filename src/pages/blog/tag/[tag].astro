@@ -79,11 +79,11 @@ const postsWithMeta = taggedPosts.map((post) => {
       postsWithMeta.length === 0 ? (
         <p class="text-text-muted">No posts found with this tag.</p>
       ) : (
-        <ul class="space-y-6">
+        <div class="space-y-6">
           {postsWithMeta.map((post) => (
             <BlogPostItem post={post} />
           ))}
-        </ul>
+        </div>
       )
     }
   </section>

@@ -30,15 +30,18 @@ const recentPosts = posts
   )
   .slice(0, 3)
   .map((post) => {
-    const { minutes } = getReadingTime(post.rawContent);
+    const { minutes, words } = getReadingTime(post.rawContent);
     return {
       slug: post.slug,
       frontmatter: {
         title: post.frontmatter.title,
         description: post.frontmatter.description,
         date: post.frontmatter.date,
+        heroImage: post.frontmatter.heroImage,
+        external: false,
       },
       minutes,
+      words,
     };
   });
 

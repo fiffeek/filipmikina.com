@@ -29,6 +29,7 @@ export const blog = z.discriminatedUnion("external", [
     external: z.literal(false),
     description: z.optional(z.string()),
     ogImagePath: z.optional(z.string()),
+    heroImage: z.optional(z.string()),
     canonicalUrl: z.optional(z.string()),
     tags: z.optional(z.array(z.string())),
     keywords: z.optional(z.array(z.string())),
