@@ -9,6 +9,7 @@ export interface Props {
       external?: boolean;
       url?: string;
       heroImage?: string;
+      tags?: string[];
     };
     minutes?: number;
     words?: number;
@@ -36,7 +37,7 @@ const heroImage = !post.frontmatter.external
     <a
       href={post.frontmatter.url}
       target="_blank"
-      class="unset block p-4 rounded-lg border border-text-muted/10 bg-bg-body transition-all hover:border-text-muted/20 hover:shadow-md"
+      class="unset block p-4 rounded-lg border border-text-muted/20 bg-bg-body transition-all hover:border-text-muted/30 hover:shadow-md"
     >
       <div class="title mb-2">
         <span class="unset hover:text-text-link text-lg font-semibold">
@@ -55,15 +56,18 @@ const heroImage = !post.frontmatter.external
   ) : (
     <a
       href={`/blog/${post.slug}`}
-      class="unset block rounded-lg border border-text-muted/10 overflow-hidden transition-all hover:border-primary-main hover:shadow-md group"
+      class="unset block rounded-lg border border-text-muted/20 overflow-hidden transition-all duration-300 hover:border-text-muted/30 hover:shadow-lg hover:-translate-y-2 group"
     >
       {heroImage && (
-        <div class="overflow-hidden" style="height: 200px;">
-          <img
-            src={heroImage}
-            alt=""
-            class="w-full h-full object-cover scale-110 blur-[2px] transition-all duration-500 group-hover:scale-100 group-hover:blur-none"
-          />
+        <div class="relative">
+          <div class="overflow-hidden" style="height: 200px;">
+            <img
+              src={heroImage}
+              alt=""
+              class="w-full h-full object-cover scale-110 blur-[2px] transition-all duration-500 group-hover:scale-100 group-hover:blur-none"
+            />
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-0 bg-primary-main transition-all duration-300 group-hover:h-1" />
         </div>
       )}
       <div class="p-4 bg-bg-body">
@@ -86,10 +90,21 @@ const heroImage = !post.frontmatter.external
           )}
         </div>
         {post.frontmatter.description && (
-          <p class="text-text-body text-sm leading-relaxed m-0">
+          <p class="text-text-body text-sm leading-relaxed m-0 mb-3">
             {post.frontmatter.description}
           </p>
         )}
+        {!post.frontmatter.external &&
+          post.frontmatter.tags &&
+          post.frontmatter.tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              {post.frontmatter.tags.slice(0, 10).map((tag) => (
+                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-primary-main/10 text-primary-main border border-primary-main/20">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
       </div>
     </a>
   )

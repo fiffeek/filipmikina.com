@@ -140,14 +140,15 @@ const socialPlatforms = [
             heroImage && (
               <div class="hero-image-container mb-8">
                 <div
-                  class="overflow-hidden rounded-lg mb-8"
-                  style="height: 250px;"
+                  class="overflow-hidden rounded-lg mb-8 relative"
+                  style="height: 350px;"
                 >
                   <img
                     src={heroImage}
                     alt=""
-                    class="w-full h-full object-cover scale-110"
+                    class="w-full h-full object-cover scale-110 rounded-lg"
                   />
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary-main/30 rounded-lg" />
                 </div>
                 <h1
                   id={titleId}

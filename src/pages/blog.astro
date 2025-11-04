@@ -23,7 +23,16 @@ const sortedPosts = posts
 
 const postsWithMeta = sortedPosts.map((post) => {
   const { words, minutes } = getReadingTime(post.rawContent);
-  return { ...post, words, minutes };
+  return {
+    ...post,
+    words,
+    minutes,
+    frontmatter: {
+      ...post.frontmatter,
+      tags:
+        post.frontmatter.external === false ? post.frontmatter.tags : undefined,
+    },
+  };
 });
 
 // Get all unique tags

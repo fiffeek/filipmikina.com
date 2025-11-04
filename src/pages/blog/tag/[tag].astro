@@ -56,7 +56,16 @@ const taggedPosts = posts
 
 const postsWithMeta = taggedPosts.map((post) => {
   const { words, minutes } = getReadingTime(post.rawContent);
-  return { ...post, words, minutes };
+  return {
+    ...post,
+    words,
+    minutes,
+    frontmatter: {
+      ...post.frontmatter,
+      tags:
+        post.frontmatter.external === false ? post.frontmatter.tags : undefined,
+    },
+  };
 });
 ---
 

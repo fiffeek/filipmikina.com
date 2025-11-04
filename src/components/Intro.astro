@@ -10,6 +10,7 @@ export interface Props {
       description?: string;
       date: Date;
       heroImage?: string;
+      tags?: string[];
       external: boolean;
     };
     minutes: number;
@@ -115,10 +116,13 @@ const { recentPosts = [] } = Astro.props;
   {
     recentPosts && recentPosts.length > 0 && (
       <div class="mb-12">
-        <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-primary-main/10 to-transparent rounded-lg border-l-4 border-primary-main">
-          <i class="fa-solid fa-pencil text-primary-main" />
-          Recent Writing
-        </h2>
+        <div class="mb-6 relative pt-6 pb-4 border-b-4 border-primary-main/30 rounded-b">
+          <span class="absolute left-0 top-2 w-16 h-1 bg-primary-main rounded-full" />
+          <h2 class="text-3xl font-bold text-primary-main flex items-center gap-3">
+            <i class="fa-solid fa-pencil text-primary-main" />
+            Recent Writing
+          </h2>
+        </div>
         <div class="space-y-6">
           {recentPosts.map((post) => (
             <BlogPostItem post={post} />
