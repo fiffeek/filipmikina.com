@@ -164,6 +164,18 @@ export const config: Config = {
         return new Tag(this.render, { ...attributes }, children);
       },
     },
+    image: {
+      render: "BlogImage",
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String },
+        title: { type: String },
+      },
+      transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        return new Tag(this.render, { ...attributes }, []);
+      },
+    },
     // if you want to customise default tags, this is where you'd do it
     // after adding the code here, add an Astro component for this node
     // in Renderer.astro component

@@ -1,5 +1,5 @@
 ---
-/* 
+/*
   This layout is used in pages that render markdoc content
   - pages/blog/[slug].astro
 */
@@ -16,6 +16,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import TagList from "../components/TagList.astro";
 import TableOfContentsSidebar from "../components/TableOfContentsSidebar.astro";
+import ImageModal from "../components/ImageModal.astro";
 import { SITE_URL } from "../config";
 import type { Content } from "astro-markdoc-renderer";
 
@@ -208,6 +209,7 @@ const socialPlatforms = [
       }
     </main>
     <Footer />
+    <ImageModal />
     <style>
       html {
         scroll-padding-top: 6rem;

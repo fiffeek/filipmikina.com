@@ -1,0 +1,112 @@
+<div
+  id="image-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image viewer"
+>
+  <button
+    type="button"
+    id="image-modal-close"
+    class="absolute inset-0 w-full h-full cursor-zoom-out"
+    aria-label="Close image viewer"
+  >
+  </button>
+  <div class="relative max-w-7xl max-h-[90vh] flex flex-col items-center">
+    <img
+      id="image-modal-img"
+      src=""
+      alt=""
+      class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded shadow-2xl"
+    />
+    <p
+      id="image-modal-caption"
+      class="text-white text-center mt-4 text-sm md:text-base max-w-2xl hidden"
+    >
+    </p>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("image-modal");
+  const modalImg = document.getElementById(
+    "image-modal-img",
+  ) as HTMLImageElement;
+  const modalCaption = document.getElementById("image-modal-caption");
+  const closeBtn = document.getElementById("image-modal-close");
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const button = target.closest(".blog-image-button") as HTMLButtonElement;
+
+    if (button) {
+      e.preventDefault();
+      const src = button.dataset.imageSrc;
+      const alt = button.dataset.imageAlt;
+
+      if (src && modal && modalImg) {
+        modalImg.src = src;
+        modalImg.alt = alt || "";
+
+        if (modalCaption) {
+          if (alt) {
+            modalCaption.textContent = alt;
+            modalCaption.classList.remove("hidden");
+          } else {
+            modalCaption.classList.add("hidden");
+          }
+        }
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+    }
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+  });
+</script>
+
+<style>
+  #image-modal {
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  #image-modal-img {
+    animation: scaleIn 0.2s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

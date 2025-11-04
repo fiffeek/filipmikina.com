@@ -1,0 +1,48 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  title?: string;
+}
+
+const { src, alt = "", title } = Astro.props;
+---
+
+<figure class="blog-image-wrapper not-prose my-8">
+  <button
+    type="button"
+    class="blog-image-button mx-auto cursor-zoom-in transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-main/50 rounded"
+    data-image-src={src}
+    data-image-alt={alt}
+    aria-label={`View full size: ${alt || "image"}`}
+  >
+    <img
+      src={src}
+      alt={alt}
+      title={title || alt}
+      class="max-w-2xl w-auto h-auto max-h-96 border-1 border-primary-main shadow-lg shadow-primary-main/10"
+      loading="lazy"
+    />
+  </button>
+  {
+    alt && (
+      <figcaption class="text-center text-sm text-text-muted mt-3 px-4 italic">
+        {alt}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .blog-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .blog-image-button {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+</style>
