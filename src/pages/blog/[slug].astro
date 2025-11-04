@@ -37,6 +37,30 @@ const { content, rawContent, frontmatter } = await readOne({
 
 const { words, minutes } = getReadingTime(rawContent);
 
+// Get recent posts for "Continue Reading" section
+const allPosts = await readAll({
+  directory: "blog",
+  frontmatterSchema: blog,
+});
+
+const recentPosts = allPosts
+  .filter(
+    (p) =>
+      p.frontmatter.draft !== true &&
+      !p.frontmatter.external &&
+      p.slug !== slug,
+  )
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf(),
+  )
+  .slice(0, 3)
+  .map((post) => ({
+    slug: post.slug,
+    title: post.frontmatter.title,
+  }));
+
 const ogImageAbsoluteUrl =
   frontmatter.external !== true &&
   (frontmatter.ogImagePath || frontmatter.heroImage)
@@ -118,6 +142,7 @@ const breadcrumbStructuredData = {
   content={content}
   showToc={frontmatter.external === false ? frontmatter.showToc : false}
   heroImage={frontmatter.external === false ? frontmatter.heroImage : undefined}
+  recentPosts={recentPosts}
 >
   <BlogPostMeta
     title={frontmatter.title}

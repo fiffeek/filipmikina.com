@@ -30,6 +30,10 @@ export interface Props {
   content?: Content;
   showToc?: boolean;
   heroImage?: string;
+  recentPosts?: Array<{
+    slug: string;
+    title: string;
+  }>;
 }
 
 const {
@@ -42,6 +46,7 @@ const {
   content,
   showToc,
   heroImage,
+  recentPosts,
 } = Astro.props;
 const formattedDate = new Date(date).toLocaleDateString("en-us", {
   year: "numeric",
@@ -136,6 +141,15 @@ const socialPlatforms = [
     <main id="main" class="content-with-sidebar mx-auto px-6 sm:px-8 pt-8">
       <div class="content-wrapper">
         <section class="blog-post prose max-w-none prose-sleek">
+          <nav class="mb-6 text-sm">
+            <a
+              href="/blog"
+              class="inline-flex items-center gap-2 text-text-muted hover:text-primary-main transition-colors"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Back to Blog</span>
+            </a>
+          </nav>
           {
             heroImage && (
               <div class="hero-image-container mb-8">
@@ -232,6 +246,28 @@ const socialPlatforms = [
                       </a>
                     ))}
                   </div>
+                </div>
+              </div>
+            )
+          }
+          {
+            recentPosts && recentPosts.length > 0 && (
+              <div class="mt-8 pt-6 pb-8 border-t border-text-muted/20 continue-reading-section">
+                <h3 class="text-lg font-semibold text-text-bold mb-4">
+                  Continue Reading
+                </h3>
+                <div class="space-y-3">
+                  {recentPosts.slice(0, 3).map((post) => (
+                    <a
+                      href={`/blog/${post.slug}`}
+                      class="continue-reading-link block text-text-body hover:text-primary-main transition-colors"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-arrow-right text-primary-main text-sm mt-1 flex-shrink-0" />
+                        <span class="font-medium truncate">{post.title}</span>
+                      </div>
+                    </a>
+                  ))}
                 </div>
               </div>
             )
@@ -354,6 +390,26 @@ const socialPlatforms = [
       .blog-post.prose .edit-page-link {
         text-decoration: none !important;
         border-bottom: none !important;
+      }
+
+      /* Continue reading links - remove underline */
+      .continue-reading-link,
+      .continue-reading-link:hover,
+      .continue-reading-link:active,
+      .continue-reading-link:focus,
+      .continue-reading-link:visited {
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+        text-decoration-line: none !important;
+        text-decoration-color: transparent !important;
+      }
+
+      .blog-post.prose .continue-reading-link {
+        text-decoration: none !important;
+        border-bottom: none !important;
+        background-image: none !important;
       }
     </style>
   </body>
