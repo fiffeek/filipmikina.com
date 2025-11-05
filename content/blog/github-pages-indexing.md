@@ -27,8 +27,12 @@ keywords:
   [
     "GitHub Pages SEO",
     "index GitHub Pages",
+    "index GitHub Pages fast",
     "how to get GitHub Pages indexed",
     "GitHub Pages not showing in Google",
+    "GitHub Pages custom domain indexing",
+    "verify GitHub Pages on Google",
+    "GitHub Pages visibility issues",
     "Google Search Console",
     "Google Search Console verification",
     "Bing Webmaster Tools",
@@ -66,6 +70,10 @@ keywords:
     "URL inspection tool",
     "sitemap configuration",
     "robots.txt configuration",
+    "CNAME record verification GitHub Pages",
+    "search engine optimization for developers",
+    "static website indexing strategy",
+    "GitHub Pages and Google Search Console integration",
   ]
 ---
 

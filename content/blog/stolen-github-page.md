@@ -3,12 +3,12 @@ external: false
 draft: false
 showToc: true
 heroImage: /images/github_stolen_error.png
-title:
-  "GitHub Pages Domain Hijacking: A Cautionary Tale About Subdomain Takeovers"
+title: |
+  GitHub Pages Domain Hijacking: How a Subdomain Takeover Happened and How to Prevent It
 description:
-  A cautionary tale about subdomain takeovers on GitHub Pages. Learn how
-  attackers can hijack your custom domains, what the security implications are,
-  and most importantly - how to protect yourself with domain verification.
+  A real-world story of a GitHub Pages subdomain hijacking. Learn how attackers
+  exploit dangling DNS records, what domain verification does (and doesn’t)
+  protect, and how to secure your GitHub Pages custom domains from takeover.
 date: 2025-11-04
 tags:
   - Security
@@ -23,12 +23,31 @@ keywords:
   - DNS security
   - CNAME takeover
   - GitHub domain verification
-  - subdomain hijacking prevention
   - dangling DNS records
   - GitHub Pages vulnerability
-  - DNS hijacking
+  - subdomain hijacking prevention
+  - domain ownership verification
+  - prevent subdomain takeover
+  - reclaim hijacked subdomain
+  - fix dangling DNS records
+  - verify GitHub Pages domain
+  - DNS hygiene best practices
   - web security best practices
   - OWASP subdomain takeover
+  - custom domain verification GitHub
+  - domain verification best practices
+  - GitHub Pages custom domain security
+  - subdomain takeover scanner
+  - detect dangling CNAME
+  - how to prevent domain hijacking
+  - web app security subdomain risk
+  - DevOps DNS security checklist
+  - Google Search Console hacked content alert
+  - SEO fallout from subdomain takeover
+  - how attackers exploit dangling DNS records
+  - step by step subdomain takeover remediation
+  - CNAME record vulnerability
+  - securing GitHub Pages custom domains
 ---
 
 Picture this: you wake up, grab your coffee, and casually check your email.
