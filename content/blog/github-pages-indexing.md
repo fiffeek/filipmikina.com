@@ -325,6 +325,72 @@ as a reference.
 For detailed GitHub Pages domain setup, refer to the
 [official GitHub documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
+#### Step 0: Verify your domain on GitHub (CRITICAL SECURITY STEP)
+
+**⚠️ Security Warning**: Before setting up any GitHub Pages custom domain, you
+**must** verify your domain to prevent subdomain takeover attacks. This is not
+optional.
+
+Domain verification ensures that only repositories you own can publish content
+to your domain and its subdomains. Without verification, attackers can hijack
+your dangling subdomains and serve malicious content. For a detailed explanation
+of how this attack works and real-world examples, see
+[my blog post on subdomain takeovers](./stolen-github-page).
+
+**How to verify your domain:**
+
+1. Go to your [GitHub Pages settings](https://github.com/settings/pages)
+2. Click on **Add domain** under the "Verified domains" section
+
+![GitHub Pages settings showing the Add domain button](/images/github_add_domain.png)
+
+3. GitHub will prompt you to add a `TXT` record to your DNS. This record proves
+   you own the domain.
+
+![GitHub DNS verification prompt showing the TXT record details](/images/github_dns_txt.png)
+
+4. Add the `TXT` record to your DNS provider (example shown for Squarespace):
+
+![DNS provider interface showing the GitHub verification TXT record](/images/square_github_txt.png)
+
+5. Verify the DNS record has propagated using `dig`:
+
+```bash
+❯ dig _github-pages-challenge-fiffeek.filipmikina.com +nostats +nocomments +nocmd TXT
+;_github-pages-challenge-fiffeek.filipmikina.com. IN TXT
+_github-pages-challenge-fiffeek.filipmikina.com. 14400 IN TXT "674546f1e2776c5e492e7ad6cde031"
+```
+
+6. Return to GitHub and click **Verify**. Once successful, you'll see a green
+   checkmark:
+
+![GitHub showing the domain is successfully verified](/images/github_domain_verified.png)
+
+**What domain verification protects you from:**
+
+According to
+[GitHub's documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages#about-domain-verification-for-github-pages):
+
+> When you verify a custom domain for your personal account, only repositories
+> owned by your personal account may be used to publish a GitHub Pages site to
+> the verified custom domain or the domain's immediate subdomains.
+
+Once verified, **all subdomains** under your domain (e.g., `*.filipmikina.com`)
+are automatically protected. Attackers cannot claim these subdomains for their
+own GitHub Pages sites, even if you have dangling DNS records.
+
+**This protects you from:**
+
+- Phishing attacks using your domain's trust
+- SEO poisoning and reputation damage
+- Cookie theft and session hijacking
+- OAuth callback hijacking
+
+**Don't skip this step.** Domain verification takes 5 minutes and prevents
+serious security vulnerabilities. For more details on what can happen if you
+skip this, read
+[my detailed writeup on GitHub Pages subdomain takeovers](./stolen-github-page).
+
 #### Step 1: Configure the CNAME File
 
 When you set a custom domain in your GitHub repository settings:
