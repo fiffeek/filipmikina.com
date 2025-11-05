@@ -28,7 +28,7 @@ const recentPosts = posts
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf(),
   )
-  .slice(0, 3)
+  .slice(0, 4)
   .map((post) => {
     const { minutes, words } = getReadingTime(post.rawContent);
     return {

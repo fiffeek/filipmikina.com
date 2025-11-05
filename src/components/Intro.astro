@@ -22,174 +22,923 @@ const { recentPosts = [] } = Astro.props;
 ---
 
 <section class="mb-8">
+  <div class="mb-8 relative">
+    <div class="mb-6">
+      <h1
+        class="font-extrabold text-4xl md:text-6xl tracking-tight overflow-hidden mb-3"
+      >
+        <span class="animated-gradient bg-clip-text text-transparent">
+          FILIP MIKINA
+        </span>
+      </h1>
+      <p class="text-lg md:text-xl text-text-muted mb-3">
+        SRE & Software Engineer · Building reliable systems at scale
+      </p>
+      <p class="text-sm md:text-base text-text-body leading-relaxed max-w-4xl">
+        7+ years building distributed systems at FAANG and high-performance
+        trading firms. Proven track record of reducing CI/CD times by 67%,
+        handling 500k+ samples/sec, and leading infrastructure modernization.
+        GCP Professional Cloud Architect & Azure certified.
+      </p>
+    </div>
+
+    <!-- Quick stats bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-center gap-2 mb-1">
+          <i
+            class="fa-solid fa-building text-blue-600 dark:text-blue-400 text-sm"
+          ></i>
+          <span
+            class="text-xs font-semibold text-text-muted uppercase tracking-wide"
+            >Companies</span
+          >
+        </div>
+        <div class="text-2xl font-bold text-text-bold">FAANG+</div>
+      </div>
+
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-center gap-2 mb-1">
+          <i
+            class="fa-solid fa-calendar-check text-purple-600 dark:text-purple-400 text-sm"
+          ></i>
+          <span
+            class="text-xs font-semibold text-text-muted uppercase tracking-wide"
+            >Experience</span
+          >
+        </div>
+        <div class="text-2xl font-bold text-text-bold">7+ Years</div>
+      </div>
+
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-center gap-2 mb-1">
+          <i
+            class="fa-solid fa-award text-emerald-600 dark:text-emerald-400 text-sm"
+          ></i>
+          <span
+            class="text-xs font-semibold text-text-muted uppercase tracking-wide"
+            >Certified</span
+          >
+        </div>
+        <div class="text-lg font-bold text-text-bold">GCP/Azure</div>
+      </div>
+
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-center gap-2 mb-1">
+          <i
+            class="fa-solid fa-graduation-cap text-orange-600 dark:text-orange-400 text-sm"
+          ></i>
+          <span
+            class="text-xs font-semibold text-text-muted uppercase tracking-wide"
+            >Education</span
+          >
+        </div>
+        <div class="text-lg font-bold text-text-bold">MSc CS</div>
+      </div>
+    </div>
+  </div>
+
   <div
-    class="mb-12 relative pt-8 pb-6 border-b-4 border-primary-main/30 rounded-b"
+    class="mb-12 bg-gradient-to-br from-green-50 via-emerald-50/50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/10 dark:to-teal-900/20 p-6 rounded-lg border-2 border-green-500 dark:border-green-600 shadow-lg"
   >
-    <span class="absolute left-0 top-2 w-20 h-1 bg-primary-main rounded-full"
-    ></span>
-    <h1
-      class="font-extrabold text-5xl md:text-6xl tracking-tight pb-2 overflow-hidden"
-    >
-      <span class="animated-gradient bg-clip-text text-transparent">
-        FILIP MIKINA
-      </span>
-    </h1>
-    <p class="text-xl text-text-muted">
-      Solving problems with<sup class="text-xs">(out)</sup> code, duct tape, and
-      <span class="line-through opacity-70 hover:opacity-100">coffee</span> empathy.
-    </p>
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0">
+        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+      </div>
+      <div class="flex-1">
+        <h2
+          class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2"
+        >
+          <i class="fa-solid fa-briefcase text-green-600 dark:text-green-500"
+          ></i>
+          Actively Seeking Opportunities
+        </h2>
+        <p class="text-gray-800 dark:text-gray-200 mb-4 leading-relaxed">
+          <span class="font-bold text-green-700 dark:text-green-400"
+            >Available immediately</span
+          > for SRE, Infrastructure Engineering, and Platform Engineering roles.
+          Looking for positions where I can drive reliability, scale systems, and
+          mentor engineering teams.
+        </p>
+        <div class="mb-4">
+          <p
+            class="text-sm text-gray-700 dark:text-gray-300 mb-2 font-semibold"
+          >
+            Core Expertise:
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-brands fa-golang mr-1.5"></i>Go
+            </span>
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-brands fa-python mr-1.5"></i>Python
+            </span>
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-solid fa-server mr-1.5"></i>Kubernetes
+            </span>
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-solid fa-chart-line mr-1.5"></i>Observability
+            </span>
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-solid fa-code-branch mr-1.5"></i>CI/CD
+            </span>
+            <span
+              class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 border border-green-300 dark:border-green-700"
+            >
+              <i class="fa-brands fa-aws mr-1.5"></i>GCP/AWS
+            </span>
+          </div>
+        </div>
+        <a
+          href="https://drive.google.com/file/d/1j3yjmZPbzp_XJ6oBDBYijkWAPlOx_rp8/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="unset inline-flex items-center gap-2 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg font-semibold hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-md hover:shadow-lg"
+          title="View Filip Mikina's resume"
+        >
+          <i class="fa-solid fa-file-lines"></i>
+          Download Resume
+        </a>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-12">
-    <h2
-      class="text-2xl mb-4 text-text-bold flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-primary-main/10 to-transparent rounded-lg border-l-4 border-primary-main"
-    >
-      <i class="fa-solid fa-user text-primary-main"></i>
-      A little about me
+  <!-- Philosophy cards -->
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold text-text-bold mb-4 flex items-center gap-2">
+      <i class="fa-solid fa-lightbulb text-yellow-500"></i>
+      Philosophy
     </h2>
-    <p class="mb-4 text-text-body leading-relaxed">
-      <span class="font-semibold">Let's start with the obvious:</span> the best code
-      I've ever written is no code at all. I work at the intersection of <span
-        class="font-medium text-gray-900 dark:text-white">SRE</span
-      > and <span class="font-medium text-gray-900 dark:text-white"
-        >software engineering</span
-      > — I love writing code, but I'm always weighing whether it's worth the long-term
-      cost. Every line you write is one you have to maintain, debug, and eventually
-      replace. That's why I think carefully about adoption, rollout plans, and whether
-      a solution justifies its complexity.
-    </p>
-    <p class="text-text-body leading-relaxed">
-      At the same time, technology fascinates me. When I have the time, I love
-      pushing boundaries and going right up to the edge of overengineering in
-      personal projects. It's how I experiment, learn, and, honestly, what keeps
-      me excited about building things.
-    </p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-5 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start gap-3">
+          <div
+            class="flex-shrink-0 w-10 h-10 bg-blue-500/10 dark:bg-blue-500/20 rounded-lg flex items-center justify-center"
+          >
+            <i class="fa-solid fa-code-branch text-blue-600 dark:text-blue-400"
+            ></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-text-bold mb-2">Less is More</h3>
+            <p class="text-sm text-text-body leading-relaxed">
+              The best code I've written is no code at all. Every line is a
+              future maintenance cost—I think carefully about adoption, rollout,
+              and whether complexity is justified.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-5 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start gap-3">
+          <div
+            class="flex-shrink-0 w-10 h-10 bg-purple-500/10 dark:bg-purple-500/20 rounded-lg flex items-center justify-center"
+          >
+            <i class="fa-solid fa-rocket text-purple-600 dark:text-purple-400"
+            ></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-text-bold mb-2">Build to Learn</h3>
+            <p class="text-sm text-text-body leading-relaxed">
+              In personal projects, I push boundaries and experiment at the edge
+              of overengineering. It's how I learn, grow, and stay excited about
+              building things.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-12">
-    <h2
-      class="text-2xl mb-4 text-text-bold flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-primary-main/10 to-transparent rounded-lg border-l-4 border-primary-main"
-    >
-      <i class="fa-solid fa-code text-primary-main"></i>
-      What I work on
+  <!-- Technical expertise -->
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold text-text-bold mb-4 flex items-center gap-2">
+      <i class="fa-solid fa-wrench text-primary-main"></i>
+      Technical Expertise
     </h2>
-    <p class="mb-4 text-text-body leading-relaxed">
-      Most days, you'll find me wrestling with distributed systems, making
-      monitoring tools that don't suck, and trying to convince CI/CD pipelines
-      to play nice. I've built systems that churn through 500k+ monitoring
-      samples per second, process thousands of messages per second, and somehow
-      managed to help teams ship faster without everything catching fire
-      (well... not always?).
-    </p>
-    <p class="text-text-body leading-relaxed">
-      Language-wise, I'm agnostic. I've shipped production code in Python,
-      Scala, Java, TypeScript, Go, Bash, Hack/PHP — you name it. Go happens to
-      be my current favorite, but tomorrow it might be something else. For me,
-      the tool should fit the problem, not the other way around.
-    </p>
+
+    <!-- Core SRE Skills -->
+    <div class="mb-4">
+      <h3
+        class="text-sm font-semibold text-text-muted mb-3 uppercase tracking-wide"
+      >
+        Core SRE & Infrastructure
+      </h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-blue-500/10 dark:bg-blue-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i
+                class="fa-solid fa-dharmachakra text-blue-600 dark:text-blue-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                Kubernetes & Containers
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Docker, Helm, ArgoCD, GKE, platform engineering
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i
+                class="fa-solid fa-chart-line text-emerald-600 dark:text-emerald-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                Observability
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Prometheus, Grafana, Loki, distributed tracing
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-purple-500/10 dark:bg-purple-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i
+                class="fa-solid fa-code-branch text-purple-600 dark:text-purple-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">CI/CD & IaC</h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Terraform, Ansible, GitLab CI, Bazel, TeamCity
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-orange-500/10 dark:bg-orange-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-solid fa-cloud text-orange-600 dark:text-orange-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                Cloud Platforms
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                GCP (Certified), AWS, Azure (Certified)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-pink-500/10 dark:bg-pink-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i
+                class="fa-solid fa-calendar-days text-pink-600 dark:text-pink-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                Orchestration
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Apache Airflow, workflow scheduling at scale
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-500/10 dark:bg-red-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-brands fa-linux text-red-600 dark:text-red-400"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                Linux & Systems
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Bash, Salt, system administration, on-premise infrastructure
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Programming & Data -->
+    <div>
+      <h3
+        class="text-sm font-semibold text-text-muted mb-3 uppercase tracking-wide"
+      >
+        Programming & Data Engineering
+      </h3>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-solid fa-code text-cyan-600 dark:text-cyan-400"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">Languages</h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                Go, Python, Scala, Java, TypeScript, JavaScript, C#, Bash, Hack
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-violet-500/10 dark:bg-violet-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-solid fa-plug text-violet-600 dark:text-violet-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">
+                APIs & Protocols
+              </h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                gRPC, GraphQL, REST, Protocol Buffers
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-sky-500/10 dark:bg-sky-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-solid fa-database text-sky-600 dark:text-sky-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">Databases</h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                PostgreSQL, Spanner, Cosmos DB, DynamoDB
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-amber-500/10 dark:bg-amber-500/20 rounded-lg flex items-center justify-center"
+            >
+              <i class="fa-brands fa-react text-amber-600 dark:text-amber-400"
+              ></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-text-bold mb-1">Frontend</h3>
+              <p class="text-xs text-text-body leading-relaxed">
+                React, TypeScript, FastAPI
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-12">
-    <h2
-      class="text-2xl mb-4 text-text-bold flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-primary-main/10 to-transparent rounded-lg border-l-4 border-primary-main"
-    >
+  <!-- Experience -->
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold text-text-bold mb-4 flex items-center gap-2">
       <i class="fa-solid fa-briefcase text-primary-main"></i>
-      Where I've been
+      Experience
     </h2>
-    <p class="mb-4 text-text-body leading-relaxed">
-      My career has been a bit of a tour through different corners of tech. I've
-      worked at massive companies like Meta, Microsoft, Google, and Amazon,
-      where you learn how systems scale (and break) at ridiculous volumes. I've
-      also spent time at smaller, engineering-heavy places like Radix Trading,
-      where every line of code matters and there's no room to hide behind
-      process.
-    </p>
-    <p class="text-text-body leading-relaxed">
-      One of the most eye-opening experiences was my time at GetInData, a
-      consulting company where I primarily worked with startup clients.
-      Consulting taught me how to quickly dive into someone else's codebase,
-      understand their business problems, and deliver solutions under tight
-      timelines.
-    </p>
+
+    <div class="space-y-4">
+      <!-- Radix Trading -->
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-5 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <h3 class="text-base font-bold flex items-center gap-2">
+              <i
+                class="fa-solid fa-coins text-emerald-600 dark:text-emerald-400 text-sm"
+              ></i>
+              <a
+                href="https://www.radixtrading.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text-bold hover:text-primary-main transition-colors"
+                >Radix Trading</a
+              >
+            </h3>
+            <p class="text-xs text-text-muted font-semibold">
+              Quantitative Technologist
+            </p>
+          </div>
+          <span class="text-xs text-text-muted font-medium whitespace-nowrap"
+            >Jul 2023 – Jan 2025</span
+          >
+        </div>
+        <ul
+          class="text-xs text-text-body leading-relaxed space-y-1 list-disc list-inside"
+        >
+          <li>
+            Built monitoring infrastructure handling <span class="font-semibold"
+              >500k+ samples/sec</span
+            > for live trading systems, closing observability gaps
+          </li>
+          <li>
+            Optimized CI/CD pipelines achieving <span class="font-semibold"
+              >50-67% reduction</span
+            > in p90 test time (3h → 1h)
+          </li>
+          <li>
+            Led infrastructure modernization: Apache Airflow, Kubernetes
+            platform, Apache Superset adoption
+          </li>
+          <li>
+            Developed real-time trading monitoring (FastAPI/React) processing <span
+              class="font-semibold">8k msg/sec</span
+            > for P&L visibility
+          </li>
+        </ul>
+      </div>
+
+      <!-- GetInData Senior -->
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-5 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <h3 class="text-base font-bold flex items-center gap-2">
+              <i
+                class="fa-solid fa-database text-blue-600 dark:text-blue-400 text-sm"
+              ></i>
+              <a
+                href="https://getindata.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text-bold hover:text-primary-main transition-colors"
+                >GetInData</a
+              >
+            </h3>
+            <p class="text-xs text-text-muted font-semibold">
+              Senior Software Engineer
+            </p>
+          </div>
+          <span class="text-xs text-text-muted font-medium whitespace-nowrap"
+            >Oct 2022 – May 2023</span
+          >
+        </div>
+        <ul
+          class="text-xs text-text-body leading-relaxed space-y-1 list-disc list-inside"
+        >
+          <li>
+            Led backend development for cloud-native Go microservices on GKE
+            with comprehensive testing suites
+          </li>
+          <li>
+            Architected GraphQL contracts driving cross-functional integration
+            (frontend, product, leadership)
+          </li>
+          <li>
+            Mentored junior engineers, enhancing technical proficiency across
+            the team
+          </li>
+        </ul>
+      </div>
+
+      <!-- FAANG Internships -->
+      <div
+        class="bg-gradient-to-br from-blue-50 to-indigo-50/50 dark:from-blue-900/20 dark:to-indigo-900/10 p-5 rounded-lg border-2 border-blue-300 dark:border-blue-700"
+      >
+        <h3
+          class="text-sm font-bold text-text-bold mb-3 flex items-center gap-2"
+        >
+          <i class="fa-solid fa-rocket text-blue-600 dark:text-blue-400 text-sm"
+          ></i>
+          FAANG Experience
+        </h3>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div class="flex gap-2">
+            <a
+              href="https://www.metacareers.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-blue-600 text-white border border-blue-700 flex-shrink-0 h-fit w-20 hover:bg-blue-700 transition-colors"
+            >
+              <i class="fa-brands fa-meta mr-1"></i>Meta
+            </a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-text-muted font-semibold mb-1">
+                Jul – Sep 2022
+              </p>
+              <p class="text-xs text-text-body leading-relaxed">
+                Reduced CI/CD cycles 24h→2h; cut machine overprovisioning by 45%
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <a
+              href="https://careers.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-red-600 text-white border border-red-700 flex-shrink-0 h-fit w-20 hover:bg-red-700 transition-colors"
+            >
+              <i class="fa-brands fa-google mr-1"></i>Google
+            </a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-text-muted font-semibold mb-1">
+                Mar – May 2021
+              </p>
+              <p class="text-xs text-text-body leading-relaxed">
+                Enhanced NLP with Spanner & gRPC for Google Account settings
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <a
+              href="https://careers.microsoft.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-gray-700 text-white border border-gray-800 flex-shrink-0 h-fit w-20 hover:bg-gray-800 transition-colors"
+            >
+              <i class="fa-brands fa-microsoft mr-1"></i>MSFT
+            </a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-text-muted font-semibold mb-1">
+                Jun – Aug 2021
+              </p>
+              <p class="text-xs text-text-body leading-relaxed">
+                Built correlation vector persistence with Azure Cosmos DB
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <a
+              href="https://www.amazon.jobs/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-orange-500 text-white border border-orange-600 flex-shrink-0 h-fit w-20 hover:bg-orange-600 transition-colors"
+            >
+              <i class="fa-brands fa-amazon mr-1"></i>AWS
+            </a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-text-muted font-semibold mb-1">
+                Oct 2020 – Feb 2021
+              </p>
+              <p class="text-xs text-text-body leading-relaxed">
+                Software Development Engineer Intern
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GetInData Software Engineer -->
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-5 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <h3 class="text-base font-bold flex items-center gap-2">
+              <i
+                class="fa-solid fa-database text-blue-600 dark:text-blue-400 text-sm"
+              ></i>
+              <a
+                href="https://getindata.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text-bold hover:text-primary-main transition-colors"
+                >GetInData</a
+              >
+            </h3>
+            <p class="text-xs text-text-muted font-semibold">
+              Software Engineer
+            </p>
+          </div>
+          <span class="text-xs text-text-muted font-medium whitespace-nowrap"
+            >Oct 2021 – Jun 2022</span
+          >
+        </div>
+        <ul
+          class="text-xs text-text-body leading-relaxed space-y-1 list-disc list-inside"
+        >
+          <li>
+            Designed Kubernetes monitoring with Prometheus, Loki, and Grafana
+            across multi-cluster deployments
+          </li>
+          <li>
+            Automated CI/CD with Terraform, Terragrunt, GitLab CI, and ArgoCD
+          </li>
+          <li>
+            Built data processing orchestration using AWS Glue, Lambda, and
+            Airflow
+          </li>
+        </ul>
+      </div>
+
+      <!-- Earlier Roles -->
+      <div
+        class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
+      >
+        <h3
+          class="text-sm font-bold text-text-bold mb-3 flex items-center gap-2"
+        >
+          <i
+            class="fa-solid fa-code text-purple-600 dark:text-purple-400 text-sm"
+          ></i>
+          Earlier Roles
+        </h3>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-start justify-between">
+            <div>
+              <a
+                href="https://www.iteratorshq.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-text-bold hover:text-primary-main transition-colors"
+                >Iterators</a
+              >
+              <span class="text-text-muted"> • Backend Developer</span>
+            </div>
+            <span
+              class="text-text-muted font-medium whitespace-nowrap text-[0.65rem]"
+              >Oct 2019 – May 2020</span
+            >
+          </div>
+          <div class="flex items-start justify-between">
+            <div>
+              <a
+                href="https://www.sumologic.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-text-bold hover:text-primary-main transition-colors"
+                >Sumo Logic</a
+              >
+              <span class="text-text-muted"> • SWE Intern</span>
+            </div>
+            <span
+              class="text-text-muted font-medium whitespace-nowrap text-[0.65rem]"
+              >Jul – Sep 2019</span
+            >
+          </div>
+          <div class="flex items-start justify-between">
+            <div>
+              <a
+                href="https://cosmose.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-text-bold hover:text-primary-main transition-colors"
+                >Cosmose</a
+              >
+              <span class="text-text-muted"> • SWE Intern</span>
+            </div>
+            <span
+              class="text-text-muted font-medium whitespace-nowrap text-[0.65rem]"
+              >Jul – Sep 2018</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research & Publications -->
+  <div class="mb-10">
+    <h2 class="text-2xl font-bold text-text-bold mb-4 flex items-center gap-2">
+      <i class="fa-solid fa-graduation-cap text-primary-main"></i>
+      Research & Education
+    </h2>
+
+    <div class="space-y-4">
+      <!-- Publication -->
+      <div
+        class="bg-gradient-to-br from-indigo-50 to-purple-50/50 dark:from-indigo-900/20 dark:to-purple-900/10 p-5 rounded-lg border-2 border-indigo-300 dark:border-indigo-700"
+      >
+        <div class="flex items-start gap-3">
+          <div
+            class="flex-shrink-0 w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center"
+          >
+            <i
+              class="fa-solid fa-file-alt text-indigo-600 dark:text-indigo-400 text-lg"
+            ></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-base font-bold text-text-bold mb-1">
+              <a
+                href="https://arxiv.org/abs/2406.01374"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-primary-main transition-colors"
+              >
+                sAirflow: Scalable Workflow Scheduling
+              </a>
+            </h3>
+            <p class="text-xs text-text-muted font-semibold mb-2">
+              Accepted at <span
+                class="font-bold text-indigo-700 dark:text-indigo-400"
+                >EuroPar 2024</span
+              > (Top-tier distributed systems conference)
+            </p>
+            <p class="text-xs text-text-body leading-relaxed mb-3">
+              Research on scalable workflow orchestration systems. Published at
+              the 30th International European Conference on Parallel and
+              Distributed Computing.
+            </p>
+            <div class="flex gap-2">
+              <a
+                href="https://arxiv.org/abs/2406.01374"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+              >
+                <i class="fa-solid fa-file-pdf"></i>
+                Read Paper
+              </a>
+              <a
+                href="https://2024.euro-par.org/program/accepted-papers/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors"
+              >
+                <i class="fa-solid fa-link"></i>
+                Conference
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
+        >
+          <div class="flex items-center gap-2 mb-2">
+            <i class="fa-solid fa-university text-primary-main text-sm"></i>
+            <h3 class="text-sm font-bold text-text-bold">
+              University of Warsaw
+            </h3>
+          </div>
+          <p class="text-xs text-text-muted font-semibold mb-1">
+            Master's in Computer Science
+          </p>
+          <p class="text-xs text-text-body">Oct 2020 – Jun 2023</p>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-800/30 dark:to-slate-900/20 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
+        >
+          <div class="flex items-center gap-2 mb-2">
+            <i class="fa-solid fa-university text-primary-main text-sm"></i>
+            <h3 class="text-sm font-bold text-text-bold">
+              University of Warsaw
+            </h3>
+          </div>
+          <p class="text-xs text-text-muted font-semibold mb-1">
+            Bachelor's in Computer Science
+          </p>
+          <p class="text-xs text-text-body">Oct 2017 – Jul 2020</p>
+          <p class="text-xs text-text-muted mt-1">
+            Research with Google on NLP datasets
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
   {
     recentPosts && recentPosts.length > 0 && (
-      <div class="mb-12">
-        <div class="mb-6 relative pt-6 pb-4 border-b-4 border-primary-main/30 rounded-b">
-          <span class="absolute left-0 top-2 w-16 h-1 bg-primary-main rounded-full" />
-          <h2 class="text-3xl font-bold text-primary-main flex items-center gap-3">
-            <i class="fa-solid fa-pencil text-primary-main" />
-            Recent Writing
-          </h2>
-        </div>
-        <div class="space-y-6">
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold text-text-bold mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-pencil text-primary-main" />
+          Recent Writing
+        </h2>
+        <div class="grid md:grid-cols-2 gap-3 mb-4">
           {recentPosts.map((post) => (
             <BlogPostItem post={post} />
           ))}
         </div>
-        <a
-          href="/blog"
-          class="inline-block mt-6 text-primary-main hover:underline text-sm font-medium"
-          title="View all blog posts"
-        >
-          View all posts →
-        </a>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/blog"
+            class="unset inline-flex items-center gap-2 px-5 py-2.5 bg-primary-main text-white rounded-lg text-sm font-semibold hover:bg-primary-main/90 transition-colors shadow-sm hover:shadow-md group"
+            title="View all blog posts"
+          >
+            <i class="fa-solid fa-book-open text-xs" />
+            <span>View all posts</span>
+            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="/rss.xml"
+            class="unset inline-flex items-center gap-2 px-5 py-2.5 border-2 border-primary-main text-primary-main rounded-lg text-sm font-semibold hover:bg-primary-main hover:text-white transition-colors group"
+            title="Subscribe to RSS feed"
+          >
+            <i class="fa-solid fa-rss text-xs group-hover:animate-pulse" />
+            Subscribe via RSS
+          </a>
+        </div>
       </div>
     )
   }
 
+  <!-- Support section -->
   <div
-    class="mb-12 bg-gradient-to-br from-primary-main/10 via-primary-main/5 to-primary-main/15 dark:from-primary-main/15 dark:via-primary-main/8 dark:to-primary-main/20 p-6 rounded-lg border border-primary-main/30"
+    class="mb-10 bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-5 rounded-lg border border-amber-200 dark:border-amber-700"
   >
-    <h2 class="text-2xl mb-4 text-text-bold flex items-center gap-3">
-      <i class="fa-solid fa-mug-hot text-primary-main"></i>
-      Support This Work
-    </h2>
-    <p class="text-text-body leading-relaxed mb-4">
-      This blog is <span class="font-semibold">free</span>, <span
-        class="font-semibold">ad-free</span
-      >, and has <span class="font-semibold">no tracking</span>. I believe in
-      sharing knowledge without compromising your privacy or cluttering your
-      reading experience.
-    </p>
-    <p class="text-text-body leading-relaxed mb-4">
-      If you find the content valuable, consider supporting my work. Your
-      contribution helps me continue writing and building in public.
-    </p>
-    <a
-      href={KOFI_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="unset inline-flex items-center gap-2 px-6 py-3 bg-primary-main text-white rounded font-semibold hover:opacity-90 hover:text-white transition-opacity"
-      title="Support me on Ko-fi"
-    >
-      <i class="fa-solid fa-mug-hot"></i>
-      Buy me a coffee
-    </a>
-  </div>
-
-  <div
-    class="flex flex-col sm:flex-row gap-4 mb-8 pt-4 border-t border-border-color"
-  >
-    <a
-      href="https://drive.google.com/file/d/1j3yjmZPbzp_XJ6oBDBYijkWAPlOx_rp8/view?usp=sharing"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="unset flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
-      title="View Filip Mikina's resume"
-    >
-      <i class="fa-solid fa-file-lines mr-2"></i>
-      View Resume
-    </a>
-    <a
-      href="/rss.xml"
-      class="unset flex-1 text-center px-6 py-3 border-2 border-primary-main text-primary-main rounded font-semibold hover:bg-primary-main hover:text-white transition-colors"
-      title="Subscribe to RSS feed"
-    >
-      <i class="fa-solid fa-rss mr-2"></i>
-      Subscribe via RSS
-    </a>
+    <div class="flex items-start gap-4">
+      <div
+        class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center"
+      >
+        <i
+          class="fa-solid fa-mug-hot text-amber-600 dark:text-amber-400 text-lg"
+        ></i>
+      </div>
+      <div class="flex-1">
+        <h2 class="text-lg font-bold text-text-bold mb-2">
+          Enjoy the content?
+        </h2>
+        <p class="text-sm text-text-body leading-relaxed mb-3">
+          This blog is <span class="font-semibold">free</span>, <span
+            class="font-semibold">ad-free</span
+          >, and has <span class="font-semibold">no tracking</span>. Support my
+          work to keep it that way.
+        </p>
+        <a
+          href={KOFI_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="unset inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-500 text-white rounded-lg text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
+          title="Support me on Ko-fi"
+        >
+          <i class="fa-solid fa-mug-hot"></i>
+          Buy me a coffee
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 

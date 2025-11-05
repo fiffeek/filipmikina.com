@@ -60,7 +60,7 @@ const heroImage = !post.frontmatter.external
     >
       {heroImage && (
         <div class="relative">
-          <div class="overflow-hidden" style="height: 200px;">
+          <div class="overflow-hidden" style="height: 100px;">
             <img
               src={heroImage}
               alt=""
@@ -70,13 +70,13 @@ const heroImage = !post.frontmatter.external
           <div class="absolute bottom-0 left-0 right-0 h-0 bg-primary-main transition-all duration-300 group-hover:h-1" />
         </div>
       )}
-      <div class="p-4 bg-bg-body">
-        <div class="title mb-2">
-          <span class="unset text-lg font-semibold transition-colors group-hover:text-primary-main">
+      <div class="p-3 bg-bg-body">
+        <div class="title mb-1.5">
+          <span class="unset text-base font-semibold transition-colors group-hover:text-primary-main">
             {post.frontmatter.title}
           </span>
         </div>
-        <div class="flex flex-wrap items-center gap-2 text-text-muted text-sm mb-2">
+        <div class="flex flex-wrap items-center gap-1.5 text-text-muted text-xs mb-2">
           <time datetime={post.frontmatter.date.toISOString()}>
             {formattedDate}
           </time>
@@ -84,22 +84,20 @@ const heroImage = !post.frontmatter.external
             <>
               <span>•</span>
               <span>{post.minutes} min read</span>
-              <span>•</span>
-              <span>{post.words?.toLocaleString()} words</span>
             </>
           )}
         </div>
         {post.frontmatter.description && (
-          <p class="text-text-body text-sm leading-relaxed m-0 mb-3">
+          <p class="text-text-body text-xs leading-relaxed m-0 mb-2 line-clamp-2">
             {post.frontmatter.description}
           </p>
         )}
         {!post.frontmatter.external &&
           post.frontmatter.tags &&
           post.frontmatter.tags.length > 0 && (
-            <div class="flex flex-wrap gap-1.5 mt-3">
-              {post.frontmatter.tags.slice(0, 10).map((tag) => (
-                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-primary-main/10 text-primary-main border border-primary-main/20">
+            <div class="flex flex-wrap gap-1 mt-2">
+              {post.frontmatter.tags.slice(0, 5).map((tag) => (
+                <span class="inline-flex items-center px-1.5 py-0.5 text-[0.625rem] font-semibold rounded-full bg-primary-main/10 text-primary-main border border-primary-main/20">
                   {tag}
                 </span>
               ))}
