@@ -35,6 +35,24 @@ const postsWithMeta = sortedPosts.map((post) => {
   };
 });
 
+// Group posts by year
+const postsByYear = postsWithMeta.reduce(
+  (acc, post) => {
+    const year = new Date(post.frontmatter.date).getFullYear();
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+  },
+  {} as Record<number, typeof postsWithMeta>,
+);
+
+// Get years in descending order
+const years = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+
 // Get all unique tags
 const allTags = new Set<string>();
 sortedPosts.forEach((post) => {
@@ -78,9 +96,30 @@ const uniqueTags = Array.from(allTags).sort();
   />
   <section slot="main">
     <h1 class="text-4xl font-bold mb-4 text-primary-main">Technical Blog</h1>
-    <h2 class="text-2xl font-semibold mb-6">All Posts</h2>
-    <div class="grid md:grid-cols-2 gap-3">
-      {postsWithMeta.map((post) => <BlogPostItem post={post} />)}
+
+    <div class="space-y-10">
+      {
+        years.map((year) => (
+          <div class="relative">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-primary-main" />
+                <h2 class="text-3xl font-bold text-text-bold">{year}</h2>
+              </div>
+              <div class="flex-1 h-px bg-gradient-to-r from-primary-main/30 to-transparent" />
+              <span class="text-sm text-text-muted font-semibold">
+                {postsByYear[year].length}{" "}
+                {postsByYear[year].length === 1 ? "post" : "posts"}
+              </span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-3 pl-6">
+              {postsByYear[year].map((post) => (
+                <BlogPostItem post={post} />
+              ))}
+            </div>
+          </div>
+        ))
+      }
     </div>
 
     {
