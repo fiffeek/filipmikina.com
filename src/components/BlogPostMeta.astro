@@ -51,6 +51,11 @@ const { meta, og, twitter } = getBlogPostMeta({
   siteOwnerTwitterHandle: TWITTER_HANDLE,
   contentAuthorTwitterHandle: TWITTER_HANDLE,
 });
+
+// Use the pageUrl as canonical URL if not explicitly provided, fall back to current URL
+const finalCanonicalUrl =
+  meta.canonicalUrl ||
+  (pagePath ? new URL(pagePath, SITE_URL).toString() : Astro.url.href);
 ---
 
 <!-- Primary Meta Tags -->
@@ -62,7 +67,7 @@ const { meta, og, twitter } = getBlogPostMeta({
     <meta name="keywords" content={allKeywords.join(", ")} />
   )
 }
-{meta.canonicalUrl && <link rel="canonical" href={meta.canonicalUrl} />}
+<link rel="canonical" href={finalCanonicalUrl} />
 
 <!-- Open Graph / Facebook -->
 {og.title && <meta property="og:title" content={og.title} />}
