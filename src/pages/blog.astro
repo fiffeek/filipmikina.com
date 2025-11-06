@@ -53,14 +53,25 @@ const years = Object.keys(postsByYear)
   .map(Number)
   .sort((a, b) => b - a);
 
-// Get all unique tags
-const allTags = new Set<string>();
+// Get all unique tags with counts
+const tagCounts = new Map<string, number>();
 sortedPosts.forEach((post) => {
   if (post.frontmatter.external === false && post.frontmatter.tags) {
-    post.frontmatter.tags.forEach((tag: string) => allTags.add(tag));
+    post.frontmatter.tags.forEach((tag: string) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
   }
 });
-const uniqueTags = Array.from(allTags).sort();
+const tagsWithCounts = Array.from(tagCounts.entries())
+  .sort((a, b) => {
+    // First sort by count descending
+    if (b[1] !== a[1]) {
+      return b[1] - a[1];
+    }
+    // Then sort alphabetically by tag name
+    return a[0].localeCompare(b[0]);
+  })
+  .map(([tag, count]) => ({ tag, count }));
 ---
 
 <PageLayout>
@@ -123,10 +134,10 @@ const uniqueTags = Array.from(allTags).sort();
     </div>
 
     {
-      uniqueTags.length > 0 && (
+      tagsWithCounts.length > 0 && (
         <div class="mb-8 mt-8">
           <h2 class="font-semibold text-text-muted mb-3">Browse by tag</h2>
-          <TagList tags={uniqueTags} />
+          <TagList tags={tagsWithCounts} />
         </div>
       )
     }
