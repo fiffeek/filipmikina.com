@@ -110,17 +110,20 @@ const { recentPosts = [] } = Astro.props;
     class="mb-12 bg-gradient-to-br from-green-50 via-emerald-50/50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/10 dark:to-teal-900/20 p-6 rounded-lg border-2 border-green-500 dark:border-green-600 shadow-lg"
   >
     <div class="flex items-start gap-4">
-      <div class="flex-shrink-0">
-        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-      </div>
       <div class="flex-1">
-        <h2
-          class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2"
-        >
-          <i class="fa-solid fa-briefcase text-green-600 dark:text-green-500"
-          ></i>
-          Actively Seeking Opportunities
-        </h2>
+        <div class="flex items-start justify-between mb-3">
+          <h2
+            class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2"
+          >
+            <i class="fa-solid fa-briefcase text-green-600 dark:text-green-500"
+            ></i>
+            Actively Seeking Opportunities
+          </h2>
+          <div
+            class="w-3 h-3 bg-green-500 rounded-full animate-pulse flex-shrink-0"
+          >
+          </div>
+        </div>
         <p class="text-gray-800 dark:text-gray-200 mb-4 leading-relaxed">
           <span class="font-bold text-green-700 dark:text-green-400"
             >Available immediately</span
@@ -584,7 +587,7 @@ const { recentPosts = [] } = Astro.props;
               href="https://www.metacareers.com/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-blue-600 text-white border border-blue-700 flex-shrink-0 h-fit w-20 hover:bg-blue-700 transition-colors"
+              class="unset inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-blue-600 text-white border border-blue-700 flex-shrink-0 h-fit w-20 hover:bg-blue-700 transition-colors"
             >
               <i class="fa-brands fa-meta mr-1"></i>Meta
             </a>
@@ -603,7 +606,7 @@ const { recentPosts = [] } = Astro.props;
               href="https://careers.google.com/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-red-600 text-white border border-red-700 flex-shrink-0 h-fit w-20 hover:bg-red-700 transition-colors"
+              class="unset inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-red-600 text-white border border-red-700 flex-shrink-0 h-fit w-20 hover:bg-red-700 transition-colors"
             >
               <i class="fa-brands fa-google mr-1"></i>Google
             </a>
@@ -622,9 +625,9 @@ const { recentPosts = [] } = Astro.props;
               href="https://careers.microsoft.com/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-gray-700 text-white border border-gray-800 flex-shrink-0 h-fit w-20 hover:bg-gray-800 transition-colors"
+              class="unset inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-gray-700 text-white border border-gray-800 flex-shrink-0 h-fit w-20 hover:bg-gray-800 transition-colors"
             >
-              <i class="fa-brands fa-microsoft mr-1"></i>MSFT
+              <i class="fa-brands fa-microsoft mr-1"></i>Microsoft
             </a>
             <div class="flex-1 min-w-0">
               <p class="text-xs text-text-muted font-semibold mb-1">
@@ -641,9 +644,9 @@ const { recentPosts = [] } = Astro.props;
               href="https://www.amazon.jobs/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-orange-500 text-white border border-orange-600 flex-shrink-0 h-fit w-20 hover:bg-orange-600 transition-colors"
+              class="unset inline-flex items-center justify-center px-2 py-1 text-xs font-bold rounded bg-orange-500 text-white border border-orange-600 flex-shrink-0 h-fit w-20 hover:bg-orange-600 transition-colors"
             >
-              <i class="fa-brands fa-amazon mr-1"></i>AWS
+              <i class="fa-brands fa-amazon mr-1"></i>Amazon
             </a>
             <div class="flex-1 min-w-0">
               <p class="text-xs text-text-muted font-semibold mb-1">
@@ -813,7 +816,7 @@ const { recentPosts = [] } = Astro.props;
                 href="https://arxiv.org/abs/2406.01374"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+                class="unset inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
               >
                 <i class="fa-solid fa-file-pdf"></i>
                 Read Paper
@@ -822,7 +825,7 @@ const { recentPosts = [] } = Astro.props;
                 href="https://2024.euro-par.org/program/accepted-papers/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors"
+                class="unset inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors"
               >
                 <i class="fa-solid fa-link"></i>
                 Conference
@@ -919,7 +922,7 @@ const { recentPosts = [] } = Astro.props;
       </div>
       <div class="flex-1">
         <h2 class="text-lg font-bold text-text-bold mb-2">
-          Enjoy the content?
+          Enjoying the content?
         </h2>
         <p class="text-sm text-text-body leading-relaxed mb-3">
           This blog is <span class="font-semibold">free</span>, <span
